@@ -13,9 +13,9 @@ import java.util.TreeMap;
 
 import org.apache.mahout.common.RandomUtils;
 import org.apache.mahout.math.DenseMatrix;
+import org.apache.mahout.math.DenseVector;
 import org.apache.mahout.math.Matrix;
 import org.apache.mahout.math.Vector;
-import org.joda.time.DateTime;
 
 import com.mapr.objects.Item;
 import com.mapr.objects.Order;
@@ -26,33 +26,43 @@ import com.mapr.stats.bandit.ContextualBayesArm;
 public class BanditHittepa {
 
     private static Random gen = RandomUtils.getRandom();
-
+    
+ 	public final static int TYPE_MATRIX_VECTOR = 0;
+ 	public final static int TYPE_VECTOR_VECTOR = 1;
+ 	public final static int TYPE_MOST_BUYS = 2;
+ 	
+    public final static int startPlace = 0;
+	public final static int trainingSet = 1000 + startPlace;
+	public final static int numberOfTests = 5000;
+	public final static int orderToEndAt = trainingSet + numberOfTests;
+	public final static int numberOfArms = 50;
+	public final static int numberOfFeatures = 6;
+	public final static int extraFeatures = 10;
+	public final static int debugOutPrint = 100000;
+	public final static int itemsRecommendedPerTurn = 5;
+    
+	static String[] csvFiles = {"data/JunkyardItem.csv", "data/JunkyardUser.csv", "data/JunkyardOrders.csv" };
+	static String csvSplitBy = ",";
+	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		// Turns on / off userContextVectors
-		final boolean userVector = false;
-		final int startPlace = 0;
-		final int trainingSet = 1000 + startPlace;
-		final int numberOfTests = 40000;
-		final int orderToEndAt = trainingSet + numberOfTests;
-		final int numberOfArms = 50;
-		final int numberOfFeatures = 6;
-		final int extraFeatures = 10;
-		final int debugOutPrint = 100000;
-		final int itemsRecommendedPerTurn = 10;
+		// Type defines what 
+	 	int TYPE = TYPE_VECTOR_VECTOR;
+		
 		final HashMap<Long, Item> items = new HashMap<Long, Item>();
 		final HashMap<Long, User> users = new HashMap<Long, User>();
 		final HashMap<Long, Order> orders = new HashMap<Long, Order>();
+		
 		String debugString = "";
-		String[] csvFiles = {"data/JunkyardItem.csv", "data/JunkyardUser.csv", "data/JunkyardOrders.csv" };
 		String line = "";
-		String cvsSplitBy = ",";
 		
 		ArrayList<Order> ordersByDate = new ArrayList<Order>();
 		ContextualBandit cb;
-		if(userVector) {
+		if(TYPE == TYPE_MATRIX_VECTOR) {
 			cb = new ContextualBandit(numberOfArms, extraFeatures);
-		} else {
+		} else if(TYPE == TYPE_VECTOR_VECTOR){
 			cb = new ContextualBandit(numberOfArms, numberOfFeatures);		
+		} else {
+			cb = new ContextualBandit(1, 1);
 		}
 		
 		double[][] randomizedMatrix = new double[extraFeatures][numberOfFeatures];
@@ -79,7 +89,7 @@ public class BanditHittepa {
 					System.out.println("Items: " + line);
 					debug = 0;
 				}
-				String[] row = line.split(cvsSplitBy);
+				String[] row = line.split(csvSplitBy);
 				Item i = new Item(row);
 				if(items.containsKey(i.getProductId())) {
 					items.get(i.getProductId()).update(i);
@@ -96,7 +106,7 @@ public class BanditHittepa {
 					System.out.println("Users: " + line);
 					debug = 0;
 				}
-				User u = new User(line.split(cvsSplitBy));
+				User u = new User(line.split(csvSplitBy));
 				if(!users.containsKey(u.getUserId())) {
 					users.put(u.getUserId(), u); 
 				}
@@ -113,7 +123,7 @@ public class BanditHittepa {
 					System.out.println("Orders: " + line);
 					debug = 0;
 				}
-				String[] row = line.split(cvsSplitBy);
+				String[] row = line.split(csvSplitBy);
 				
 				Long orderId = Long.parseLong(row[1]);
 				Long itemId = Long.parseLong(row[2]);
@@ -145,7 +155,7 @@ public class BanditHittepa {
 			Order o = ordersByDate.get(i);
 			List<Item> itemList = o.getItems();
 			for(Item item : itemList) {
-				item.buy(o.getUser(), o.getPlacedOrder());
+				item.buy(o);
 			}
 		}
 		
@@ -160,23 +170,26 @@ public class BanditHittepa {
 				debugString = o.getOrderId() + "";
 				
 				Vector userContext;
-				if(userVector) {
+				if(TYPE == TYPE_MATRIX_VECTOR) {
 					userContext = cba.getContext().times(u.getUserContextVector(characterMatrix, o.getPlacedOrder()));
+				} else if(TYPE == TYPE_VECTOR_VECTOR) {
+					userContext = cba.getContext().times(u.getContextVector(o.getPlacedOrder()));
 				} else {
-					DateTime dt = o.getPlacedOrder();
-					Vector vt = u.getContextVector(dt);
-					//Vector arm = cba.getContext();
-					userContext = cba.getContext().times(vt);
+					// Timefocus only
+					userContext = new DenseVector(new double[]{1.0});
 				}
 				Set<Long> itemKeys = items.keySet();
 				int zipcode = u.getZipCode(o.getPlacedOrder());
 				for(Long key : itemKeys) {
 					double result = 0;
 					Vector itemVec;
-					if(userVector) {
+					if(TYPE == TYPE_MATRIX_VECTOR) {
 						itemVec = items.get(key).getUserContextVector(characterMatrix, o.getPlacedOrder());
-					} else {
+					} else if(TYPE == TYPE_VECTOR_VECTOR) {
 						itemVec = items.get(key).getContextVector(zipcode, o.getPlacedOrder());
+					} else {
+						// Timefocus only
+						itemVec = items.get(key).getNumberOfBuysInLastMonth(o.getPlacedOrder());
 					}
 					for(int j = 0; j < userContext.size(); j++) {
 						result += userContext.get(j) * itemVec.get(j);
@@ -212,7 +225,7 @@ public class BanditHittepa {
 				cba.train(success);
 				if(debug) System.out.println("These are the actual items bought: ");	
 				for(Item item : o.getItems()) {
-					item.buy(u, o.getPlacedOrder());
+					item.buy(o);
 					if(debug) System.out.println("   " + item.getProductId());
 				}
 			}
@@ -226,7 +239,7 @@ public class BanditHittepa {
 			numberOfRightGuesses += cba.getNumberOfBuys();
 			System.out.println("The best arm seems to be " + cba.getArmNumber() + " with vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
 		}
-		System.out.println("The right guesses are: " + numberOfRightGuesses + " which means " + ((double) numberOfRightGuesses)/((double) numberOfTests)+ "% correct");
+		System.out.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) numberOfTests)*100) + "% correct");
 		System.out.println("Done");
 	  }
 }

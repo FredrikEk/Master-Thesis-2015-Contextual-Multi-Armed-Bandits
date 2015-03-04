@@ -24,6 +24,7 @@ public class Item {
 	private int oldBuys;
 	private HashMap<Integer, Integer> zipcodes;
 	private List<User> users;
+	private List<Order> orders;
 	
 	public DateTimeFormatter df = DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss");
 
@@ -39,6 +40,7 @@ public class Item {
 		zipcodes = new HashMap<Integer, Integer>();
 		bought = 0;
 		users = new ArrayList<User>();
+		orders = new ArrayList<Order>();
 	}
 	
 	public Item(String[] row) throws Exception{
@@ -53,9 +55,12 @@ public class Item {
 		zipcodes = new HashMap<Integer, Integer>();
 		bought = 0;
 		users = new ArrayList<User>();
+		orders = new ArrayList<Order>();
 	}
 	
-	public void buy(User u, DateTime d) {
+	public void buy(Order o) {
+		User u = o.getUser();
+		DateTime d = o.getPlacedOrder();
 		int zip = u.getZipCode(d);
 		if(zipcodes.containsKey(zip)) {
 			zipcodes.put(zip, zipcodes.get(zip) + 1);
@@ -72,6 +77,7 @@ public class Item {
 		}
 		bought++;
 		users.add(u);
+		orders.add(o);
 	}
 	
 	public Vector getAgeVector() {
@@ -211,6 +217,21 @@ public class Item {
 		}
 		if(i.getProductModified().isAfter(this.productModified)) {
 			this.productModified = new DateTime(i.getProductModified());
+		}
+	}
+	
+	public Vector getNumberOfBuysInLastMonth(DateTime now) {
+		if(now.isAfter(this.productCreated) && (stock || now.isBefore(productModified))) {
+			int buys = 0;
+			DateTime lastMonth = now.minusMonths(1);
+			for(int i = 0; i < orders.size(); i++) {
+				if(lastMonth.isBefore(orders.get(i).getPlacedOrder())) {
+					buys++;
+				}
+			}
+			return new DenseVector(new double[]{(double)buys});
+		} else {
+			return new DenseVector(new double[]{0.0});
 		}
 	}
 }
