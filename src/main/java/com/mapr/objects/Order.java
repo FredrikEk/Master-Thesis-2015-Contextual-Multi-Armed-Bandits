@@ -54,7 +54,7 @@ public class Order {
 		this.df = df;
 	}
 
-	public DateTimeFormatter df = DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss");
+	public DateTimeFormatter df = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
 	
 	public Order(User user, long orderId, String date) throws Exception{

@@ -11,6 +11,8 @@ import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.mapr.bandit.BanditHittepa;
+
 public class User {
 
 	private long userId;
@@ -18,6 +20,9 @@ public class User {
 	private List<Integer> zipcode;
 	private DateTime dateOfBirth;
 	private int gender;
+	
+	private int[] categories;
+	private int buys;
 	
 	public long getUserId() {
 		return userId;
@@ -67,7 +72,7 @@ public class User {
 		this.df = df;
 	}
 
-	DateTimeFormatter df = DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss");
+	DateTimeFormatter df = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 	
 	public User(long userId, DateTime updated, int zipcode, DateTime dateOfBirth, int gender){
 		this.userId 		= userId;
@@ -77,6 +82,11 @@ public class User {
 		this.zipcode.add(zipcode);
 		this.dateOfBirth 	= dateOfBirth;
 		this.gender 		= gender;
+		this.categories		= new int[Category.numberOfCategories];
+		for(int i = 0; i < categories.length; i++) {
+			categories[i] = 0;
+		}
+		this.buys			= 0;
 	}
 	
 	public User(String[] row) throws Exception{
@@ -102,6 +112,11 @@ public class User {
 			this.dateOfBirth = new DateTime();
 		}
 		this.gender 		= Integer.parseInt(row[4]);
+		this.categories		= new int[Category.numberOfCategories];
+		for(int i = 0; i < categories.length; i++) {
+			categories[i] = 0;
+		}
+		this.buys 			= 0;
 	}
 	
 	public Vector getAge(DateTime saleMoment) {
@@ -138,11 +153,52 @@ public class User {
 		return new DenseVector(new double[]{1.0, 1.0});
 	}
 	
+	public void addBuy(Item i) {
+		for(int cat : i.getCategories()) {
+			categories[cat]++;
+		}
+	}
+	
+	public double[] categoryVector() {
+		double[] categoryVec = new double[categories.length];
+		for(int i = 0; i < categories.length; i++) {
+			if(buys > 0) {
+				categoryVec[i] = ((double)categories[i]) / (double) buys;
+			} else {
+				categoryVec[i] = 0.0;
+			}
+		}
+		return categoryVec;
+	}
+	
 	public Vector getContextVector(DateTime date) {
 		Vector age = getAge(date);
 		Vector gender = getGenderContext();
 		double zipFocus = 1.0;
-		return new DenseVector(new double[]{age.get(0),age.get(1), age.get(2), gender.get(0), gender.get(1), zipFocus});
+		double popularityFocus = 1.0;
+		double[] preContextuality = new double[]{age.get(0),age.get(1), age.get(2), gender.get(0), gender.get(1), zipFocus, popularityFocus, popularityFocus};
+		double[] contextuality;
+		
+		
+		
+		if(BanditHittepa.useCategories) {
+			double[] category = categoryVector();
+			contextuality = new double[preContextuality.length + category.length];
+					
+			for(int i = 0; i < preContextuality.length; i++) {
+				contextuality[i] = preContextuality[i];
+			}
+			for(int i = 0 ; i < categories.length; i++) {
+				contextuality[i + preContextuality.length] = category[i];
+			}
+		} else {
+			contextuality = new double[preContextuality.length];
+			for(int i = 0; i < preContextuality.length; i++) {
+				contextuality[i] = preContextuality[i];
+			}
+		}
+		
+		return new DenseVector(contextuality);
 	}
 	
 	public Vector getUserContextVector(Matrix dm, DateTime date) {

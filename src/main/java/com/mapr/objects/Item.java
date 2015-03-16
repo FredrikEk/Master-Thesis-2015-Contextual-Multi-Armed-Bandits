@@ -1,6 +1,9 @@
 package com.mapr.objects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +13,8 @@ import org.apache.mahout.math.Vector;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import com.mapr.bandit.BanditHittepa;
 
 public class Item {
 
@@ -25,10 +30,14 @@ public class Item {
 	private HashMap<Integer, Integer> zipcodes;
 	private List<User> users;
 	private List<Order> orders;
+	private List<Integer> category;
 	
-	public DateTimeFormatter df = DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss");
+	public static List<Item> mostPopularMonthly = new ArrayList<Item>();
+	public static List<Item> mostPopularWeekly = new ArrayList<Item>();
+	
+	public DateTimeFormatter df = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
-	public Item(long productId, int gender, DateTime productCreated, DateTime productModified, int stock){
+	public Item(long productId, int gender, DateTime productCreated, DateTime productModified, int stock, String byteCode){
 		this.productId 			= productId;
 		this.gender 			= gender;
 		this.productCreated 	= productCreated;
@@ -41,6 +50,11 @@ public class Item {
 		bought = 0;
 		users = new ArrayList<User>();
 		orders = new ArrayList<Order>();
+		List<Category.Categories> subCategories = Category.GetByByteArray(byteCode);
+		category = new ArrayList<Integer>();
+		for(Category.Categories subCat : subCategories) {
+			category.add(Category.GetMainCategoryByCategory(subCat).GetID() - 1);
+		}
 	}
 	
 	public Item(String[] row) throws Exception{
@@ -56,6 +70,11 @@ public class Item {
 		bought = 0;
 		users = new ArrayList<User>();
 		orders = new ArrayList<Order>();
+		List<Category.Categories> subCategories = Category.GetByByteArray(row[5]);
+		category = new ArrayList<Integer>();
+		for(Category.Categories subCat : subCategories) {
+			category.add(Category.GetMainCategoryByCategory(subCat).GetID() - 1);
+		}
 	}
 	
 	public void buy(Order o) {
@@ -78,6 +97,36 @@ public class Item {
 		bought++;
 		users.add(u);
 		orders.add(o);
+		
+		Comparator<Item> compLastMonth = (e1, e2) -> Integer.compare(
+	            e2.getBuysInLastMonth(d), e1.getBuysInLastMonth(d));
+	
+		Comparator<Item> compLastWeek = (e1, e2) -> Integer.compare(
+	            e2.getBuysInLastWeek(d), e1.getBuysInLastWeek(d));
+		
+		Collections.sort(mostPopularMonthly, compLastMonth);
+		Collections.sort(mostPopularWeekly, compLastWeek);
+		
+		if(mostPopularMonthly.size() < 10 && !mostPopularMonthly.contains(this)) {
+			mostPopularMonthly.add(this);
+		}
+		else if(!mostPopularMonthly.contains(this)) {
+			if(mostPopularMonthly.get(9).getBuysInLastMonth(d) < this.getBuysInLastMonth(d)) { 
+				mostPopularMonthly.set(9, this);
+				Collections.sort(mostPopularMonthly, compLastMonth);
+			}
+		}
+		
+		if(mostPopularWeekly.size() < 10 && !mostPopularWeekly.contains(this)){
+			mostPopularWeekly.add(this);
+		}
+		else if(!mostPopularWeekly.contains(this)) {
+			if(mostPopularWeekly.get(9).getBuysInLastMonth(d) < this.getBuysInLastMonth(d)) { 
+				mostPopularWeekly.set(9, this);
+				Collections.sort(mostPopularWeekly, compLastWeek);
+			}
+		}
+		
 	}
 	
 	public Vector getAgeVector() {
@@ -107,22 +156,83 @@ public class Item {
 		return new DenseVector(new double[]{1.0, 1.0});
 	}
 	
-	public Vector getContextVector(int zipcode, DateTime sales) {
-		if(sales.isAfter(this.productCreated) && (stock || sales.isBefore(productModified))) {
+	public Vector getPopularityContext(DateTime sale) {
+		double weekPopularity = 0.0, monthPopularity = 0.0;
+		if(bought != 0) {
+			DateTime lastMonth = sale.minusMonths(1);
+			DateTime lastWeek = sale.minusWeeks(1);
+			for(int i = 0; i < orders.size(); i++) {
+				if(lastWeek.isBefore(orders.get(i).getPlacedOrder())) {
+					weekPopularity++;
+					monthPopularity++;
+				}
+				else if(lastMonth.isBefore(orders.get(i).getPlacedOrder())) {
+					monthPopularity++;
+				}
+			}
+		}
+		return new DenseVector(new double[]{weekPopularity, monthPopularity});
+	}
+	
+	public double[] getCategoriesVector() {
+		double[] categories = new double[Category.numberOfCategories];
+		for(int i = 1; i <= Category.numberOfCategories; i++) {
+			if(category.contains(i-1)) {
+				categories[i-1] = 1.0; 
+			} else {
+				categories[i-1] = 0.0;
+			}
+		}
+		return categories;
+	}
+	
+	public Vector getContextVector(int zipcode, DateTime sale) {
+		if(sale.isAfter(this.productCreated) && (stock || sale.isBefore(this.productModified))) {
 			Vector age = getAgeVector();
 			Vector gender = getGenderContext();
 			double zip = getZipContext(zipcode);
-			return new DenseVector(new double[] {age.get(0), age.get(1), age.get(2), gender.get(0), gender.get(1), zip});
+			Vector popularity = getPopularityContext(sale);
+			double[] preContextuality = new double[] {age.get(0), age.get(1), age.get(2), gender.get(0), gender.get(1), zip, popularity.get(0) / mostPopularWeekly.get(0).getBuysInLastWeek(sale), popularity.get(1) / mostPopularMonthly.get(0).getBuysInLastMonth(sale)};
+			double[] contextuality;
+			
+			if(BanditHittepa.useCategories) {
+				double[] categories = getCategoriesVector();
+				contextuality = new double[categories.length + preContextuality.length];
+				
+				for(int i = 0; i < preContextuality.length; i++) {
+					contextuality[i] = preContextuality[i];
+				}
+
+				for(int i = 0 ; i < categories.length; i++) {
+					contextuality[i + preContextuality.length] = categories[i];
+				}
+			} else {
+				contextuality = new double[preContextuality.length];
+				for(int i = 0; i < preContextuality.length; i++) {
+					contextuality[i] = preContextuality[i];
+				}
+			}
+			
+			return new DenseVector(contextuality);
 		} else {
-			return new DenseVector(new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
+			double[] contextuality = new double[BanditHittepa.numberOfFeatures];
+			for(int i = 0; i < contextuality.length; i++) {
+				contextuality[i] = 0.0;
+			}
+			return new DenseVector(contextuality);
 		}
 	}
 	
 	public Vector getUserContextVector(Matrix dm, DateTime date) {
-		Vector vec = new DenseVector(new double[]{0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+		double[] contextuality = new double[BanditHittepa.extraFeatures];
+		for(int i = 0; i < contextuality.length; i++) {
+			contextuality[i] = 0.0;
+		}
+		
+		Vector vec = new DenseVector(contextuality);
 		
 		for(User u : users) {
-			vec = vec.plus(dm.times(u.getContextVector(date)).divide(users.size()));
+			vec = vec.plus(u.getUserContextVector(dm, date).divide(users.size()));
 		}
 		
 		return vec;
@@ -220,10 +330,10 @@ public class Item {
 		}
 	}
 	
-	public Vector getNumberOfBuysInLastMonth(DateTime now) {
-		if(now.isAfter(this.productCreated) && (stock || now.isBefore(productModified))) {
+	public Vector getNumberOfBuysInLastMonth(DateTime sale) {
+		if(sale.isAfter(this.productCreated) && (stock || sale.isBefore(productModified))) {
 			int buys = 0;
-			DateTime lastMonth = now.minusMonths(1);
+			DateTime lastMonth = sale.minusMonths(1);
 			for(int i = 0; i < orders.size(); i++) {
 				if(lastMonth.isBefore(orders.get(i).getPlacedOrder())) {
 					buys++;
@@ -233,5 +343,39 @@ public class Item {
 		} else {
 			return new DenseVector(new double[]{0.0});
 		}
+	}
+	
+	public int getBuysInLastMonth(DateTime sale) {
+		if(sale.isAfter(this.productCreated) && (stock || sale.isBefore(productModified))) {
+			int buys = 0;
+			DateTime lastMonth = sale.minusMonths(1);
+			for(int i = 0; i < orders.size(); i++) {
+				if(lastMonth.isBefore(orders.get(i).getPlacedOrder())) {
+					buys++;
+				}
+			}
+			return buys;
+		} else {
+			return 0;
+		}
+	}
+	
+	public int getBuysInLastWeek(DateTime sale) {
+		if(sale.isAfter(this.productCreated) && (stock || sale.isBefore(productModified))) {
+			int buys = 0;
+			DateTime lastWeek = sale.minusWeeks(1);
+			for(int i = 0; i < orders.size(); i++) {
+				if(lastWeek.isBefore(orders.get(i).getPlacedOrder())) {
+					buys++;
+				}
+			}
+			return buys;
+		} else {
+			return 0;
+		}
+	}
+	
+	public List<Integer> getCategories() {
+		return category;
 	}
 }

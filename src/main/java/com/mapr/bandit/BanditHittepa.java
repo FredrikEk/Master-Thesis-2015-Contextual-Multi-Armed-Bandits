@@ -17,6 +17,7 @@ import org.apache.mahout.math.DenseVector;
 import org.apache.mahout.math.Matrix;
 import org.apache.mahout.math.Vector;
 
+import com.mapr.objects.Category;
 import com.mapr.objects.Item;
 import com.mapr.objects.Order;
 import com.mapr.objects.User;
@@ -27,21 +28,25 @@ public class BanditHittepa {
 
     private static Random gen = RandomUtils.getRandom();
     
+    public final static boolean useCategories = false;
+    
  	public final static int TYPE_MATRIX_VECTOR = 0;
  	public final static int TYPE_VECTOR_VECTOR = 1;
  	public final static int TYPE_MOST_BUYS = 2;
  	
-    public final static int startPlace = 0;
-	public final static int trainingSet = 1000 + startPlace;
+    public final static int startPlace = 600000;
+	public final static int trainingSet = startPlace + 1000;
 	public final static int numberOfTests = 5000;
 	public final static int orderToEndAt = trainingSet + numberOfTests;
 	public final static int numberOfArms = 50;
-	public final static int numberOfFeatures = 6;
+	public final static int numberOfFeatures = useCategories ? 8 + Category.numberOfCategories: 8;
 	public final static int extraFeatures = 10;
 	public final static int debugOutPrint = 100000;
-	public final static int itemsRecommendedPerTurn = 5;
+	public final static int itemsRecommendedPerTurn = 10;
+	
+	
     
-	static String[] csvFiles = {"data/JunkyardItem.csv", "data/JunkyardUser.csv", "data/JunkyardOrders.csv" };
+	static String[] csvFiles = {"data/JunkyardItems.csv", "data/JunkyardUser.csv", "data/JunkyardOrders.csv" };
 	static String csvSplitBy = ",";
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -150,7 +155,6 @@ public class BanditHittepa {
 		} catch( Exception e ) {
 			e.printStackTrace();
 		}
-		System.out.println(ordersByDate.size());
 		for(int i = startPlace; i < trainingSet; i++) {
 			Order o = ordersByDate.get(i);
 			List<Item> itemList = o.getItems();
@@ -163,33 +167,33 @@ public class BanditHittepa {
 			for(int i = trainingSet; i < orderToEndAt; i++) {
 				boolean debug = i % 1000 == 0;
 				TreeMap<Double, ArrayList<Long>> sortedMap = new TreeMap<Double, ArrayList<Long>>();
-				Order o = ordersByDate.get(i);
-				User u = o.getUser();
+				Order currentOrder = ordersByDate.get(i);
+				User u = currentOrder.getUser();
 				ContextualBayesArm cba = cb.getArm();
 				
-				debugString = o.getOrderId() + "";
+				debugString = currentOrder.getOrderId() + "";
 				
 				Vector userContext;
 				if(TYPE == TYPE_MATRIX_VECTOR) {
-					userContext = cba.getContext().times(u.getUserContextVector(characterMatrix, o.getPlacedOrder()));
+					userContext = cba.getContext().times(u.getUserContextVector(characterMatrix, currentOrder.getPlacedOrder()));
 				} else if(TYPE == TYPE_VECTOR_VECTOR) {
-					userContext = cba.getContext().times(u.getContextVector(o.getPlacedOrder()));
+					userContext = cba.getContext().times(u.getContextVector(currentOrder.getPlacedOrder()));
 				} else {
 					// Timefocus only
 					userContext = new DenseVector(new double[]{1.0});
 				}
 				Set<Long> itemKeys = items.keySet();
-				int zipcode = u.getZipCode(o.getPlacedOrder());
+				int zipcode = u.getZipCode(currentOrder.getPlacedOrder());
 				for(Long key : itemKeys) {
 					double result = 0;
 					Vector itemVec;
 					if(TYPE == TYPE_MATRIX_VECTOR) {
-						itemVec = items.get(key).getUserContextVector(characterMatrix, o.getPlacedOrder());
+						itemVec = items.get(key).getUserContextVector(characterMatrix, currentOrder.getPlacedOrder());
 					} else if(TYPE == TYPE_VECTOR_VECTOR) {
-						itemVec = items.get(key).getContextVector(zipcode, o.getPlacedOrder());
+						itemVec = items.get(key).getContextVector(zipcode, currentOrder.getPlacedOrder());
 					} else {
 						// Timefocus only
-						itemVec = items.get(key).getNumberOfBuysInLastMonth(o.getPlacedOrder());
+						itemVec = items.get(key).getNumberOfBuysInLastMonth(currentOrder.getPlacedOrder());
 					}
 					for(int j = 0; j < userContext.size(); j++) {
 						result += userContext.get(j) * itemVec.get(j);
@@ -205,7 +209,9 @@ public class BanditHittepa {
 				
 				if(debug) {
 					System.out.println("The current arm is " + cba.getArmNumber() + " with vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta());
-					System.out.println("It predicted these items for order " + o.getOrderId() + " :");
+					System.out.println("The order information:");
+					System.out.println("Date: " + currentOrder.getPlacedOrder().toString());
+					System.out.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
 					
 				}
 
@@ -215,7 +221,7 @@ public class BanditHittepa {
 					ArrayList<Long> itemKeys2 = sortedMap.remove(key);
 					for(Long itemKey : itemKeys2) {
 						Item item = items.get(itemKey);
-						if(o.getItems().contains(item)) success = true;
+						if(currentOrder.getItems().contains(item)) success = true;
 						if(debug) System.out.println("   " + item.getProductId() + " with score of " + key);
 						j++;
 						if(!(j < itemsRecommendedPerTurn)) break;
@@ -224,8 +230,8 @@ public class BanditHittepa {
 				
 				cba.train(success);
 				if(debug) System.out.println("These are the actual items bought: ");	
-				for(Item item : o.getItems()) {
-					item.buy(o);
+				for(Item item : currentOrder.getItems()) {
+					item.buy(currentOrder);
 					if(debug) System.out.println("   " + item.getProductId());
 				}
 			}
@@ -235,10 +241,20 @@ public class BanditHittepa {
 			e.printStackTrace();
 		}
 		int numberOfRightGuesses = 0;
+		ContextualBayesArm bestArm = null;
 		for(ContextualBayesArm cba : cb.getAllArms()) {
 			numberOfRightGuesses += cba.getNumberOfBuys();
-			System.out.println("The best arm seems to be " + cba.getArmNumber() + " with vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
+			System.out.println("The arm " + cba.getArmNumber() + " has vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
+			if(bestArm == null) {
+				bestArm = cba;
+			}
+			if(((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries()) > ((double)bestArm.getNumberOfBuys()/(double)bestArm.getNumberOfTries())) {
+				bestArm = cba;
+			}
 		}
+		
+		System.out.println("The best arm is " + bestArm.getArmNumber() + " with vector " + bestArm.getContext().toString() + " with alpha " + bestArm.getAlpha() + " and beta " + bestArm.getBeta() + ", percentage " + ((double)bestArm.getNumberOfBuys()/(double)bestArm.getNumberOfTries())*100);
+		
 		System.out.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) numberOfTests)*100) + "% correct");
 		System.out.println("Done");
 	  }
