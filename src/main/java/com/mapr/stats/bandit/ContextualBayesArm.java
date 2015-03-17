@@ -30,6 +30,17 @@ public class ContextualBayesArm {
 		this.numberOfBuys = 0;
 	}
 	
+	public ContextualBayesArm(ContextualBayesArm cba) {
+		this.armNumber 		= cba.armNumber;
+		this.alpha			= 1.0;
+		this.beta			= 1.0;
+		this.features		= cba.features.clone();
+		this.rand 			= new BetaDistribution(alpha, beta);
+		this.numberOfBuys 	= 0;
+		this.numberOfTries	= 0;
+		
+	}
+	
 	public double sample() {
 		return this.rand.nextDouble(alpha, beta);
 	}
@@ -75,4 +86,7 @@ public class ContextualBayesArm {
 		this.numberOfBuys = numberOfBuys;
 	}
 
+	public ContextualBayesArm copy() {
+		return new ContextualBayesArm(this);
+	}
 }

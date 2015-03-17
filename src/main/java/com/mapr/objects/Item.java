@@ -77,6 +77,25 @@ public class Item {
 		}
 	}
 	
+	public Item(Item i) {
+		this.productId			= i.productId;
+		this.gender				= i.gender;
+		this.productCreated		= new DateTime(i.productCreated);
+		this.productModified	= new DateTime(i.productModified);
+		this.stock				= i.stock;
+		this.youngBuys			= 0;
+		this.middleBuys			= 0;
+		this.oldBuys			= 0;
+		this.zipcodes			= new HashMap<Integer, Integer>();
+		this.bought				= 0;
+		this.users				= new ArrayList<User>();
+		this.orders				= new ArrayList<Order>();
+		this.category			= new ArrayList<Integer>();
+		for(Integer subCat : i.getCategories()) {
+			this.category.add(subCat);
+		}
+	}
+	
 	public void buy(Order o) {
 		User u = o.getUser();
 		DateTime d = o.getPlacedOrder();
@@ -377,5 +396,9 @@ public class Item {
 	
 	public List<Integer> getCategories() {
 		return category;
+	}
+	
+	public Item copy() {
+		return new Item(this);
 	}
 }

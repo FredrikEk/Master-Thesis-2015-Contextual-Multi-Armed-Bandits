@@ -119,6 +119,25 @@ public class User {
 		this.buys 			= 0;
 	}
 	
+	public User(User u) {
+		this.userId				= u.userId;
+		this.updated			= new ArrayList<DateTime>();
+		for(DateTime dt : u.updated) {
+			this.updated.add(new DateTime(dt));
+		}
+		this.zipcode = new ArrayList<Integer>();
+		for(Integer i : u.zipcode) {
+			this.zipcode.add(i);
+		}
+		this.dateOfBirth		= new DateTime(u.dateOfBirth);
+		this.gender				= u.gender;
+		this.categories			= new int[Category.numberOfCategories];
+		for(int i = 0; i < categories.length; i++) {
+			categories[i] = 0;
+		}
+		this.buys 			= 0;
+	}
+	
 	public Vector getAge(DateTime saleMoment) {
 		double y = Days.daysBetween(saleMoment, dateOfBirth).getDays() < 6600 ? 1.0 : 0.0;
 		double m = Days.daysBetween(saleMoment, dateOfBirth).getDays() > 6600 && Days.daysBetween(saleMoment, dateOfBirth).getDays() < 12000 ? 1.0 : 0.0;
@@ -203,5 +222,9 @@ public class User {
 	
 	public Vector getUserContextVector(Matrix dm, DateTime date) {
 		return dm.times(this.getContextVector(date));
+	}
+	
+	public User copy() {
+		return new User(this);
 	}
 }
