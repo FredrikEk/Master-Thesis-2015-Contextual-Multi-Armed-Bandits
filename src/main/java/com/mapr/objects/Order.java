@@ -64,6 +64,13 @@ public class Order {
 		this.placedOrder = df.parseDateTime(date.substring(0,19));
 	}
 	
+	public Order(User user, long orderId, DateTime date) {
+		this.user = user;
+		this.orderId = orderId;
+		this.items = new ArrayList<>();
+		this.placedOrder = new DateTime(date);
+	}
+	
 	public void addItem(Item i){
 		items.add(i);
 	}
