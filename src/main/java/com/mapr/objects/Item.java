@@ -15,6 +15,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.mapr.bandit.BanditHittepa;
+import com.mapr.bandit.BanditHittepa2;
 
 public class Item {
 
@@ -46,12 +47,12 @@ public class Item {
 		this.youngBuys 			= 0;
 		this.middleBuys			= 0;
 		this.oldBuys			= 0;
-		zipcodes = new HashMap<Integer, Integer>();
-		bought = 0;
-		users = new ArrayList<User>();
-		orders = new ArrayList<Order>();
+		zipcodes 				= new HashMap<Integer, Integer>();
+		bought 					= 0;
+		users					= new ArrayList<User>();
+		orders 					= new ArrayList<Order>();
 		List<Category.Categories> subCategories = Category.GetByByteArray(byteCode);
-		category = new ArrayList<Integer>();
+		category 				= new ArrayList<Integer>();
 		for(Category.Categories subCat : subCategories) {
 			category.add(Category.GetMainCategoryByCategory(subCat).GetID() - 1);
 		}
@@ -66,12 +67,12 @@ public class Item {
 		this.youngBuys 			= 0;
 		this.middleBuys			= 0;
 		this.oldBuys			= 0;
-		zipcodes = new HashMap<Integer, Integer>();
-		bought = 0;
-		users = new ArrayList<User>();
-		orders = new ArrayList<Order>();
+		zipcodes 				= new HashMap<Integer, Integer>();
+		bought 					= 0;
+		users 					= new ArrayList<User>();
+		orders 					= new ArrayList<Order>();
 		List<Category.Categories> subCategories = Category.GetByByteArray(row[5]);
-		category = new ArrayList<Integer>();
+		category 				= new ArrayList<Integer>();
 		for(Category.Categories subCat : subCategories) {
 			category.add(Category.GetMainCategoryByCategory(subCat).GetID() - 1);
 		}
@@ -123,8 +124,6 @@ public class Item {
 		Comparator<Item> compLastWeek = (e1, e2) -> Integer.compare(
 	            e2.getBuysInLastWeek(d), e1.getBuysInLastWeek(d));
 		
-		Collections.sort(mostPopularMonthly, compLastMonth);
-		Collections.sort(mostPopularWeekly, compLastWeek);
 		
 		if(mostPopularMonthly.size() < 10 && !mostPopularMonthly.contains(this)) {
 			mostPopularMonthly.add(this);
@@ -132,7 +131,6 @@ public class Item {
 		else if(!mostPopularMonthly.contains(this)) {
 			if(mostPopularMonthly.get(9).getBuysInLastMonth(d) < this.getBuysInLastMonth(d)) { 
 				mostPopularMonthly.set(9, this);
-				Collections.sort(mostPopularMonthly, compLastMonth);
 			}
 		}
 		
@@ -140,11 +138,13 @@ public class Item {
 			mostPopularWeekly.add(this);
 		}
 		else if(!mostPopularWeekly.contains(this)) {
-			if(mostPopularWeekly.get(9).getBuysInLastMonth(d) < this.getBuysInLastMonth(d)) { 
+			if(mostPopularWeekly.get(9).getBuysInLastWeek(d) < this.getBuysInLastWeek(d)) { 
 				mostPopularWeekly.set(9, this);
-				Collections.sort(mostPopularWeekly, compLastWeek);
 			}
 		}
+		
+		Collections.sort(mostPopularMonthly, compLastMonth);
+		Collections.sort(mostPopularWeekly, compLastWeek);
 		
 	}
 	
@@ -207,32 +207,31 @@ public class Item {
 	
 	public Vector getContextVector(int zipcode, DateTime sale) {
 		if(sale.isAfter(this.productCreated) && (stock || sale.isBefore(this.productModified))) {
-			Vector age = getAgeVector();
-			Vector gender = getGenderContext();
-			double zip = getZipContext(zipcode);
-			Vector popularity = getPopularityContext(sale);
-			double[] preContextuality = new double[] {age.get(0), age.get(1), age.get(2), gender.get(0), gender.get(1), zip, popularity.get(0) / mostPopularWeekly.get(0).getBuysInLastWeek(sale), popularity.get(1) / mostPopularMonthly.get(0).getBuysInLastMonth(sale)};
-			double[] contextuality;
+			ArrayList<Vector> contextVector = new ArrayList<Vector>();
+			if(BanditHittepa2.useAge) contextVector.add(getAgeVector());
+			if(BanditHittepa2.useGender) contextVector.add(getGenderContext());
+			if(BanditHittepa2.useLocation) contextVector.add(new DenseVector(new double[] {getZipContext(zipcode)}));
+			if(BanditHittepa2.usePopularity) contextVector.add(getPopularityContext(sale));
+			double[] contextuality = new double[0 + (BanditHittepa2.useAge ? 3 : 0) + (BanditHittepa2.useGender ? 2 : 0) + (BanditHittepa2.useLocation ? 1 : 0)
+			                                          + (BanditHittepa2.usePopularity ? 2 : 0) + (BanditHittepa2.useCategories ? Category.numberOfCategories : 0)];
+			int pointer = 0;
+			for(Vector preContext : contextVector) {
+				for(int i = 0; i < preContext.size(); i++) {
+					contextuality[pointer] = preContext.get(i);
+					pointer++;
+				}
+			}
 			
 			if(BanditHittepa.useCategories) {
 				double[] categories = getCategoriesVector();
-				contextuality = new double[categories.length + preContextuality.length];
 				
-				for(int i = 0; i < preContextuality.length; i++) {
-					contextuality[i] = preContextuality[i];
-				}
-
 				for(int i = 0 ; i < categories.length; i++) {
-					contextuality[i + preContextuality.length] = categories[i];
-				}
-			} else {
-				contextuality = new double[preContextuality.length];
-				for(int i = 0; i < preContextuality.length; i++) {
-					contextuality[i] = preContextuality[i];
+					contextuality[i + pointer] = categories[i];
 				}
 			}
 			
 			return new DenseVector(contextuality);
+			
 		} else {
 			double[] contextuality = new double[BanditHittepa.numberOfFeatures];
 			for(int i = 0; i < contextuality.length; i++) {

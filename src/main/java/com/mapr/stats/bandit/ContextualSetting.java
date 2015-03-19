@@ -41,24 +41,24 @@ public class ContextualSetting {
 	public ContextualSetting(ContextualSetting cs) {
 		Set<Long> itemKeys = cs.getItemKeySet();
 		Set<Long> userKeys = cs.getUserKeySet();
-		Set<Long> orderKeys = cs.getOrderKeySet();
+		ArrayList<Order> orderedOrders = cs.getOrdersByDate();
+		
 		for(Long key : itemKeys) {
 			items.put(key, new Item(cs.getItem(key)));
 		}
 		for(Long key : userKeys) {
 			users.put(key, new User(cs.getUser(key)));
 		}
-		for(Long key : orderKeys) {
-			Order orderCopy = cs.getOrder(key);
+		for(Order orderCopy : orderedOrders) {
 			
 			Order o;
-			if(!orders.containsKey(key)) {
+			if(!orders.containsKey(orderCopy.getOrderId())) {
 				Long userId = orderCopy.getUser().getUserId();
-				o = new Order(users.get(userId), key, orderCopy.getPlacedOrder());
-				ordersByDate.add(o);
-				orders.put(key, o);
+				o = new Order(users.get(userId), orderCopy.getOrderId(), orderCopy.getPlacedOrder());
+				this.ordersByDate.add(o);
+				this.orders.put(orderCopy.getOrderId(), o);
 			} else {
-				o = orders.get(key);
+				o = this.orders.get(orderCopy.getOrderId());
 			}
 			
 			for(Item i : orderCopy.getItems()) {

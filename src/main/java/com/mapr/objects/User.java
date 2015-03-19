@@ -12,6 +12,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.mapr.bandit.BanditHittepa;
+import com.mapr.bandit.BanditHittepa2;
 
 public class User {
 
@@ -91,7 +92,7 @@ public class User {
 	
 	public User(String[] row) throws Exception{
 		this.userId 		= Long.parseLong(row[0]);
-		this.updated = new ArrayList<DateTime>();
+		this.updated 		= new ArrayList<DateTime>();
 		if(!row[1].equals("")) {
 			this.updated.add(df.parseDateTime(row[1].substring(0,19)));
 		}
@@ -114,7 +115,7 @@ public class User {
 		this.gender 		= Integer.parseInt(row[4]);
 		this.categories		= new int[Category.numberOfCategories];
 		for(int i = 0; i < categories.length; i++) {
-			categories[i] = 0;
+			categories[i] 	= 0;
 		}
 		this.buys 			= 0;
 	}
@@ -135,7 +136,7 @@ public class User {
 		for(int i = 0; i < categories.length; i++) {
 			categories[i] = 0;
 		}
-		this.buys 			= 0;
+		this.buys 				= 0;
 	}
 	
 	public Vector getAge(DateTime saleMoment) {
@@ -191,29 +192,27 @@ public class User {
 	}
 	
 	public Vector getContextVector(DateTime date) {
-		Vector age = getAge(date);
-		Vector gender = getGenderContext();
-		double zipFocus = 1.0;
 		double popularityFocus = 1.0;
-		double[] preContextuality = new double[]{age.get(0),age.get(1), age.get(2), gender.get(0), gender.get(1), zipFocus, popularityFocus, popularityFocus};
-		double[] contextuality;
-		
-		
+		ArrayList<Vector> contextVector = new ArrayList<Vector>();
+		if(BanditHittepa2.useAge) contextVector.add(getAge(date));
+		if(BanditHittepa2.useGender) contextVector.add(getGenderContext());
+		if(BanditHittepa2.useLocation) contextVector.add(new DenseVector(new double[] {1.0}));
+		if(BanditHittepa2.usePopularity) contextVector.add(new DenseVector(new double[] {popularityFocus, popularityFocus}));
+		double[] contextuality = new double[0 + (BanditHittepa2.useAge ? 3 : 0) + (BanditHittepa2.useGender ? 2 : 0) + (BanditHittepa2.useLocation ? 1 : 0)
+		                                          + (BanditHittepa2.usePopularity ? 2 : 0) + (BanditHittepa2.useCategories ? Category.numberOfCategories : 0)];
+		int pointer = 0;
+		for(Vector preContext : contextVector) {
+			for(int i = 0; i < preContext.size(); i++) {
+				contextuality[pointer] = preContext.get(i);
+				pointer++;
+			}
+		}
 		
 		if(BanditHittepa.useCategories) {
 			double[] category = categoryVector();
-			contextuality = new double[preContextuality.length + category.length];
-					
-			for(int i = 0; i < preContextuality.length; i++) {
-				contextuality[i] = preContextuality[i];
-			}
+			
 			for(int i = 0 ; i < categories.length; i++) {
-				contextuality[i + preContextuality.length] = category[i];
-			}
-		} else {
-			contextuality = new double[preContextuality.length];
-			for(int i = 0; i < preContextuality.length; i++) {
-				contextuality[i] = preContextuality[i];
+				contextuality[i + pointer] = category[i];
 			}
 		}
 		

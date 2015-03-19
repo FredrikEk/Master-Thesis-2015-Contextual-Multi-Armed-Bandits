@@ -26,6 +26,7 @@ import org.apache.mahout.math.Matrix;
 import org.apache.mahout.math.Vector;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
@@ -46,20 +47,30 @@ public class BanditHittepa2 {
     private static Random gen = RandomUtils.getRandom();
     
     public final static boolean useCategories = true;
-    
+    public final static boolean useGender = true;
+    public final static boolean useAge = true;
+    public final static boolean useLocation = true;
+    public final static boolean usePopularity = true;
+    // 771338 - 859594 3 months, 2012-05-01
+    // 771338 - 777471, 1 week, 2012-05-01
  	public final static int TYPE_RANDOM_MATRIX = 0;
  	public final static int TYPE_NORMAL = 1;
  	public final static int TYPE_MOST_BUYS = 2;
- 	
-    public final static int startPlace = 1100000;
-	public final static int trainingSet = startPlace + 999;
-	public final static int numberOfTests = 100;
+    public final static int startPlace = 700000;
+    public final static int numberOfTraining = 71338;
+	public final static int trainingSet = startPlace + numberOfTraining;
+	public final static int numberOfTests = 6133;
 	public final static int orderToEndAt = trainingSet + numberOfTests;
 	public final static int numberOfArms = 50;
-	public final static int numberOfFeatures = useCategories ? 8 + Category.numberOfCategories : 8;
+	public final static int numberOfFeatures = 0 + (useGender 		? 2 : 0) + 
+												   (useAge	 		? 3 : 0) + 
+												   (useLocation 	? 1 : 0) + 
+												   (usePopularity 	? 2 : 0) + 
+												   (useCategories 	? Category.numberOfCategories : 0);
 	public final static int extraFeatures = 10;
 	public final static int debugOutPrint = 100000;
 	public final static int itemsRecommendedPerTurn = 10;
+	public final static boolean baseLine = false;
 	
 	public static ContextualBayesArm bestArm = null;
     
@@ -69,10 +80,8 @@ public class BanditHittepa2 {
 	public static PrintWriter logWriter = null;
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		// Type defines what 
 		int TYPE = TYPE_NORMAL;
-		boolean baseLine = true;
-		
+				
 	 	long start1 = System.currentTimeMillis();
 	 	String logFileName = "logs/logfile" + DateTime.now().toString().replaceAll("[^a-zA-Z0-9.-]", "_");
 	 	
@@ -99,6 +108,27 @@ public class BanditHittepa2 {
 		}
 		double[][] randomizedMatrix = new double[extraFeatures][numberOfFeatures];
 		
+		System.out.println("");
+		System.out.println("Startup information:");
+		System.out.println("First order in training stage: " + startPlace);
+		System.out.println("First order in evaluation stage: " + trainingSet);
+		System.out.println("Last order in evaluation stage: " + orderToEndAt);
+		System.out.println("");
+		System.out.println("Number of orders in training stage: " + numberOfTraining);
+		System.out.println("Number of orders in evaluation stage: " + numberOfTests);
+		System.out.println("");
+		
+		logWriter.println("");
+		logWriter.println("Startup information:");
+		logWriter.println("First order in training stage: " + startPlace);
+		logWriter.println("First order in evaluation stage: " + trainingSet);
+		logWriter.println("Last order in evaluation stage: " + orderToEndAt);
+		logWriter.println("");
+		logWriter.println("Number of orders in training stage: " + numberOfTraining);
+		logWriter.println("Number of orders in evaluation stage: " + numberOfTests);
+		logWriter.println("");
+		
+		
 		ArrayList<XYSeries> allSeries = new ArrayList<XYSeries>();
 		
 		if(TYPE == TYPE_RANDOM_MATRIX) {
@@ -122,6 +152,9 @@ public class BanditHittepa2 {
 			
 			XYSeries seriesAll = testMatrixArm("All arms", cb, contextualSetting, characterMatrix);
 
+			Item.mostPopularMonthly = new ArrayList<Item>();
+			Item.mostPopularWeekly = new ArrayList<Item>();
+			
 			allSeries.add(seriesAll);
 			
 			ContextualSetting contextualSettingEvaluation = contextualSetting.copy();
@@ -139,6 +172,9 @@ public class BanditHittepa2 {
 			}
 			
 			XYSeries seriesReference = testMatrixArm("Best arm", cbEvaluation, contextualSettingEvaluation, characterMatrix);
+
+			Item.mostPopularMonthly = new ArrayList<Item>();
+			Item.mostPopularWeekly = new ArrayList<Item>();
 			
 			allSeries.add(seriesReference);
 		} else {
@@ -157,12 +193,16 @@ public class BanditHittepa2 {
 			XYSeries seriesAll = testVectorArm("All arms", cb, contextualSetting, TYPE);
 
 			allSeries.add(seriesAll);
+
+			Item.mostPopularMonthly = new ArrayList<Item>();
+			Item.mostPopularWeekly = new ArrayList<Item>();
 			
 			ContextualSetting contextualSettingEvaluation = contextualSetting.copy();
 			
 			ArrayList<ContextualBayesArm> bestArms = new ArrayList<ContextualBayesArm>();
 			bestArms.add(bestArm.copy());
 			ContextualBandit cbEvaluation = new ContextualBandit(bestArms);
+			
 			
 			for(int i = startPlace; i < trainingSet; i++) {
 				Order o = contextualSettingEvaluation.getOrderByDate(i);
@@ -174,6 +214,9 @@ public class BanditHittepa2 {
 			
 			XYSeries seriesReference = testVectorArm("Best arm", cbEvaluation, contextualSettingEvaluation, TYPE);
 
+			Item.mostPopularMonthly = new ArrayList<Item>();
+			Item.mostPopularWeekly = new ArrayList<Item>();
+			
 			allSeries.add(seriesReference);
 		}
 		
@@ -191,6 +234,9 @@ public class BanditHittepa2 {
 			}
 			
 			XYSeries seriesReference = testVectorArm("Baseline (most bought last month)", cbBaseline, contextualSettingBaseline, TYPE_MOST_BUYS);
+
+			Item.mostPopularMonthly = new ArrayList<Item>();
+			Item.mostPopularWeekly = new ArrayList<Item>();
 			
 			allSeries.add(seriesReference);
 		}
@@ -235,6 +281,8 @@ public class BanditHittepa2 {
         }
         NumberAxis domain = new NumberAxis("Number of tries");
         NumberAxis range = new NumberAxis("Correct predictions (%)");
+        DateAxis dateAxis = new DateAxis("Time zone");
+        
         XYSplineRenderer r = new XYSplineRenderer(3);
         XYPlot xyplot = new XYPlot(dataset, domain, range, r);
         JFreeChart chart = new JFreeChart(xyplot);
@@ -433,7 +481,6 @@ public class BanditHittepa2 {
 					logWriter.println("The order information:");
 					logWriter.println("Date: " + currentOrder.getPlacedOrder().toString());
 					logWriter.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
-					
 				}
 
 				boolean success = false;

@@ -58,17 +58,17 @@ public class Order {
 
 	
 	public Order(User user, long orderId, String date) throws Exception{
-		this.user = user;
-		this.orderId = orderId;
-		this.items = new ArrayList<>();
-		this.placedOrder = df.parseDateTime(date.substring(0,19));
+		this.user 			= user;
+		this.orderId 		= orderId;
+		this.items 			= new ArrayList<>();
+		this.placedOrder 	= df.parseDateTime(date.substring(0,19));
 	}
 	
 	public Order(User user, long orderId, DateTime date) {
-		this.user = user;
-		this.orderId = orderId;
-		this.items = new ArrayList<>();
-		this.placedOrder = new DateTime(date);
+		this.user 			= user;
+		this.orderId 		= orderId;
+		this.items 			= new ArrayList<>();
+		this.placedOrder 	= new DateTime(date);
 	}
 	
 	public void addItem(Item i){
