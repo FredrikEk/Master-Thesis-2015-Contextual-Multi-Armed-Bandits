@@ -1,0 +1,2896 @@
+Items: 31014,2,2012-03-22 09:35:15.730000000,2013-01-31 22:08:19.360000000,0,0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+Items: 16065,3,2010-10-12 09:05:28.623000000,2011-10-19 12:41:59.293000000,0,0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+Items: 2897,1,2010-07-28 15:55:07.423000000,2013-07-15 05:02:15.650000000,0,0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+Users: 46671,2009-07-31 17:52:05.423000000,45238,,0
+Users: 117404,2012-02-11 18:20:17.737000000,30295,1989-02-13 00:00:00,1
+Users: 185087,2009-07-31 19:48:45.310000000,54234,1986-06-04 00:00:00,1
+Users: 242612,2011-12-03 21:34:16.640000000,90627,1990-07-23 00:00:00,2
+Users: 294436,2011-03-16 09:05:23.647000000,72233,1994-04-25 00:00:00,1
+Users: 345704,2011-11-11 20:55:14.437000000,68600,1994-06-05 00:00:00,2
+Users: 399809,2012-09-17 14:43:42.033000000,44491,1997-12-12 00:00:00,1
+Users: 455390,2012-12-20 16:02:28.573000000,3274,1978-06-02 00:00:00,2
+Users: 525182,2013-07-28 12:33:53.590000000,53372,1990-06-17 00:00:00,0
+Orders: 35022,1033356,1457,2009-10-18 21:46:53.347000000
+Orders: 214698,1082559,614,2010-01-24 20:16:55.153000000
+Orders: 226305,1122161,1501,2010-03-20 16:23:03.950000000
+Orders: 46541,1167569,11120,2010-05-26 12:55:02.417000000
+Orders: 75824,1208142,11119,2010-07-27 23:14:48.377000000
+Orders: 13287,1248778,12826,2010-09-21 21:56:27.157000000
+Orders: 272654,1296031,653,2010-12-01 18:41:36.730000000
+Orders: 285359,1344258,18628,2011-01-28 14:59:09.743000000
+Orders: 157456,1388262,18371,2011-03-17 11:46:02.120000000
+Orders: 307265,1432210,758,2011-04-29 21:28:48.340000000
+Orders: 271030,1473349,21803,2011-06-14 15:24:35.467000000
+Orders: 275827,1511037,21829,2011-07-28 21:58:50.970000000
+Orders: 62527,1550712,24845,2011-09-10 18:44:47.023000000
+Orders: 293365,1597283,27523,2011-11-12 08:21:31.203000000
+Orders: 158173,1649466,24361,2011-12-28 14:06:54.430000000
+Orders: 371623,1691322,28947,2012-01-31 15:54:20.570000000
+Orders: 151193,1739094,2144,2012-03-22 17:02:48.527000000
+Orders: 71320,1784958,7874,2012-05-16 17:00:59.817000000
+Orders: 287161,1827735,20480,2012-06-29 22:23:24.193000000
+Orders: 271514,1866722,31203,2012-08-11 21:38:56.863000000
+Orders: 428803,1915657,35460,2012-10-09 20:15:44.210000000
+Orders: 444954,1966435,29677,2012-12-01 22:51:49.073000000
+Orders: 460415,2018674,31695,2013-01-07 22:20:30.543000000
+Orders: 381441,2066329,35170,2013-02-19 22:08:16.833000000
+Orders: 485606,2112774,39306,2013-03-26 15:04:37.277000000
+Orders: 423890,2161061,11304,2013-05-03 09:35:38.190000000
+Orders: 314770,2207605,26096,2013-06-05 19:04:54.837000000
+Orders: 287308,2249841,40450,2013-07-13 20:23:09.463000000
+Orders: 255027,2289235,33612,2013-08-13 17:15:05.073000000
+Orders: 466261,2331294,43871,2013-09-15 21:02:00.180000000
+Orders: 446724,2379393,448,2013-11-01 19:20:53.627000000
+
+Startup information:
+First order in training stage: 700000
+First order in evaluation stage: 771338
+Last order in evaluation stage: 936163
+
+Number of orders in training stage: 71338
+Number of orders in evaluation stage: 164825
+
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 82.0 and beta 582.0
+The order information:
+Date: 2012-05-09T17:07:05.000+02:00
+It predicted these items for order 1778911 :
+   31560 with score of 247.0
+   752 with score of 185.0
+   5003 with score of 96.0
+   21714 with score of 93.0
+   23467 with score of 89.0
+   27576 with score of 86.0
+   748 with score of 82.0
+   21787 with score of 69.0
+   21803 with score of 66.0
+   27900 with score of 64.0
+These are the actual items bought: 
+   11832
+   30233
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 229.0 and beta 1435.0
+The order information:
+Date: 2012-05-10T17:54:43.000+02:00
+It predicted these items for order 1779917 :
+   31560 with score of 230.0
+   752 with score of 201.0
+   5003 with score of 102.0
+   21714 with score of 96.0
+   748 with score of 89.0
+   27576 with score of 85.0
+   29669 with score of 78.0
+   21787 with score of 72.0
+   23467 with score of 72.0
+   21803 with score of 70.0
+These are the actual items bought: 
+   30342
+   23374
+   32289
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 388.0 and beta 2276.0
+The order information:
+Date: 2012-05-11T22:39:32.000+02:00
+It predicted these items for order 1780921 :
+   31560 with score of 221.0
+   752 with score of 200.0
+   748 with score of 137.0
+   27576 with score of 88.0
+   21714 with score of 87.0
+   29669 with score of 87.0
+   21803 with score of 80.0
+   23467 with score of 78.0
+   5003 with score of 72.0
+   21787 with score of 66.0
+These are the actual items bought: 
+   31776
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 551.0 and beta 3113.0
+The order information:
+Date: 2012-05-13T15:53:25.000+02:00
+It predicted these items for order 1781930 :
+   752 with score of 189.0
+   31560 with score of 181.0
+   748 with score of 163.0
+   21714 with score of 101.0
+   29669 with score of 90.0
+   27576 with score of 88.0
+   5003 with score of 87.0
+   12338 with score of 79.0
+   21803 with score of 79.0
+   23467 with score of 75.0
+These are the actual items bought: 
+   2084
+   29003
+   31950
+   20990
+   31940
+   30573
+   20678
+   30195
+   25363
+   27900
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 705.0 and beta 3959.0
+The order information:
+Date: 2012-05-14T16:46:54.000+02:00
+It predicted these items for order 1782931 :
+   748 with score of 193.0
+   31560 with score of 172.0
+   752 with score of 168.0
+   21714 with score of 98.0
+   27576 with score of 97.0
+   29669 with score of 90.0
+   5003 with score of 89.0
+   12338 with score of 89.0
+   23467 with score of 81.0
+   21776 with score of 75.0
+These are the actual items bought: 
+   32564
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 836.0 and beta 4828.0
+The order information:
+Date: 2012-05-15T15:02:20.000+02:00
+It predicted these items for order 1783936 :
+   748 with score of 200.0
+   31560 with score of 152.0
+   752 with score of 133.0
+   27576 with score of 111.0
+   21714 with score of 97.0
+   21776 with score of 90.0
+   5003 with score of 89.0
+   29669 with score of 89.0
+   25201 with score of 80.0
+   12338 with score of 78.0
+These are the actual items bought: 
+   12096
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 951.0 and beta 5713.0
+The order information:
+Date: 2012-05-16T16:36:57.000+02:00
+It predicted these items for order 1784944 :
+   748 with score of 201.0
+   31560 with score of 130.0
+   752 with score of 111.0
+   21714 with score of 98.0
+   27576 with score of 98.0
+   5003 with score of 85.0
+   21776 with score of 84.0
+   23467 with score of 82.0
+   12338 with score of 80.0
+   25201 with score of 80.0
+These are the actual items bought: 
+   29149
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 1125.0 and beta 6539.0
+The order information:
+Date: 2012-05-17T23:37:38.000+02:00
+It predicted these items for order 1785980 :
+   748 with score of 184.0
+   27576 with score of 115.0
+   21714 with score of 109.0
+   31560 with score of 107.0
+   23588 with score of 102.0
+   752 with score of 98.0
+   1663 with score of 93.0
+   23467 with score of 83.0
+   30800 with score of 83.0
+   11380 with score of 80.0
+These are the actual items bought: 
+   32343
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 1252.0 and beta 7412.0
+The order information:
+Date: 2012-05-19T14:02:12.000+02:00
+It predicted these items for order 1786983 :
+   748 with score of 164.0
+   31560 with score of 115.0
+   27576 with score of 114.0
+   1663 with score of 103.0
+   21714 with score of 102.0
+   23588 with score of 98.0
+   12338 with score of 87.0
+   21776 with score of 87.0
+   23467 with score of 87.0
+   752 with score of 86.0
+These are the actual items bought: 
+   18405
+   13678
+   28010
+   30947
+   31265
+   26587
+   30304
+   13678
+   24965
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 1374.0 and beta 8290.0
+The order information:
+Date: 2012-05-20T19:46:05.000+02:00
+It predicted these items for order 1787986 :
+   748 with score of 135.0
+   31560 with score of 127.0
+   27576 with score of 118.0
+   23588 with score of 104.0
+   23467 with score of 94.0
+   1663 with score of 90.0
+   21776 with score of 88.0
+   11380 with score of 81.0
+   752 with score of 78.0
+   11832 with score of 77.0
+These are the actual items bought: 
+   9892
+   2750
+   30011
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 1536.0 and beta 9128.0
+The order information:
+Date: 2012-05-21T17:53:53.000+02:00
+It predicted these items for order 1788991 :
+   31560 with score of 155.0
+   748 with score of 138.0
+   23588 with score of 114.0
+   23467 with score of 110.0
+   752 with score of 87.0
+   27576 with score of 86.0
+   11832 with score of 82.0
+   1663 with score of 80.0
+   30800 with score of 79.0
+   11380 with score of 78.0
+These are the actual items bought: 
+   19597
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 1674.0 and beta 9990.0
+The order information:
+Date: 2012-05-22T15:04:22.000+02:00
+It predicted these items for order 1789993 :
+   748 with score of 148.0
+   31560 with score of 146.0
+   23588 with score of 118.0
+   23467 with score of 113.0
+   27576 with score of 105.0
+   752 with score of 96.0
+   1663 with score of 94.0
+   30800 with score of 90.0
+   11832 with score of 83.0
+   24428 with score of 82.0
+These are the actual items bought: 
+   21242
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 1827.0 and beta 10837.0
+The order information:
+Date: 2012-05-23T10:57:04.000+02:00
+It predicted these items for order 1790996 :
+   31560 with score of 153.0
+   748 with score of 141.0
+   23588 with score of 131.0
+   23467 with score of 122.0
+   27576 with score of 109.0
+   30800 with score of 106.0
+   1663 with score of 104.0
+   752 with score of 102.0
+   5003 with score of 86.0
+   11832 with score of 86.0
+These are the actual items bought: 
+   15449
+   21787
+   21787
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 1960.0 and beta 11704.0
+The order information:
+Date: 2012-05-24T04:15:47.000+02:00
+It predicted these items for order 1792001 :
+   31560 with score of 162.0
+   23588 with score of 141.0
+   748 with score of 137.0
+   27576 with score of 135.0
+   23467 with score of 127.0
+   30800 with score of 118.0
+   752 with score of 112.0
+   1663 with score of 100.0
+   29669 with score of 97.0
+   5003 with score of 93.0
+These are the actual items bought: 
+   29355
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 2148.0 and beta 12516.0
+The order information:
+Date: 2012-05-25T09:03:22.000+02:00
+It predicted these items for order 1793007 :
+   31560 with score of 195.0
+   23467 with score of 163.0
+   21803 with score of 148.0
+   748 with score of 140.0
+   752 with score of 117.0
+   27576 with score of 116.0
+   23588 with score of 115.0
+   30800 with score of 113.0
+   32289 with score of 98.0
+   5003 with score of 91.0
+These are the actual items bought: 
+   31184
+   9876
+   24045
+   32886
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 2312.0 and beta 13352.0
+The order information:
+Date: 2012-05-26T13:29:41.000+02:00
+It predicted these items for order 1794012 :
+   31560 with score of 220.0
+   23467 with score of 186.0
+   748 with score of 139.0
+   30800 with score of 135.0
+   21803 with score of 134.0
+   752 with score of 117.0
+   23588 with score of 114.0
+   27576 with score of 114.0
+   32289 with score of 98.0
+   5003 with score of 87.0
+These are the actual items bought: 
+   31457
+   24942
+   21839
+   1002
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 2453.0 and beta 14211.0
+The order information:
+Date: 2012-05-27T18:26:02.000+02:00
+It predicted these items for order 1795019 :
+   31560 with score of 222.0
+   23467 with score of 204.0
+   30800 with score of 148.0
+   21803 with score of 141.0
+   748 with score of 129.0
+   752 with score of 115.0
+   27576 with score of 110.0
+   32289 with score of 105.0
+   23588 with score of 104.0
+   29669 with score of 85.0
+These are the actual items bought: 
+   7420
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 2577.0 and beta 15087.0
+The order information:
+Date: 2012-05-28T14:17:50.000+02:00
+It predicted these items for order 1796028 :
+   31560 with score of 204.0
+   23467 with score of 202.0
+   30800 with score of 160.0
+   21803 with score of 142.0
+   27576 with score of 128.0
+   748 with score of 125.0
+   752 with score of 115.0
+   32289 with score of 108.0
+   23588 with score of 102.0
+   20451 with score of 85.0
+These are the actual items bought: 
+   21224
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 2686.0 and beta 15978.0
+The order information:
+Date: 2012-05-28T22:58:00.000+02:00
+It predicted these items for order 1797034 :
+   31560 with score of 222.0
+   23467 with score of 189.0
+   30800 with score of 165.0
+   21803 with score of 132.0
+   32289 with score of 112.0
+   752 with score of 110.0
+   748 with score of 108.0
+   27576 with score of 100.0
+   21714 with score of 94.0
+   23588 with score of 94.0
+These are the actual items bought: 
+   24447
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 2809.0 and beta 16855.0
+The order information:
+Date: 2012-05-29T21:07:49.000+02:00
+It predicted these items for order 1798038 :
+   31560 with score of 239.0
+   23467 with score of 175.0
+   30800 with score of 154.0
+   21803 with score of 125.0
+   32289 with score of 119.0
+   752 with score of 114.0
+   748 with score of 103.0
+   11380 with score of 98.0
+   27576 with score of 96.0
+   23588 with score of 94.0
+These are the actual items bought: 
+   21857
+   23469
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 2932.0 and beta 17732.0
+The order information:
+Date: 2012-05-30T19:21:53.000+02:00
+It predicted these items for order 1799051 :
+   31560 with score of 264.0
+   23467 with score of 156.0
+   30800 with score of 148.0
+   21803 with score of 123.0
+   32289 with score of 122.0
+   752 with score of 100.0
+   748 with score of 99.0
+   11380 with score of 98.0
+   21714 with score of 95.0
+   20451 with score of 91.0
+These are the actual items bought: 
+   20534
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 3061.0 and beta 18603.0
+The order information:
+Date: 2012-05-31T18:59:26.000+02:00
+It predicted these items for order 1800061 :
+   31560 with score of 282.0
+   23467 with score of 135.0
+   30800 with score of 135.0
+   32289 with score of 128.0
+   21803 with score of 117.0
+   5003 with score of 113.0
+   11380 with score of 103.0
+   23588 with score of 99.0
+   21714 with score of 90.0
+   748 with score of 88.0
+These are the actual items bought: 
+   5003
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 3174.0 and beta 19490.0
+The order information:
+Date: 2012-06-01T21:06:50.000+02:00
+It predicted these items for order 1801065 :
+   31560 with score of 274.0
+   30800 with score of 117.0
+   32289 with score of 116.0
+   5003 with score of 113.0
+   23588 with score of 105.0
+   11380 with score of 104.0
+   23467 with score of 92.0
+   572 with score of 87.0
+   20451 with score of 86.0
+   752 with score of 81.0
+These are the actual items bought: 
+   23072
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 3332.0 and beta 20332.0
+The order information:
+Date: 2012-06-03T13:10:07.000+02:00
+It predicted these items for order 1802072 :
+   31560 with score of 289.0
+   5003 with score of 140.0
+   32289 with score of 116.0
+   23588 with score of 110.0
+   30800 with score of 98.0
+   11380 with score of 96.0
+   20451 with score of 92.0
+   752 with score of 89.0
+   572 with score of 86.0
+   11832 with score of 73.0
+These are the actual items bought: 
+   18489
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 3492.0 and beta 21172.0
+The order information:
+Date: 2012-06-04T06:36:28.000+02:00
+It predicted these items for order 1803078 :
+   31560 with score of 312.0
+   5003 with score of 150.0
+   23588 with score of 107.0
+   32289 with score of 105.0
+   11380 with score of 101.0
+   29353 with score of 89.0
+   20451 with score of 87.0
+   11832 with score of 85.0
+   572 with score of 81.0
+   752 with score of 81.0
+These are the actual items bought: 
+   31872
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 3636.0 and beta 22028.0
+The order information:
+Date: 2012-06-04T22:48:26.000+02:00
+It predicted these items for order 1804098 :
+   31560 with score of 314.0
+   5003 with score of 130.0
+   29353 with score of 116.0
+   23588 with score of 114.0
+   32289 with score of 105.0
+   11832 with score of 102.0
+   11380 with score of 96.0
+   12338 with score of 86.0
+   572 with score of 79.0
+   20451 with score of 78.0
+These are the actual items bought: 
+   20051
+   31484
+   13678
+   13672
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 3797.0 and beta 22867.0
+The order information:
+Date: 2012-06-06T00:51:18.000+02:00
+It predicted these items for order 1805107 :
+   31560 with score of 304.0
+   5003 with score of 135.0
+   29353 with score of 115.0
+   32289 with score of 112.0
+   11832 with score of 104.0
+   23588 with score of 95.0
+   11380 with score of 86.0
+   12338 with score of 74.0
+   572 with score of 72.0
+   20451 with score of 64.0
+These are the actual items bought: 
+   752
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 3951.0 and beta 23713.0
+The order information:
+Date: 2012-06-07T08:29:43.000+02:00
+It predicted these items for order 1806121 :
+   31560 with score of 311.0
+   5003 with score of 112.0
+   29353 with score of 112.0
+   11832 with score of 103.0
+   32289 with score of 102.0
+   23588 with score of 92.0
+   11380 with score of 89.0
+   572 with score of 68.0
+   12338 with score of 68.0
+   23469 with score of 62.0
+These are the actual items bought: 
+   33075
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 4093.0 and beta 24571.0
+The order information:
+Date: 2012-06-08T09:20:14.000+02:00
+It predicted these items for order 1807131 :
+   31560 with score of 295.0
+   29353 with score of 119.0
+   32289 with score of 118.0
+   5003 with score of 100.0
+   11832 with score of 100.0
+   23588 with score of 95.0
+   11380 with score of 89.0
+   572 with score of 70.0
+   23469 with score of 65.0
+   12338 with score of 64.0
+These are the actual items bought: 
+   32886
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 4231.0 and beta 25433.0
+The order information:
+Date: 2012-06-09T20:08:02.000+02:00
+It predicted these items for order 1808142 :
+   31560 with score of 257.0
+   32289 with score of 131.0
+   29353 with score of 112.0
+   11380 with score of 98.0
+   5003 with score of 97.0
+   23588 with score of 94.0
+   11832 with score of 93.0
+   12338 with score of 80.0
+   23469 with score of 76.0
+   572 with score of 67.0
+These are the actual items bought: 
+   20952
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 4354.0 and beta 26310.0
+The order information:
+Date: 2012-06-10T22:09:10.000+02:00
+It predicted these items for order 1809154 :
+   31560 with score of 232.0
+   32289 with score of 140.0
+   11380 with score of 99.0
+   11832 with score of 98.0
+   29353 with score of 96.0
+   23588 with score of 91.0
+   12338 with score of 88.0
+   23469 with score of 85.0
+   5003 with score of 83.0
+   27900 with score of 69.0
+These are the actual items bought: 
+   758
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 4475.0 and beta 27189.0
+The order information:
+Date: 2012-06-11T22:12:13.000+02:00
+It predicted these items for order 1810164 :
+   31560 with score of 216.0
+   32289 with score of 142.0
+   11380 with score of 98.0
+   23588 with score of 93.0
+   5003 with score of 85.0
+   12338 with score of 85.0
+   23469 with score of 81.0
+   11832 with score of 74.0
+   11833 with score of 67.0
+   27900 with score of 63.0
+These are the actual items bought: 
+   32829
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 4619.0 and beta 28045.0
+The order information:
+Date: 2012-06-12T21:33:55.000+02:00
+It predicted these items for order 1811173 :
+   31560 with score of 231.0
+   32289 with score of 128.0
+   11380 with score of 106.0
+   23588 with score of 103.0
+   5003 with score of 80.0
+   12338 with score of 80.0
+   11832 with score of 78.0
+   23469 with score of 76.0
+   11833 with score of 69.0
+   748 with score of 67.0
+These are the actual items bought: 
+   32563
+   21986
+   21833
+   29794
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 4763.0 and beta 28901.0
+The order information:
+Date: 2012-06-13T23:05:47.000+02:00
+It predicted these items for order 1812178 :
+   31560 with score of 203.0
+   32289 with score of 123.0
+   23588 with score of 101.0
+   11380 with score of 97.0
+   5003 with score of 90.0
+   11832 with score of 82.0
+   12338 with score of 82.0
+   748 with score of 81.0
+   21787 with score of 76.0
+   23469 with score of 74.0
+These are the actual items bought: 
+   30584
+   29944
+   30425
+   30466
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 4910.0 and beta 29754.0
+The order information:
+Date: 2012-06-15T16:19:38.000+02:00
+It predicted these items for order 1813189 :
+   31560 with score of 184.0
+   5003 with score of 110.0
+   32289 with score of 98.0
+   23588 with score of 93.0
+   748 with score of 90.0
+   11380 with score of 90.0
+   23469 with score of 82.0
+   12338 with score of 81.0
+   11832 with score of 80.0
+   21787 with score of 77.0
+These are the actual items bought: 
+   20420
+   13461
+   31940
+   1002
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5032.0 and beta 30632.0
+The order information:
+Date: 2012-06-17T17:19:20.000+02:00
+It predicted these items for order 1814192 :
+   31560 with score of 167.0
+   748 with score of 105.0
+   5003 with score of 105.0
+   23588 with score of 85.0
+   32289 with score of 81.0
+   11380 with score of 77.0
+   12338 with score of 71.0
+   11832 with score of 70.0
+   23469 with score of 68.0
+   21787 with score of 65.0
+These are the actual items bought: 
+   21815
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5127.0 and beta 31537.0
+The order information:
+Date: 2012-06-18T19:09:52.000+02:00
+It predicted these items for order 1815195 :
+   31560 with score of 145.0
+   5003 with score of 107.0
+   748 with score of 94.0
+   23588 with score of 76.0
+   32289 with score of 76.0
+   12338 with score of 68.0
+   21787 with score of 68.0
+   23469 with score of 68.0
+   11832 with score of 66.0
+   21803 with score of 66.0
+These are the actual items bought: 
+   19179
+   22396
+   22394
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5228.0 and beta 32436.0
+The order information:
+Date: 2012-06-19T21:02:22.000+02:00
+It predicted these items for order 1816202 :
+   31560 with score of 121.0
+   5003 with score of 105.0
+   748 with score of 95.0
+   21803 with score of 72.0
+   32289 with score of 71.0
+   12338 with score of 70.0
+   11832 with score of 69.0
+   27576 with score of 68.0
+   23588 with score of 59.0
+   14951 with score of 57.0
+These are the actual items bought: 
+   29916
+   31039
+   21781
+   21776
+   29837
+   29578
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5312.0 and beta 33352.0
+The order information:
+Date: 2012-06-21T09:44:30.000+02:00
+It predicted these items for order 1817208 :
+   31560 with score of 83.0
+   5003 with score of 78.0
+   748 with score of 76.0
+   11832 with score of 62.0
+   21803 with score of 62.0
+   12338 with score of 60.0
+   27576 with score of 60.0
+   29669 with score of 59.0
+   14951 with score of 54.0
+   23588 with score of 53.0
+These are the actual items bought: 
+   30901
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5441.0 and beta 34223.0
+The order information:
+Date: 2012-06-22T22:11:26.000+02:00
+It predicted these items for order 1818221 :
+   31560 with score of 86.0
+   748 with score of 77.0
+   5003 with score of 76.0
+   29669 with score of 67.0
+   12338 with score of 65.0
+   27576 with score of 64.0
+   27900 with score of 63.0
+   14951 with score of 58.0
+   30800 with score of 57.0
+   11832 with score of 54.0
+These are the actual items bought: 
+   13289
+   14951
+   14951
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5551.0 and beta 35113.0
+The order information:
+Date: 2012-06-24T14:08:03.000+02:00
+It predicted these items for order 1819229 :
+   31560 with score of 101.0
+   27900 with score of 77.0
+   748 with score of 76.0
+   27576 with score of 70.0
+   5003 with score of 69.0
+   29669 with score of 69.0
+   30800 with score of 67.0
+   12338 with score of 64.0
+   14951 with score of 61.0
+   11832 with score of 55.0
+These are the actual items bought: 
+   21815
+   11833
+   33199
+   33224
+   6097
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5676.0 and beta 35988.0
+The order information:
+Date: 2012-06-24T23:07:04.000+02:00
+It predicted these items for order 1820233 :
+   31560 with score of 113.0
+   27900 with score of 108.0
+   30800 with score of 78.0
+   748 with score of 77.0
+   27576 with score of 75.0
+   12338 with score of 70.0
+   5003 with score of 69.0
+   14951 with score of 69.0
+   29669 with score of 69.0
+   33232 with score of 64.0
+These are the actual items bought: 
+   27900
+   32213
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5772.0 and beta 36892.0
+The order information:
+Date: 2012-06-25T19:16:27.000+02:00
+It predicted these items for order 1821236 :
+   31560 with score of 127.0
+   27900 with score of 123.0
+   30800 with score of 98.0
+   27576 with score of 78.0
+   748 with score of 75.0
+   5003 with score of 73.0
+   33232 with score of 69.0
+   12338 with score of 68.0
+   14951 with score of 68.0
+   29669 with score of 61.0
+These are the actual items bought: 
+   30427
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5872.0 and beta 37792.0
+The order information:
+Date: 2012-06-26T10:49:49.000+02:00
+It predicted these items for order 1822239 :
+   31560 with score of 133.0
+   27900 with score of 131.0
+   30800 with score of 105.0
+   29669 with score of 85.0
+   5003 with score of 80.0
+   27576 with score of 79.0
+   12338 with score of 74.0
+   748 with score of 73.0
+   33232 with score of 73.0
+   11380 with score of 57.0
+These are the actual items bought: 
+   26866
+   28993
+   24761
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 5931.0 and beta 38733.0
+The order information:
+Date: 2012-06-26T21:15:21.000+02:00
+It predicted these items for order 1823247 :
+   31560 with score of 136.0
+   27900 with score of 135.0
+   30800 with score of 103.0
+   27576 with score of 84.0
+   29669 with score of 84.0
+   33232 with score of 82.0
+   5003 with score of 77.0
+   748 with score of 71.0
+   12338 with score of 69.0
+   33250 with score of 67.0
+These are the actual items bought: 
+   20003
+   30394
+   18343
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6008.0 and beta 39656.0
+The order information:
+Date: 2012-06-27T16:08:11.000+02:00
+It predicted these items for order 1824252 :
+   31560 with score of 157.0
+   27900 with score of 133.0
+   30800 with score of 115.0
+   5003 with score of 83.0
+   29669 with score of 81.0
+   27576 with score of 80.0
+   748 with score of 76.0
+   33250 with score of 76.0
+   33169 with score of 70.0
+   33232 with score of 70.0
+These are the actual items bought: 
+   9632
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6083.0 and beta 40581.0
+The order information:
+Date: 2012-06-28T07:32:03.000+02:00
+It predicted these items for order 1825252 :
+   31560 with score of 157.0
+   27900 with score of 141.0
+   30800 with score of 129.0
+   27576 with score of 85.0
+   5003 with score of 81.0
+   748 with score of 80.0
+   33250 with score of 78.0
+   29669 with score of 77.0
+   32731 with score of 77.0
+   20480 with score of 74.0
+These are the actual items bought: 
+   11832
+   30058
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6148.0 and beta 41516.0
+The order information:
+Date: 2012-06-28T20:49:13.000+02:00
+It predicted these items for order 1826253 :
+   31560 with score of 155.0
+   27900 with score of 132.0
+   30800 with score of 129.0
+   32731 with score of 96.0
+   20480 with score of 84.0
+   27576 with score of 83.0
+   748 with score of 80.0
+   5003 with score of 78.0
+   33250 with score of 78.0
+   32701 with score of 74.0
+These are the actual items bought: 
+   18977
+   17093
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6243.0 and beta 42421.0
+The order information:
+Date: 2012-06-29T16:13:38.000+02:00
+It predicted these items for order 1827257 :
+   31560 with score of 155.0
+   30800 with score of 136.0
+   27900 with score of 125.0
+   32731 with score of 111.0
+   20480 with score of 100.0
+   27576 with score of 85.0
+   12338 with score of 84.0
+   32701 with score of 82.0
+   11833 with score of 81.0
+   33169 with score of 81.0
+These are the actual items bought: 
+   31085
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6314.0 and beta 43350.0
+The order information:
+Date: 2012-06-30T11:21:48.000+02:00
+It predicted these items for order 1828259 :
+   31560 with score of 148.0
+   30800 with score of 147.0
+   27900 with score of 132.0
+   32731 with score of 119.0
+   20480 with score of 113.0
+   32701 with score of 89.0
+   11833 with score of 86.0
+   12338 with score of 84.0
+   27576 with score of 82.0
+   29355 with score of 81.0
+These are the actual items bought: 
+   758
+   29700
+   32185
+   9700
+   31808
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6413.0 and beta 44251.0
+The order information:
+Date: 2012-06-30T20:09:27.000+02:00
+It predicted these items for order 1829261 :
+   30800 with score of 149.0
+   32731 with score of 148.0
+   31560 with score of 147.0
+   20480 with score of 138.0
+   27900 with score of 125.0
+   29355 with score of 106.0
+   32701 with score of 100.0
+   11833 with score of 97.0
+   27576 with score of 87.0
+   29675 with score of 86.0
+These are the actual items bought: 
+   27589
+   32739
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6498.0 and beta 45166.0
+The order information:
+Date: 2012-07-01T16:24:58.000+02:00
+It predicted these items for order 1830262 :
+   20480 with score of 174.0
+   30800 with score of 146.0
+   32731 with score of 144.0
+   31560 with score of 141.0
+   27900 with score of 119.0
+   29355 with score of 119.0
+   32701 with score of 98.0
+   11833 with score of 97.0
+   29675 with score of 93.0
+   33254 with score of 90.0
+These are the actual items bought: 
+   30799
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6611.0 and beta 46053.0
+The order information:
+Date: 2012-07-02T00:12:22.000+02:00
+It predicted these items for order 1831263 :
+   20480 with score of 175.0
+   30800 with score of 161.0
+   32731 with score of 157.0
+   29355 with score of 136.0
+   31560 with score of 130.0
+   11833 with score of 106.0
+   29675 with score of 105.0
+   27900 with score of 104.0
+   32701 with score of 92.0
+   33254 with score of 86.0
+These are the actual items bought: 
+   17093
+   26803
+   30708
+   32141
+   6992
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6703.0 and beta 46961.0
+The order information:
+Date: 2012-07-02T11:25:18.000+02:00
+It predicted these items for order 1832265 :
+   20480 with score of 240.0
+   30800 with score of 158.0
+   32731 with score of 158.0
+   29355 with score of 147.0
+   31560 with score of 127.0
+   29675 with score of 122.0
+   27900 with score of 116.0
+   11833 with score of 112.0
+   20430 with score of 89.0
+   30969 with score of 89.0
+These are the actual items bought: 
+   29939
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6824.0 and beta 47840.0
+The order information:
+Date: 2012-07-02T16:57:45.000+02:00
+It predicted these items for order 1833274 :
+   20480 with score of 263.0
+   32731 with score of 176.0
+   29355 with score of 169.0
+   30800 with score of 162.0
+   29675 with score of 147.0
+   11833 with score of 118.0
+   27900 with score of 116.0
+   31560 with score of 116.0
+   20430 with score of 99.0
+   30969 with score of 97.0
+These are the actual items bought: 
+   29675
+   31432
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 6931.0 and beta 48733.0
+The order information:
+Date: 2012-07-02T20:48:23.000+02:00
+It predicted these items for order 1834278 :
+   20480 with score of 282.0
+   32731 with score of 192.0
+   29355 with score of 183.0
+   29675 with score of 166.0
+   30800 with score of 165.0
+   27900 with score of 125.0
+   11833 with score of 109.0
+   20430 with score of 107.0
+   31560 with score of 105.0
+   30969 with score of 97.0
+These are the actual items bought: 
+   24587
+   32729
+   30118
+   32993
+   30463
+   32730
+   32728
+   28982
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7070.0 and beta 49594.0
+The order information:
+Date: 2012-07-03T00:09:20.000+02:00
+It predicted these items for order 1835278 :
+   20480 with score of 327.0
+   32731 with score of 207.0
+   29355 with score of 192.0
+   29675 with score of 187.0
+   30800 with score of 178.0
+   20430 with score of 127.0
+   27900 with score of 123.0
+   11833 with score of 110.0
+   29649 with score of 109.0
+   32650 with score of 101.0
+These are the actual items bought: 
+   31008
+   30123
+   31123
+   7880
+   20763
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7194.0 and beta 50470.0
+The order information:
+Date: 2012-07-03T18:20:54.000+02:00
+It predicted these items for order 1836279 :
+   20480 with score of 333.0
+   29355 with score of 213.0
+   32731 with score of 207.0
+   29675 with score of 203.0
+   30800 with score of 191.0
+   20430 with score of 130.0
+   27900 with score of 126.0
+   11833 with score of 111.0
+   29649 with score of 110.0
+   32650 with score of 102.0
+These are the actual items bought: 
+   29486
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7313.0 and beta 51351.0
+The order information:
+Date: 2012-07-04T01:45:19.000+02:00
+It predicted these items for order 1837285 :
+   20480 with score of 329.0
+   29675 with score of 240.0
+   29355 with score of 225.0
+   32731 with score of 193.0
+   30800 with score of 190.0
+   20430 with score of 138.0
+   27900 with score of 137.0
+   29649 with score of 112.0
+   32650 with score of 108.0
+   11833 with score of 106.0
+These are the actual items bought: 
+   32247
+   33329
+   24965
+   24965
+   24789
+   28965
+   24965
+   24789
+   24965
+   24965
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7423.0 and beta 52241.0
+The order information:
+Date: 2012-07-04T20:49:30.000+02:00
+It predicted these items for order 1838289 :
+   20480 with score of 352.0
+   29675 with score of 249.0
+   29355 with score of 235.0
+   30800 with score of 188.0
+   32731 with score of 186.0
+   20430 with score of 142.0
+   27900 with score of 140.0
+   29649 with score of 114.0
+   32729 with score of 114.0
+   32650 with score of 113.0
+These are the actual items bought: 
+   29500
+   16202
+   30909
+   20430
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7528.0 and beta 53136.0
+The order information:
+Date: 2012-07-05T14:31:28.000+02:00
+It predicted these items for order 1839291 :
+   20480 with score of 358.0
+   29675 with score of 272.0
+   29355 with score of 241.0
+   30800 with score of 183.0
+   32731 with score of 167.0
+   20430 with score of 159.0
+   27900 with score of 147.0
+   32650 with score of 124.0
+   32729 with score of 117.0
+   29649 with score of 110.0
+These are the actual items bought: 
+   29845
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7644.0 and beta 54020.0
+The order information:
+Date: 2012-07-05T23:09:34.000+02:00
+It predicted these items for order 1840294 :
+   20480 with score of 358.0
+   29675 with score of 280.0
+   29355 with score of 259.0
+   30800 with score of 170.0
+   20430 with score of 169.0
+   27900 with score of 152.0
+   32731 with score of 147.0
+   32729 with score of 125.0
+   32650 with score of 119.0
+   32993 with score of 117.0
+These are the actual items bought: 
+   29675
+   32742
+   32117
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7708.0 and beta 54956.0
+The order information:
+Date: 2012-07-07T12:24:08.000+02:00
+It predicted these items for order 1841297 :
+   20480 with score of 342.0
+   29675 with score of 272.0
+   29355 with score of 243.0
+   20430 with score of 169.0
+   30800 with score of 156.0
+   27900 with score of 142.0
+   32731 with score of 128.0
+   32729 with score of 124.0
+   32993 with score of 124.0
+   32650 with score of 107.0
+These are the actual items bought: 
+   31568
+   29686
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7760.0 and beta 55904.0
+The order information:
+Date: 2012-07-08T23:07:32.000+02:00
+It predicted these items for order 1842304 :
+   20480 with score of 271.0
+   29675 with score of 244.0
+   29355 with score of 209.0
+   20430 with score of 154.0
+   32993 with score of 126.0
+   27900 with score of 125.0
+   30800 with score of 117.0
+   31774 with score of 105.0
+   32729 with score of 103.0
+   5003 with score of 97.0
+These are the actual items bought: 
+   33177
+   21833
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7836.0 and beta 56828.0
+The order information:
+Date: 2012-07-10T08:47:07.000+02:00
+It predicted these items for order 1843317 :
+   29675 with score of 135.0
+   29355 with score of 131.0
+   20480 with score of 105.0
+   5003 with score of 98.0
+   20430 with score of 98.0
+   32993 with score of 95.0
+   31774 with score of 87.0
+   32729 with score of 73.0
+   27900 with score of 72.0
+   6621 with score of 69.0
+These are the actual items bought: 
+   31789
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 7900.0 and beta 57764.0
+The order information:
+Date: 2012-07-11T13:40:35.000+02:00
+It predicted these items for order 1844320 :
+   29355 with score of 98.0
+   5003 with score of 96.0
+   31774 with score of 84.0
+   20430 with score of 81.0
+   29675 with score of 74.0
+   32993 with score of 70.0
+   20480 with score of 60.0
+   6621 with score of 59.0
+   12338 with score of 59.0
+   27576 with score of 58.0
+These are the actual items bought: 
+   33414
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8000.0 and beta 58664.0
+The order information:
+Date: 2012-07-12T18:54:55.000+02:00
+It predicted these items for order 1845341 :
+   5003 with score of 105.0
+   31774 with score of 83.0
+   752 with score of 77.0
+   12338 with score of 68.0
+   29355 with score of 67.0
+   20430 with score of 59.0
+   27576 with score of 50.0
+   33359 with score of 49.0
+   748 with score of 47.0
+   758 with score of 45.0
+These are the actual items bought: 
+   29906
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8143.0 and beta 59521.0
+The order information:
+Date: 2012-07-14T14:32:38.000+02:00
+It predicted these items for order 1846349 :
+   5003 with score of 105.0
+   31774 with score of 83.0
+   752 with score of 82.0
+   27576 with score of 73.0
+   748 with score of 69.0
+   12338 with score of 67.0
+   33359 with score of 56.0
+   6803 with score of 55.0
+   20430 with score of 48.0
+   758 with score of 47.0
+These are the actual items bought: 
+   32590
+   24077
+   33209
+   31013
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8258.0 and beta 60406.0
+The order information:
+Date: 2012-07-16T12:26:25.000+02:00
+It predicted these items for order 1847354 :
+   5003 with score of 100.0
+   752 with score of 85.0
+   12338 with score of 79.0
+   748 with score of 74.0
+   31774 with score of 67.0
+   27576 with score of 64.0
+   6803 with score of 63.0
+   33359 with score of 56.0
+   758 with score of 53.0
+   20430 with score of 43.0
+These are the actual items bought: 
+   6991
+   5003
+   33130
+   29647
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8374.0 and beta 61290.0
+The order information:
+Date: 2012-07-17T20:21:30.000+02:00
+It predicted these items for order 1848358 :
+   5003 with score of 90.0
+   12338 with score of 79.0
+   31774 with score of 66.0
+   6803 with score of 64.0
+   748 with score of 63.0
+   27576 with score of 60.0
+   33359 with score of 59.0
+   752 with score of 56.0
+   11833 with score of 46.0
+   33232 with score of 43.0
+These are the actual items bought: 
+   28985
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8489.0 and beta 62175.0
+The order information:
+Date: 2012-07-19T14:47:52.000+02:00
+It predicted these items for order 1849365 :
+   5003 with score of 87.0
+   748 with score of 86.0
+   6803 with score of 75.0
+   12338 with score of 72.0
+   31774 with score of 60.0
+   27576 with score of 55.0
+   33359 with score of 55.0
+   11833 with score of 38.0
+   752 with score of 34.0
+   20430 with score of 34.0
+These are the actual items bought: 
+   6621
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8612.0 and beta 63052.0
+The order information:
+Date: 2012-07-21T10:11:11.000+02:00
+It predicted these items for order 1850369 :
+   5003 with score of 93.0
+   748 with score of 89.0
+   12338 with score of 71.0
+   33359 with score of 53.0
+   6803 with score of 52.0
+   31774 with score of 45.0
+   11833 with score of 42.0
+   29000 with score of 40.0
+   32650 with score of 34.0
+   11380 with score of 32.0
+These are the actual items bought: 
+   748
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8679.0 and beta 63985.0
+The order information:
+Date: 2012-07-22T17:52:55.000+02:00
+It predicted these items for order 1851374 :
+   5003 with score of 89.0
+   748 with score of 88.0
+   12338 with score of 65.0
+   33359 with score of 56.0
+   6803 with score of 51.0
+   29000 with score of 48.0
+   11833 with score of 46.0
+   31774 with score of 44.0
+   31709 with score of 40.0
+   32650 with score of 39.0
+These are the actual items bought: 
+   23108
+   9494
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8787.0 and beta 64877.0
+The order information:
+Date: 2012-07-23T14:01:38.000+02:00
+It predicted these items for order 1852375 :
+   5003 with score of 118.0
+   748 with score of 95.0
+   33359 with score of 63.0
+   29000 with score of 60.0
+   12338 with score of 57.0
+   31709 with score of 52.0
+   20430 with score of 49.0
+   32650 with score of 49.0
+   6803 with score of 45.0
+   11833 with score of 45.0
+These are the actual items bought: 
+   2621
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8894.0 and beta 65770.0
+The order information:
+Date: 2012-07-24T13:05:39.000+02:00
+It predicted these items for order 1853375 :
+   5003 with score of 116.0
+   748 with score of 104.0
+   29000 with score of 73.0
+   12338 with score of 68.0
+   31709 with score of 63.0
+   20430 with score of 58.0
+   32650 with score of 57.0
+   33359 with score of 56.0
+   29402 with score of 54.0
+   333 with score of 53.0
+These are the actual items bought: 
+   26590
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 8996.0 and beta 66668.0
+The order information:
+Date: 2012-07-25T13:08:59.000+02:00
+It predicted these items for order 1854381 :
+   5003 with score of 120.0
+   748 with score of 96.0
+   29000 with score of 78.0
+   31709 with score of 76.0
+   12338 with score of 73.0
+   333 with score of 65.0
+   32650 with score of 62.0
+   33359 with score of 57.0
+   20430 with score of 55.0
+   29669 with score of 55.0
+These are the actual items bought: 
+   18303
+   21839
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9117.0 and beta 67547.0
+The order information:
+Date: 2012-07-26T11:55:33.000+02:00
+It predicted these items for order 1855386 :
+   5003 with score of 123.0
+   748 with score of 98.0
+   31709 with score of 89.0
+   12338 with score of 80.0
+   32650 with score of 80.0
+   29669 with score of 73.0
+   20430 with score of 69.0
+   29666 with score of 67.0
+   333 with score of 65.0
+   29000 with score of 65.0
+These are the actual items bought: 
+   18366
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9205.0 and beta 68459.0
+The order information:
+Date: 2012-07-27T17:15:19.000+02:00
+It predicted these items for order 1856396 :
+   5003 with score of 113.0
+   748 with score of 101.0
+   31709 with score of 91.0
+   32650 with score of 84.0
+   20430 with score of 79.0
+   12338 with score of 76.0
+   29669 with score of 71.0
+   333 with score of 67.0
+   29666 with score of 67.0
+   30800 with score of 64.0
+These are the actual items bought: 
+   29210
+   29210
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9295.0 and beta 69369.0
+The order information:
+Date: 2012-07-29T14:34:53.000+02:00
+It predicted these items for order 1857401 :
+   748 with score of 104.0
+   5003 with score of 99.0
+   20430 with score of 92.0
+   31709 with score of 86.0
+   32650 with score of 82.0
+   12338 with score of 78.0
+   333 with score of 71.0
+   29666 with score of 65.0
+   23469 with score of 64.0
+   29669 with score of 63.0
+These are the actual items bought: 
+   10123
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9389.0 and beta 70275.0
+The order information:
+Date: 2012-07-30T18:44:37.000+02:00
+It predicted these items for order 1858405 :
+   748 with score of 91.0
+   20430 with score of 83.0
+   32650 with score of 77.0
+   12338 with score of 76.0
+   5003 with score of 70.0
+   31709 with score of 61.0
+   745 with score of 58.0
+   23469 with score of 55.0
+   25794 with score of 53.0
+   29000 with score of 53.0
+These are the actual items bought: 
+   20785
+   13208
+   30451
+   29870
+   3867
+   30939
+   31618
+   10592
+   24269
+   31912
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9505.0 and beta 71159.0
+The order information:
+Date: 2012-07-31T21:31:41.000+02:00
+It predicted these items for order 1859410 :
+   5003 with score of 83.0
+   20430 with score of 82.0
+   748 with score of 81.0
+   32650 with score of 76.0
+   12338 with score of 69.0
+   745 with score of 64.0
+   33359 with score of 57.0
+   23469 with score of 56.0
+   25794 with score of 55.0
+   31709 with score of 54.0
+These are the actual items bought: 
+   26029
+   31952
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9632.0 and beta 72032.0
+The order information:
+Date: 2012-08-02T11:04:29.000+02:00
+It predicted these items for order 1860417 :
+   20430 with score of 95.0
+   33359 with score of 80.0
+   5003 with score of 73.0
+   748 with score of 70.0
+   745 with score of 68.0
+   12338 with score of 63.0
+   32650 with score of 63.0
+   23469 with score of 60.0
+   19253 with score of 51.0
+   6803 with score of 50.0
+These are the actual items bought: 
+   30904
+   33668
+   6600
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9738.0 and beta 72926.0
+The order information:
+Date: 2012-08-03T22:48:35.000+02:00
+It predicted these items for order 1861421 :
+   33359 with score of 87.0
+   20430 with score of 85.0
+   5003 with score of 74.0
+   745 with score of 69.0
+   32650 with score of 62.0
+   12338 with score of 59.0
+   23469 with score of 56.0
+   748 with score of 55.0
+   6803 with score of 49.0
+   29000 with score of 48.0
+These are the actual items bought: 
+   17529
+   31940
+   3647
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9850.0 and beta 73814.0
+The order information:
+Date: 2012-08-05T23:06:52.000+02:00
+It predicted these items for order 1862434 :
+   20430 with score of 92.0
+   33359 with score of 84.0
+   5003 with score of 82.0
+   32650 with score of 63.0
+   745 with score of 62.0
+   11832 with score of 53.0
+   12338 with score of 52.0
+   748 with score of 51.0
+   29000 with score of 48.0
+   6803 with score of 46.0
+These are the actual items bought: 
+   27549
+   26079
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 9952.0 and beta 74712.0
+The order information:
+Date: 2012-08-07T11:26:00.000+02:00
+It predicted these items for order 1863440 :
+   20430 with score of 94.0
+   33359 with score of 78.0
+   5003 with score of 76.0
+   12338 with score of 61.0
+   32650 with score of 52.0
+   745 with score of 48.0
+   23469 with score of 48.0
+   6803 with score of 47.0
+   748 with score of 45.0
+   29000 with score of 45.0
+These are the actual items bought: 
+   9986
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 10049.0 and beta 75615.0
+The order information:
+Date: 2012-08-08T16:06:17.000+02:00
+It predicted these items for order 1864446 :
+   20430 with score of 94.0
+   5003 with score of 83.0
+   33359 with score of 82.0
+   12338 with score of 65.0
+   32650 with score of 53.0
+   33447 with score of 53.0
+   748 with score of 48.0
+   23469 with score of 45.0
+   299 with score of 44.0
+   11832 with score of 42.0
+These are the actual items bought: 
+   30092
+   24355
+   33652
+   33647
+   32929
+   33651
+   23398
+   17712
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 10176.0 and beta 76488.0
+The order information:
+Date: 2012-08-09T20:48:53.000+02:00
+It predicted these items for order 1865449 :
+   33359 with score of 81.0
+   20430 with score of 80.0
+   5003 with score of 74.0
+   12338 with score of 72.0
+   299 with score of 69.0
+   748 with score of 58.0
+   11832 with score of 51.0
+   33447 with score of 50.0
+   32650 with score of 47.0
+   6803 with score of 41.0
+These are the actual items bought: 
+   2624
+   26191
+   33447
+   26191
+   411
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 10304.0 and beta 77360.0
+The order information:
+Date: 2012-08-11T13:40:47.000+02:00
+It predicted these items for order 1866453 :
+   33359 with score of 92.0
+   12338 with score of 81.0
+   5003 with score of 77.0
+   20430 with score of 76.0
+   33447 with score of 76.0
+   299 with score of 70.0
+   748 with score of 63.0
+   11832 with score of 58.0
+   6803 with score of 48.0
+   11380 with score of 44.0
+These are the actual items bought: 
+   33637
+   29663
+   33656
+   33656
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 10439.0 and beta 78225.0
+The order information:
+Date: 2012-08-12T22:24:59.000+02:00
+It predicted these items for order 1867456 :
+   33359 with score of 116.0
+   12338 with score of 93.0
+   5003 with score of 83.0
+   33447 with score of 82.0
+   299 with score of 70.0
+   11380 with score of 70.0
+   6803 with score of 58.0
+   11832 with score of 56.0
+   748 with score of 55.0
+   20430 with score of 55.0
+These are the actual items bought: 
+   33447
+   24164
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 10588.0 and beta 79076.0
+The order information:
+Date: 2012-08-13T23:06:21.000+02:00
+It predicted these items for order 1868465 :
+   33359 with score of 137.0
+   33447 with score of 102.0
+   11380 with score of 84.0
+   12338 with score of 84.0
+   5003 with score of 82.0
+   748 with score of 75.0
+   299 with score of 73.0
+   11832 with score of 66.0
+   31774 with score of 58.0
+   24532 with score of 54.0
+These are the actual items bought: 
+   6624
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 10719.0 and beta 79945.0
+The order information:
+Date: 2012-08-15T11:52:54.000+02:00
+It predicted these items for order 1869468 :
+   33359 with score of 144.0
+   33447 with score of 96.0
+   11380 with score of 88.0
+   12338 with score of 88.0
+   5003 with score of 76.0
+   11832 with score of 75.0
+   748 with score of 69.0
+   31774 with score of 66.0
+   299 with score of 64.0
+   23588 with score of 60.0
+These are the actual items bought: 
+   32963
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 10824.0 and beta 80840.0
+The order information:
+Date: 2012-08-16T12:23:50.000+02:00
+It predicted these items for order 1870470 :
+   33359 with score of 150.0
+   33447 with score of 102.0
+   11380 with score of 91.0
+   5003 with score of 80.0
+   12338 with score of 80.0
+   11832 with score of 79.0
+   23588 with score of 68.0
+   31774 with score of 61.0
+   748 with score of 55.0
+   24532 with score of 53.0
+These are the actual items bought: 
+   29521
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 10971.0 and beta 81693.0
+The order information:
+Date: 2012-08-17T09:19:17.000+02:00
+It predicted these items for order 1871472 :
+   33359 with score of 162.0
+   33447 with score of 114.0
+   11380 with score of 103.0
+   5003 with score of 81.0
+   11832 with score of 76.0
+   31774 with score of 76.0
+   12338 with score of 73.0
+   23588 with score of 73.0
+   31709 with score of 73.0
+   748 with score of 72.0
+These are the actual items bought: 
+   29987
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 11080.0 and beta 82584.0
+The order information:
+Date: 2012-08-18T19:37:10.000+02:00
+It predicted these items for order 1872477 :
+   33359 with score of 194.0
+   11380 with score of 100.0
+   33447 with score of 94.0
+   24532 with score of 89.0
+   5003 with score of 81.0
+   12338 with score of 76.0
+   11832 with score of 75.0
+   31709 with score of 71.0
+   31774 with score of 69.0
+   748 with score of 66.0
+These are the actual items bought: 
+   6803
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 11227.0 and beta 83437.0
+The order information:
+Date: 2012-08-20T10:22:38.000+02:00
+It predicted these items for order 1873479 :
+   33359 with score of 202.0
+   11380 with score of 101.0
+   33447 with score of 83.0
+   11832 with score of 82.0
+   24532 with score of 82.0
+   12338 with score of 73.0
+   299 with score of 71.0
+   572 with score of 71.0
+   31774 with score of 67.0
+   2419 with score of 65.0
+These are the actual items bought: 
+   33359
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 11342.0 and beta 84322.0
+The order information:
+Date: 2012-08-21T10:38:11.000+02:00
+It predicted these items for order 1874483 :
+   33359 with score of 187.0
+   11380 with score of 100.0
+   11832 with score of 90.0
+   33447 with score of 79.0
+   299 with score of 78.0
+   24532 with score of 77.0
+   572 with score of 76.0
+   12338 with score of 73.0
+   5003 with score of 72.0
+   31709 with score of 72.0
+These are the actual items bought: 
+   31919
+   33132
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 11463.0 and beta 85201.0
+The order information:
+Date: 2012-08-22T12:43:58.000+02:00
+It predicted these items for order 1875493 :
+   33359 with score of 211.0
+   11832 with score of 108.0
+   11380 with score of 106.0
+   12338 with score of 80.0
+   572 with score of 78.0
+   23379 with score of 75.0
+   11833 with score of 74.0
+   2419 with score of 70.0
+   5003 with score of 70.0
+   299 with score of 69.0
+These are the actual items bought: 
+   19989
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 11599.0 and beta 86065.0
+The order information:
+Date: 2012-08-23T16:18:22.000+02:00
+It predicted these items for order 1876494 :
+   33359 with score of 236.0
+   11832 with score of 115.0
+   11380 with score of 114.0
+   12338 with score of 83.0
+   23379 with score of 81.0
+   33447 with score of 80.0
+   11833 with score of 72.0
+   299 with score of 69.0
+   572 with score of 66.0
+   5003 with score of 63.0
+These are the actual items bought: 
+   20217
+   406
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 11736.0 and beta 86928.0
+The order information:
+Date: 2012-08-24T18:56:22.000+02:00
+It predicted these items for order 1877499 :
+   33359 with score of 235.0
+   11832 with score of 123.0
+   23379 with score of 103.0
+   11380 with score of 93.0
+   12338 with score of 91.0
+   11833 with score of 77.0
+   33447 with score of 71.0
+   5003 with score of 69.0
+   299 with score of 59.0
+   572 with score of 59.0
+These are the actual items bought: 
+   33359
+   34025
+   18677
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 11856.0 and beta 87808.0
+The order information:
+Date: 2012-08-26T15:47:29.000+02:00
+It predicted these items for order 1878501 :
+   33359 with score of 238.0
+   11832 with score of 121.0
+   23379 with score of 97.0
+   11380 with score of 88.0
+   12338 with score of 83.0
+   11833 with score of 79.0
+   33447 with score of 69.0
+   5003 with score of 63.0
+   33675 with score of 62.0
+   21799 with score of 61.0
+These are the actual items bought: 
+   29666
+   17254
+   23334
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 11996.0 and beta 88668.0
+The order information:
+Date: 2012-08-27T17:07:17.000+02:00
+It predicted these items for order 1879504 :
+   33359 with score of 240.0
+   11832 with score of 118.0
+   23379 with score of 115.0
+   11380 with score of 96.0
+   12338 with score of 85.0
+   11833 with score of 80.0
+   33447 with score of 62.0
+   33675 with score of 62.0
+   5003 with score of 60.0
+   333 with score of 54.0
+These are the actual items bought: 
+   33410
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 12130.0 and beta 89534.0
+The order information:
+Date: 2012-08-28T17:53:14.000+02:00
+It predicted these items for order 1880512 :
+   33359 with score of 261.0
+   11832 with score of 117.0
+   23379 with score of 112.0
+   12338 with score of 89.0
+   11833 with score of 86.0
+   11380 with score of 84.0
+   33447 with score of 57.0
+   333 with score of 56.0
+   33675 with score of 52.0
+   24428 with score of 49.0
+These are the actual items bought: 
+   33578
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 12243.0 and beta 90421.0
+The order information:
+Date: 2012-08-29T15:43:16.000+02:00
+It predicted these items for order 1881518 :
+   33359 with score of 275.0
+   23379 with score of 117.0
+   11832 with score of 108.0
+   11380 with score of 79.0
+   11833 with score of 78.0
+   12338 with score of 78.0
+   33675 with score of 62.0
+   33447 with score of 57.0
+   333 with score of 56.0
+   5003 with score of 52.0
+These are the actual items bought: 
+   32402
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 12363.0 and beta 91301.0
+The order information:
+Date: 2012-08-30T11:18:28.000+02:00
+It predicted these items for order 1882523 :
+   33359 with score of 284.0
+   23379 with score of 135.0
+   11832 with score of 112.0
+   11380 with score of 79.0
+   11833 with score of 75.0
+   12338 with score of 70.0
+   33675 with score of 70.0
+   333 with score of 61.0
+   24428 with score of 56.0
+   5003 with score of 52.0
+These are the actual items bought: 
+   11380
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 12454.0 and beta 92210.0
+The order information:
+Date: 2012-08-31T14:04:55.000+02:00
+It predicted these items for order 1883532 :
+   33359 with score of 263.0
+   23379 with score of 126.0
+   11832 with score of 105.0
+   11380 with score of 83.0
+   11833 with score of 82.0
+   12338 with score of 70.0
+   33675 with score of 66.0
+   33970 with score of 58.0
+   21242 with score of 56.0
+   333 with score of 51.0
+These are the actual items bought: 
+   32647
+   24548
+   34235
+   33895
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 12553.0 and beta 93111.0
+The order information:
+Date: 2012-09-01T17:30:54.000+02:00
+It predicted these items for order 1884537 :
+   33359 with score of 267.0
+   23379 with score of 130.0
+   11832 with score of 110.0
+   11380 with score of 78.0
+   11833 with score of 78.0
+   12338 with score of 73.0
+   33675 with score of 69.0
+   21242 with score of 61.0
+   33970 with score of 53.0
+   333 with score of 48.0
+These are the actual items bought: 
+   27404
+   31691
+   18703
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 12666.0 and beta 93998.0
+The order information:
+Date: 2012-09-02T20:57:05.000+02:00
+It predicted these items for order 1885541 :
+   33359 with score of 269.0
+   23379 with score of 132.0
+   11832 with score of 118.0
+   11833 with score of 73.0
+   33675 with score of 72.0
+   11380 with score of 67.0
+   12338 with score of 64.0
+   333 with score of 52.0
+   21242 with score of 52.0
+   32650 with score of 52.0
+These are the actual items bought: 
+   29707
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 12804.0 and beta 94860.0
+The order information:
+Date: 2012-09-03T22:31:00.000+02:00
+It predicted these items for order 1886545 :
+   33359 with score of 267.0
+   23379 with score of 143.0
+   11832 with score of 114.0
+   26890 with score of 69.0
+   33675 with score of 64.0
+   11833 with score of 63.0
+   25201 with score of 61.0
+   27576 with score of 57.0
+   11380 with score of 56.0
+   333 with score of 54.0
+These are the actual items bought: 
+   224
+   230
+   230
+   224
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 12978.0 and beta 95686.0
+The order information:
+Date: 2012-09-04T23:22:31.000+02:00
+It predicted these items for order 1887555 :
+   33359 with score of 272.0
+   23379 with score of 153.0
+   11832 with score of 112.0
+   26890 with score of 78.0
+   27576 with score of 71.0
+   33675 with score of 66.0
+   25201 with score of 64.0
+   333 with score of 60.0
+   11833 with score of 58.0
+   11380 with score of 55.0
+These are the actual items bought: 
+   25082
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 13131.0 and beta 96533.0
+The order information:
+Date: 2012-09-05T23:07:13.000+02:00
+It predicted these items for order 1888557 :
+   33359 with score of 281.0
+   23379 with score of 147.0
+   11832 with score of 100.0
+   27576 with score of 91.0
+   26890 with score of 87.0
+   11833 with score of 76.0
+   25201 with score of 68.0
+   12338 with score of 63.0
+   11380 with score of 59.0
+   33675 with score of 59.0
+These are the actual items bought: 
+   34254
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 13245.0 and beta 97419.0
+The order information:
+Date: 2012-09-07T10:35:37.000+02:00
+It predicted these items for order 1889560 :
+   33359 with score of 294.0
+   23379 with score of 146.0
+   11832 with score of 103.0
+   26890 with score of 86.0
+   27576 with score of 86.0
+   25201 with score of 68.0
+   11833 with score of 67.0
+   33675 with score of 66.0
+   11380 with score of 65.0
+   333 with score of 58.0
+These are the actual items bought: 
+   171
+   171
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 13340.0 and beta 98324.0
+The order information:
+Date: 2012-09-08T20:46:37.000+02:00
+It predicted these items for order 1890562 :
+   33359 with score of 284.0
+   785 with score of 133.0
+   23379 with score of 122.0
+   11832 with score of 102.0
+   26890 with score of 92.0
+   27576 with score of 77.0
+   25201 with score of 69.0
+   11380 with score of 68.0
+   33675 with score of 62.0
+   11833 with score of 60.0
+These are the actual items bought: 
+   31294
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 13438.0 and beta 99226.0
+The order information:
+Date: 2012-09-10T00:00:58.000+02:00
+It predicted these items for order 1891566 :
+   33359 with score of 269.0
+   785 with score of 131.0
+   11832 with score of 106.0
+   23379 with score of 99.0
+   26890 with score of 83.0
+   27576 with score of 72.0
+   11380 with score of 70.0
+   25201 with score of 63.0
+   33675 with score of 60.0
+   11833 with score of 54.0
+These are the actual items bought: 
+   34059
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 13532.0 and beta 100132.0
+The order information:
+Date: 2012-09-11T14:43:02.000+02:00
+It predicted these items for order 1892569 :
+   33359 with score of 273.0
+   785 with score of 130.0
+   11832 with score of 104.0
+   23379 with score of 77.0
+   11380 with score of 75.0
+   27576 with score of 73.0
+   26890 with score of 71.0
+   25201 with score of 54.0
+   11833 with score of 53.0
+   30178 with score of 53.0
+These are the actual items bought: 
+   7521
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 13677.0 and beta 100987.0
+The order information:
+Date: 2012-09-12T19:00:04.000+02:00
+It predicted these items for order 1893573 :
+   33359 with score of 244.0
+   785 with score of 134.0
+   11832 with score of 90.0
+   26890 with score of 84.0
+   11380 with score of 72.0
+   34678 with score of 62.0
+   748 with score of 61.0
+   27576 with score of 56.0
+   33675 with score of 52.0
+   23379 with score of 49.0
+These are the actual items bought: 
+   31060
+   33353
+   23212
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 13817.0 and beta 101847.0
+The order information:
+Date: 2012-09-13T21:47:39.000+02:00
+It predicted these items for order 1894577 :
+   33359 with score of 234.0
+   785 with score of 135.0
+   26890 with score of 97.0
+   11832 with score of 93.0
+   11380 with score of 78.0
+   34678 with score of 71.0
+   24428 with score of 63.0
+   27576 with score of 60.0
+   21808 with score of 53.0
+   34673 with score of 46.0
+These are the actual items bought: 
+   26351
+   2681
+   772
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 13935.0 and beta 102729.0
+The order information:
+Date: 2012-09-15T16:26:15.000+02:00
+It predicted these items for order 1895584 :
+   33359 with score of 227.0
+   26890 with score of 109.0
+   11832 with score of 90.0
+   11380 with score of 71.0
+   34678 with score of 69.0
+   27576 with score of 67.0
+   24428 with score of 65.0
+   21808 with score of 54.0
+   33675 with score of 54.0
+   748 with score of 51.0
+These are the actual items bought: 
+   333
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 14072.0 and beta 103592.0
+The order information:
+Date: 2012-09-16T22:14:57.000+02:00
+It predicted these items for order 1896587 :
+   33359 with score of 252.0
+   26890 with score of 140.0
+   11832 with score of 88.0
+   24428 with score of 71.0
+   34678 with score of 70.0
+   11380 with score of 66.0
+   27576 with score of 59.0
+   748 with score of 56.0
+   21808 with score of 54.0
+   5003 with score of 49.0
+These are the actual items bought: 
+   20272
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 14206.0 and beta 104458.0
+The order information:
+Date: 2012-09-17T23:26:23.000+02:00
+It predicted these items for order 1897594 :
+   33359 with score of 248.0
+   26890 with score of 162.0
+   11832 with score of 93.0
+   11380 with score of 76.0
+   34678 with score of 73.0
+   24428 with score of 64.0
+   748 with score of 62.0
+   24949 with score of 57.0
+   27576 with score of 52.0
+   33675 with score of 50.0
+These are the actual items bought: 
+   193
+   29555
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 14321.0 and beta 105343.0
+The order information:
+Date: 2012-09-19T10:12:52.000+02:00
+It predicted these items for order 1898603 :
+   33359 with score of 240.0
+   26890 with score of 170.0
+   11832 with score of 94.0
+   748 with score of 73.0
+   34678 with score of 73.0
+   11380 with score of 67.0
+   24949 with score of 64.0
+   24428 with score of 62.0
+   783 with score of 61.0
+   5003 with score of 55.0
+These are the actual items bought: 
+   25017
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 14462.0 and beta 106202.0
+The order information:
+Date: 2012-09-20T14:50:51.000+02:00
+It predicted these items for order 1899608 :
+   33359 with score of 246.0
+   26890 with score of 153.0
+   11832 with score of 103.0
+   11380 with score of 93.0
+   748 with score of 67.0
+   24949 with score of 66.0
+   34678 with score of 66.0
+   5003 with score of 60.0
+   783 with score of 54.0
+   33675 with score of 54.0
+These are the actual items bought: 
+   13258
+   30653
+   34663
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 14606.0 and beta 107058.0
+The order information:
+Date: 2012-09-21T18:59:01.000+02:00
+It predicted these items for order 1900616 :
+   33359 with score of 264.0
+   26890 with score of 146.0
+   11832 with score of 109.0
+   11380 with score of 81.0
+   748 with score of 79.0
+   24949 with score of 77.0
+   34678 with score of 64.0
+   783 with score of 54.0
+   23588 with score of 53.0
+   30367 with score of 49.0
+These are the actual items bought: 
+   34878
+   30439
+   11832
+   34823
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 14728.0 and beta 107936.0
+The order information:
+Date: 2012-09-23T15:42:01.000+02:00
+It predicted these items for order 1901620 :
+   33359 with score of 273.0
+   26890 with score of 129.0
+   11832 with score of 117.0
+   748 with score of 87.0
+   11380 with score of 77.0
+   24949 with score of 62.0
+   30367 with score of 61.0
+   23588 with score of 58.0
+   34678 with score of 56.0
+   29353 with score of 50.0
+These are the actual items bought: 
+   11832
+   34375
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 14840.0 and beta 108824.0
+The order information:
+Date: 2012-09-24T17:45:44.000+02:00
+It predicted these items for order 1902625 :
+   33359 with score of 263.0
+   11832 with score of 108.0
+   26890 with score of 104.0
+   748 with score of 77.0
+   11380 with score of 72.0
+   24949 with score of 63.0
+   30367 with score of 61.0
+   783 with score of 58.0
+   23588 with score of 56.0
+   34678 with score of 49.0
+These are the actual items bought: 
+   26751
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 14947.0 and beta 109717.0
+The order information:
+Date: 2012-09-25T16:23:53.000+02:00
+It predicted these items for order 1903636 :
+   33359 with score of 282.0
+   11832 with score of 113.0
+   26890 with score of 100.0
+   11380 with score of 74.0
+   748 with score of 70.0
+   24949 with score of 63.0
+   30367 with score of 57.0
+   783 with score of 54.0
+   27576 with score of 54.0
+   23588 with score of 50.0
+These are the actual items bought: 
+   6629
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 15071.0 and beta 110593.0
+The order information:
+Date: 2012-09-26T12:56:25.000+02:00
+It predicted these items for order 1904644 :
+   33359 with score of 300.0
+   11832 with score of 118.0
+   26890 with score of 104.0
+   11380 with score of 71.0
+   748 with score of 68.0
+   24949 with score of 64.0
+   27576 with score of 58.0
+   23588 with score of 53.0
+   30367 with score of 53.0
+   313 with score of 51.0
+These are the actual items bought: 
+   572
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 15174.0 and beta 111490.0
+The order information:
+Date: 2012-09-27T12:52:17.000+02:00
+It predicted these items for order 1905649 :
+   33359 with score of 291.0
+   26890 with score of 98.0
+   11832 with score of 94.0
+   27576 with score of 68.0
+   24949 with score of 63.0
+   748 with score of 61.0
+   30367 with score of 60.0
+   11380 with score of 57.0
+   35167 with score of 57.0
+   33675 with score of 53.0
+These are the actual items bought: 
+   21220
+   34520
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 15278.0 and beta 112386.0
+The order information:
+Date: 2012-09-28T16:50:24.000+02:00
+It predicted these items for order 1906654 :
+   33359 with score of 315.0
+   11832 with score of 91.0
+   26890 with score of 79.0
+   27576 with score of 73.0
+   35167 with score of 68.0
+   30367 with score of 61.0
+   11380 with score of 58.0
+   5003 with score of 55.0
+   24949 with score of 53.0
+   313 with score of 52.0
+These are the actual items bought: 
+   670
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 15448.0 and beta 113216.0
+The order information:
+Date: 2012-09-29T23:53:44.000+02:00
+It predicted these items for order 1907659 :
+   33359 with score of 321.0
+   24949 with score of 97.0
+   35167 with score of 92.0
+   11832 with score of 86.0
+   26890 with score of 74.0
+   11380 with score of 73.0
+   27576 with score of 70.0
+   30367 with score of 60.0
+   11833 with score of 59.0
+   24359 with score of 55.0
+These are the actual items bought: 
+   4936
+   29780
+   32956
+   7420
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 15611.0 and beta 114053.0
+The order information:
+Date: 2012-09-30T23:48:10.000+02:00
+It predicted these items for order 1908661 :
+   33359 with score of 351.0
+   24949 with score of 123.0
+   35167 with score of 120.0
+   11832 with score of 83.0
+   26890 with score of 78.0
+   11380 with score of 76.0
+   27576 with score of 70.0
+   11833 with score of 63.0
+   23588 with score of 63.0
+   30367 with score of 58.0
+These are the actual items bought: 
+   33505
+   33546
+   29283
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 15736.0 and beta 114928.0
+The order information:
+Date: 2012-10-01T22:58:12.000+02:00
+It predicted these items for order 1909669 :
+   33359 with score of 354.0
+   24949 with score of 122.0
+   35167 with score of 115.0
+   11832 with score of 98.0
+   11380 with score of 75.0
+   23588 with score of 73.0
+   27576 with score of 65.0
+   11833 with score of 59.0
+   26890 with score of 59.0
+   30367 with score of 57.0
+These are the actual items bought: 
+   33752
+   2709
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 15876.0 and beta 115788.0
+The order information:
+Date: 2012-10-02T23:45:29.000+02:00
+It predicted these items for order 1910673 :
+   33359 with score of 359.0
+   24949 with score of 146.0
+   35167 with score of 123.0
+   11832 with score of 84.0
+   11833 with score of 76.0
+   11380 with score of 74.0
+   27576 with score of 67.0
+   23588 with score of 66.0
+   13688 with score of 54.0
+   24359 with score of 54.0
+These are the actual items bought: 
+   34730
+   185
+   33763
+   35574
+   14087
+   35520
+   24899
+   26377
+   35132
+   12132
+   34425
+   13430
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16001.0 and beta 116663.0
+The order information:
+Date: 2012-10-04T12:35:03.000+02:00
+It predicted these items for order 1911675 :
+   33359 with score of 368.0
+   24949 with score of 157.0
+   35167 with score of 126.0
+   11832 with score of 87.0
+   11833 with score of 75.0
+   23588 with score of 68.0
+   11380 with score of 62.0
+   27576 with score of 56.0
+   13688 with score of 53.0
+   35367 with score of 53.0
+These are the actual items bought: 
+   14142
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16116.0 and beta 117548.0
+The order information:
+Date: 2012-10-05T20:31:07.000+02:00
+It predicted these items for order 1912678 :
+   33359 with score of 335.0
+   24949 with score of 158.0
+   35167 with score of 139.0
+   11833 with score of 75.0
+   11832 with score of 70.0
+   23588 with score of 67.0
+   313 with score of 60.0
+   748 with score of 57.0
+   783 with score of 54.0
+   13688 with score of 53.0
+These are the actual items bought: 
+   13688
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16225.0 and beta 118439.0
+The order information:
+Date: 2012-10-07T18:08:06.000+02:00
+It predicted these items for order 1913687 :
+   33359 with score of 299.0
+   35167 with score of 139.0
+   24949 with score of 105.0
+   11832 with score of 83.0
+   313 with score of 69.0
+   11833 with score of 65.0
+   23588 with score of 60.0
+   11380 with score of 51.0
+   748 with score of 50.0
+   13688 with score of 48.0
+These are the actual items bought: 
+   35445
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16322.0 and beta 119342.0
+The order information:
+Date: 2012-10-08T20:10:16.000+02:00
+It predicted these items for order 1914691 :
+   33359 with score of 243.0
+   35167 with score of 122.0
+   24949 with score of 78.0
+   748 with score of 59.0
+   11832 with score of 59.0
+   11833 with score of 59.0
+   313 with score of 58.0
+   11380 with score of 52.0
+   30367 with score of 49.0
+   13688 with score of 47.0
+These are the actual items bought: 
+   33698
+   32348
+   35201
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16425.0 and beta 120239.0
+The order information:
+Date: 2012-10-09T20:34:52.000+02:00
+It predicted these items for order 1915693 :
+   33359 with score of 221.0
+   35167 with score of 133.0
+   313 with score of 60.0
+   748 with score of 59.0
+   24949 with score of 57.0
+   11832 with score of 56.0
+   11380 with score of 52.0
+   11833 with score of 52.0
+   26890 with score of 49.0
+   30367 with score of 47.0
+These are the actual items bought: 
+   33359
+   33359
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16560.0 and beta 121104.0
+The order information:
+Date: 2012-10-10T22:41:26.000+02:00
+It predicted these items for order 1916700 :
+   33359 with score of 192.0
+   35167 with score of 136.0
+   26890 with score of 63.0
+   313 with score of 62.0
+   11832 with score of 61.0
+   5003 with score of 56.0
+   33675 with score of 52.0
+   24949 with score of 51.0
+   748 with score of 48.0
+   11380 with score of 45.0
+These are the actual items bought: 
+   20272
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16678.0 and beta 121986.0
+The order information:
+Date: 2012-10-12T13:21:24.000+02:00
+It predicted these items for order 1917705 :
+   33359 with score of 164.0
+   35167 with score of 137.0
+   34866 with score of 77.0
+   11832 with score of 67.0
+   26890 with score of 67.0
+   5003 with score of 56.0
+   33675 with score of 56.0
+   30367 with score of 52.0
+   313 with score of 50.0
+   24949 with score of 49.0
+These are the actual items bought: 
+   35503
+   29306
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16792.0 and beta 122872.0
+The order information:
+Date: 2012-10-13T21:53:02.000+02:00
+It predicted these items for order 1918715 :
+   33359 with score of 188.0
+   35167 with score of 128.0
+   26890 with score of 78.0
+   34866 with score of 77.0
+   313 with score of 59.0
+   24949 with score of 59.0
+   5003 with score of 56.0
+   33675 with score of 53.0
+   748 with score of 49.0
+   30367 with score of 47.0
+These are the actual items bought: 
+   29380
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 16883.0 and beta 123781.0
+The order information:
+Date: 2012-10-14T23:24:45.000+02:00
+It predicted these items for order 1919731 :
+   33359 with score of 195.0
+   35167 with score of 124.0
+   26890 with score of 85.0
+   34866 with score of 78.0
+   24949 with score of 69.0
+   35367 with score of 57.0
+   5003 with score of 55.0
+   313 with score of 54.0
+   33675 with score of 50.0
+   11833 with score of 48.0
+These are the actual items bought: 
+   35921
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 17025.0 and beta 124639.0
+The order information:
+Date: 2012-10-15T22:31:47.000+02:00
+It predicted these items for order 1920738 :
+   33359 with score of 262.0
+   35167 with score of 122.0
+   26890 with score of 93.0
+   24949 with score of 78.0
+   35367 with score of 74.0
+   34866 with score of 71.0
+   313 with score of 64.0
+   33675 with score of 60.0
+   13688 with score of 54.0
+   12338 with score of 48.0
+These are the actual items bought: 
+   24756
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 17149.0 and beta 125515.0
+The order information:
+Date: 2012-10-16T23:22:13.000+02:00
+It predicted these items for order 1921749 :
+   33359 with score of 241.0
+   24949 with score of 119.0
+   35167 with score of 119.0
+   26890 with score of 103.0
+   35367 with score of 68.0
+   33675 with score of 65.0
+   313 with score of 57.0
+   23588 with score of 55.0
+   34866 with score of 53.0
+   35883 with score of 51.0
+These are the actual items bought: 
+   23588
+   11380
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 17304.0 and beta 126360.0
+The order information:
+Date: 2012-10-17T23:40:31.000+02:00
+It predicted these items for order 1922751 :
+   33359 with score of 245.0
+   35167 with score of 121.0
+   24949 with score of 115.0
+   26890 with score of 114.0
+   35367 with score of 73.0
+   23588 with score of 72.0
+   313 with score of 62.0
+   11380 with score of 62.0
+   33675 with score of 62.0
+   34866 with score of 61.0
+These are the actual items bought: 
+   35340
+   12338
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 17450.0 and beta 127214.0
+The order information:
+Date: 2012-10-19T09:19:08.000+02:00
+It predicted these items for order 1923765 :
+   33359 with score of 241.0
+   26890 with score of 155.0
+   35167 with score of 125.0
+   24949 with score of 108.0
+   23588 with score of 102.0
+   313 with score of 71.0
+   11380 with score of 71.0
+   35367 with score of 67.0
+   33675 with score of 60.0
+   12338 with score of 58.0
+These are the actual items bought: 
+   27900
+   36299
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 17601.0 and beta 128063.0
+The order information:
+Date: 2012-10-20T16:18:43.000+02:00
+It predicted these items for order 1924773 :
+   33359 with score of 227.0
+   26890 with score of 189.0
+   35167 with score of 127.0
+   23588 with score of 121.0
+   24949 with score of 111.0
+   11380 with score of 94.0
+   33675 with score of 66.0
+   35367 with score of 66.0
+   313 with score of 63.0
+   34223 with score of 59.0
+These are the actual items bought: 
+   32586
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 17772.0 and beta 128892.0
+The order information:
+Date: 2012-10-21T20:14:17.000+02:00
+It predicted these items for order 1925777 :
+   33359 with score of 225.0
+   26890 with score of 207.0
+   23588 with score of 161.0
+   35167 with score of 140.0
+   24949 with score of 119.0
+   11380 with score of 102.0
+   33675 with score of 73.0
+   313 with score of 59.0
+   34223 with score of 58.0
+   35367 with score of 58.0
+These are the actual items bought: 
+   33451
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 17938.0 and beta 129726.0
+The order information:
+Date: 2012-10-22T19:50:19.000+02:00
+It predicted these items for order 1926782 :
+   26890 with score of 224.0
+   23588 with score of 172.0
+   33359 with score of 172.0
+   24949 with score of 153.0
+   35167 with score of 151.0
+   11380 with score of 105.0
+   33675 with score of 65.0
+   34223 with score of 61.0
+   35367 with score of 56.0
+   11832 with score of 52.0
+These are the actual items bought: 
+   23374
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 18080.0 and beta 130584.0
+The order information:
+Date: 2012-10-23T19:23:31.000+02:00
+It predicted these items for order 1927785 :
+   26890 with score of 225.0
+   23588 with score of 166.0
+   33359 with score of 164.0
+   35167 with score of 150.0
+   24949 with score of 148.0
+   11380 with score of 107.0
+   34223 with score of 57.0
+   313 with score of 56.0
+   33675 with score of 56.0
+   11832 with score of 50.0
+These are the actual items bought: 
+   35559
+   34028
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 18234.0 and beta 131430.0
+The order information:
+Date: 2012-10-24T18:05:24.000+02:00
+It predicted these items for order 1928788 :
+   26890 with score of 260.0
+   23588 with score of 181.0
+   24949 with score of 156.0
+   33359 with score of 156.0
+   35167 with score of 141.0
+   11380 with score of 109.0
+   313 with score of 61.0
+   33675 with score of 57.0
+   35367 with score of 51.0
+   21776 with score of 50.0
+These are the actual items bought: 
+   23379
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 18361.0 and beta 132303.0
+The order information:
+Date: 2012-10-25T17:09:43.000+02:00
+It predicted these items for order 1929793 :
+   26890 with score of 238.0
+   24949 with score of 177.0
+   23588 with score of 165.0
+   33359 with score of 163.0
+   35167 with score of 146.0
+   11380 with score of 113.0
+   33675 with score of 59.0
+   32963 with score of 54.0
+   11832 with score of 52.0
+   313 with score of 50.0
+These are the actual items bought: 
+   26395
+   36466
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 18484.0 and beta 133180.0
+The order information:
+Date: 2012-10-26T12:26:53.000+02:00
+It predicted these items for order 1930795 :
+   24949 with score of 248.0
+   26890 with score of 212.0
+   33359 with score of 165.0
+   23588 with score of 160.0
+   35167 with score of 148.0
+   11380 with score of 122.0
+   13688 with score of 57.0
+   33675 with score of 57.0
+   313 with score of 53.0
+   35367 with score of 53.0
+These are the actual items bought: 
+   3315
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 18623.0 and beta 134041.0
+The order information:
+Date: 2012-10-27T20:18:39.000+02:00
+It predicted these items for order 1931803 :
+   24949 with score of 248.0
+   26890 with score of 202.0
+   35167 with score of 146.0
+   23588 with score of 139.0
+   33359 with score of 139.0
+   11380 with score of 109.0
+   33675 with score of 59.0
+   313 with score of 54.0
+   3315 with score of 49.0
+   13688 with score of 49.0
+These are the actual items bought: 
+   30495
+   36302
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 18768.0 and beta 134896.0
+The order information:
+Date: 2012-10-28T22:46:12.000+01:00
+It predicted these items for order 1932807 :
+   24949 with score of 250.0
+   26890 with score of 180.0
+   35167 with score of 150.0
+   33359 with score of 128.0
+   11380 with score of 107.0
+   23588 with score of 105.0
+   313 with score of 61.0
+   13688 with score of 59.0
+   11832 with score of 55.0
+   27979 with score of 50.0
+These are the actual items bought: 
+   13112
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 18898.0 and beta 135766.0
+The order information:
+Date: 2012-10-29T21:43:59.000+01:00
+It predicted these items for order 1933816 :
+   24949 with score of 232.0
+   26890 with score of 173.0
+   35167 with score of 146.0
+   33359 with score of 133.0
+   11380 with score of 119.0
+   23588 with score of 93.0
+   313 with score of 63.0
+   3315 with score of 60.0
+   13688 with score of 57.0
+   11832 with score of 53.0
+These are the actual items bought: 
+   24516
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 18997.0 and beta 136667.0
+The order information:
+Date: 2012-10-30T21:41:23.000+01:00
+It predicted these items for order 1934825 :
+   24949 with score of 217.0
+   26890 with score of 144.0
+   35167 with score of 144.0
+   33359 with score of 122.0
+   11380 with score of 118.0
+   23588 with score of 84.0
+   11832 with score of 57.0
+   13688 with score of 57.0
+   313 with score of 56.0
+   3315 with score of 54.0
+These are the actual items bought: 
+   36863
+   26617
+   27287
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19123.0 and beta 137541.0
+The order information:
+Date: 2012-10-31T20:55:18.000+01:00
+It predicted these items for order 1935874 :
+   24949 with score of 229.0
+   35167 with score of 150.0
+   26890 with score of 131.0
+   11380 with score of 114.0
+   33359 with score of 113.0
+   11832 with score of 63.0
+   13688 with score of 57.0
+   23588 with score of 57.0
+   313 with score of 55.0
+   3315 with score of 50.0
+These are the actual items bought: 
+   787
+   36381
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19215.0 and beta 138449.0
+The order information:
+Date: 2012-11-01T21:35:32.000+01:00
+It predicted these items for order 1936881 :
+   24949 with score of 155.0
+   35167 with score of 152.0
+   26890 with score of 133.0
+   33359 with score of 119.0
+   11380 with score of 101.0
+   13688 with score of 60.0
+   11832 with score of 58.0
+   313 with score of 55.0
+   36174 with score of 53.0
+   3315 with score of 52.0
+These are the actual items bought: 
+   31544
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19324.0 and beta 139340.0
+The order information:
+Date: 2012-11-03T12:56:28.000+01:00
+It predicted these items for order 1937884 :
+   35167 with score of 148.0
+   24949 with score of 128.0
+   26890 with score of 119.0
+   33359 with score of 112.0
+   11380 with score of 102.0
+   13688 with score of 62.0
+   313 with score of 59.0
+   11832 with score of 56.0
+   36174 with score of 52.0
+   35130 with score of 47.0
+These are the actual items bought: 
+   12756
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19466.0 and beta 140198.0
+The order information:
+Date: 2012-11-04T20:09:35.000+01:00
+It predicted these items for order 1938896 :
+   26890 with score of 147.0
+   35167 with score of 135.0
+   33359 with score of 119.0
+   24949 with score of 113.0
+   11380 with score of 93.0
+   790 with score of 53.0
+   13688 with score of 53.0
+   25904 with score of 52.0
+   11832 with score of 47.0
+   27576 with score of 46.0
+These are the actual items bought: 
+   34462
+   36175
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19594.0 and beta 141070.0
+The order information:
+Date: 2012-11-05T19:35:54.000+01:00
+It predicted these items for order 1939900 :
+   33359 with score of 146.0
+   26890 with score of 143.0
+   35167 with score of 137.0
+   24949 with score of 101.0
+   11380 with score of 95.0
+   790 with score of 59.0
+   25904 with score of 59.0
+   748 with score of 51.0
+   13688 with score of 50.0
+   313 with score of 48.0
+These are the actual items bought: 
+   14916
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19709.0 and beta 141955.0
+The order information:
+Date: 2012-11-06T18:38:31.000+01:00
+It predicted these items for order 1940902 :
+   33359 with score of 278.0
+   26890 with score of 141.0
+   35167 with score of 137.0
+   24949 with score of 91.0
+   11380 with score of 88.0
+   785 with score of 74.0
+   21776 with score of 67.0
+   748 with score of 61.0
+   25904 with score of 59.0
+   790 with score of 56.0
+These are the actual items bought: 
+   21843
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19780.0 and beta 142884.0
+The order information:
+Date: 2012-11-07T17:03:19.000+01:00
+It predicted these items for order 1941905 :
+   33359 with score of 298.0
+   26890 with score of 131.0
+   35167 with score of 116.0
+   785 with score of 76.0
+   11380 with score of 76.0
+   25904 with score of 66.0
+   21776 with score of 65.0
+   24949 with score of 63.0
+   790 with score of 61.0
+   13688 with score of 60.0
+These are the actual items bought: 
+   35340
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19863.0 and beta 143801.0
+The order information:
+Date: 2012-11-08T16:14:04.000+01:00
+It predicted these items for order 1942908 :
+   33359 with score of 297.0
+   26890 with score of 140.0
+   35167 with score of 91.0
+   785 with score of 83.0
+   24949 with score of 79.0
+   790 with score of 68.0
+   21776 with score of 66.0
+   11380 with score of 64.0
+   25904 with score of 64.0
+   13688 with score of 62.0
+These are the actual items bought: 
+   29944
+   11832
+   35652
+The current arm is 0 with vector {0:0.8657237583492767} with alpha 19987.0 and beta 144677.0
+The order information:
+Date: 2012-11-08T23:58:05.000+01:00
+It predicted these items for order 1943910 :
+   33359 with score of 290.0
+   26890 with score of 130.0
+   36619 with score of 105.0
+   25904 with score of 104.0
+   785 with score of 90.0
+   24949 with score of 87.0
+   908 with score of 82.0
+   35167 with score of 81.0
+   790 with score of 73.0
+   2750 with score of 71.0
+These are the actual items bought: 
+   30495
+The arm 0 has vector {0:0.8657237583492767} with alpha 20017.0 and beta 144810.0, percentage 12.143788866980131
+The best arm is 0 with vector {0:0.8657237583492767} with alpha 20017.0 and beta 144810.0, percentage 12.143788866980131
+The right guesses are: 20016 which means 12.143788866980131% correct
+Done
+4912

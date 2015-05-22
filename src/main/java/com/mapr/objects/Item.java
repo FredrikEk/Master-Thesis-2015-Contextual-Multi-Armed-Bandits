@@ -1,7 +1,6 @@
 package com.mapr.objects;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -13,9 +12,6 @@ import org.apache.mahout.math.Vector;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-
-import com.mapr.bandit.BanditHittepa;
-import com.mapr.bandit.BanditHittepa2;
 
 public class Item {
 
@@ -32,9 +28,12 @@ public class Item {
 	private List<User> users;
 	private List<Order> orders;
 	private List<Integer> category;
+	private long index = 0;
 	
 	public static List<Item> mostPopularMonthly = new ArrayList<Item>();
 	public static List<Item> mostPopularWeekly = new ArrayList<Item>();
+	public static int mostPopularMonthlyBuys = 0;
+	public static int mostPopularWeeklyBuys = 0;
 	
 	public DateTimeFormatter df = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -95,6 +94,7 @@ public class Item {
 		for(Integer subCat : i.getCategories()) {
 			this.category.add(subCat);
 		}
+		this.index				= i.index;
 	}
 	
 	public void buy(Order o) {
@@ -117,6 +117,8 @@ public class Item {
 		bought++;
 		users.add(u);
 		orders.add(o);
+		
+		u.addBuy(this);
 		
 		Comparator<Item> compLastMonth = (e1, e2) -> Integer.compare(
 	            e2.getBuysInLastMonth(d), e1.getBuysInLastMonth(d));
@@ -146,6 +148,8 @@ public class Item {
 		Collections.sort(mostPopularMonthly, compLastMonth);
 		Collections.sort(mostPopularWeekly, compLastWeek);
 		
+		mostPopularMonthlyBuys = mostPopularMonthly.get(0).getBuysInLastMonth(d);
+		mostPopularWeeklyBuys = mostPopularWeekly.get(0).getBuysInLastWeek(d);
 	}
 	
 	public Vector getAgeVector() {
@@ -190,6 +194,10 @@ public class Item {
 				}
 			}
 		}
+		
+		weekPopularity /= mostPopularWeeklyBuys;
+		monthPopularity /= mostPopularMonthlyBuys;
+		
 		return new DenseVector(new double[]{weekPopularity, monthPopularity});
 	}
 	
@@ -208,12 +216,12 @@ public class Item {
 	public Vector getContextVector(int zipcode, DateTime sale) {
 		if(sale.isAfter(this.productCreated) && (stock || sale.isBefore(this.productModified))) {
 			ArrayList<Vector> contextVector = new ArrayList<Vector>();
-			if(BanditHittepa2.useAge) contextVector.add(getAgeVector());
-			if(BanditHittepa2.useGender) contextVector.add(getGenderContext());
-			if(BanditHittepa2.useLocation) contextVector.add(new DenseVector(new double[] {getZipContext(zipcode)}));
-			if(BanditHittepa2.usePopularity) contextVector.add(getPopularityContext(sale));
-			double[] contextuality = new double[0 + (BanditHittepa2.useAge ? 3 : 0) + (BanditHittepa2.useGender ? 2 : 0) + (BanditHittepa2.useLocation ? 1 : 0)
-			                                          + (BanditHittepa2.usePopularity ? 2 : 0) + (BanditHittepa2.useCategories ? Category.numberOfCategories : 0)];
+			if(ConstantHolder.useAge) contextVector.add(getAgeVector());
+			if(ConstantHolder.useGender) contextVector.add(getGenderContext());
+			if(ConstantHolder.useLocation) contextVector.add(new DenseVector(new double[] {getZipContext(zipcode)}));
+			if(ConstantHolder.usePopularity) contextVector.add(getPopularityContext(sale));
+			double[] contextuality = new double[0 + (ConstantHolder.useAge ? 3 : 0) + (ConstantHolder.useGender ? 2 : 0) + (ConstantHolder.useLocation ? 1 : 0)
+			                                          + (ConstantHolder.usePopularity ? 2 : 0) + (ConstantHolder.useCategories ? Category.numberOfCategories : 0)];
 			int pointer = 0;
 			for(Vector preContext : contextVector) {
 				for(int i = 0; i < preContext.size(); i++) {
@@ -222,7 +230,7 @@ public class Item {
 				}
 			}
 			
-			if(BanditHittepa.useCategories) {
+			if(ConstantHolder.useCategories) {
 				double[] categories = getCategoriesVector();
 				
 				for(int i = 0 ; i < categories.length; i++) {
@@ -233,7 +241,7 @@ public class Item {
 			return new DenseVector(contextuality);
 			
 		} else {
-			double[] contextuality = new double[BanditHittepa.numberOfFeatures];
+			double[] contextuality = new double[ConstantHolder.numberOfFeatures];
 			for(int i = 0; i < contextuality.length; i++) {
 				contextuality[i] = 0.0;
 			}
@@ -242,7 +250,7 @@ public class Item {
 	}
 	
 	public Vector getUserContextVector(Matrix dm, DateTime date) {
-		double[] contextuality = new double[BanditHittepa.extraFeatures];
+		double[] contextuality = new double[ConstantHolder.extraFeatures];
 		for(int i = 0; i < contextuality.length; i++) {
 			contextuality[i] = 0.0;
 		}
@@ -378,6 +386,21 @@ public class Item {
 		}
 	}
 	
+	public Vector getNumberOfBuysInLastWeek(DateTime sale) {
+		if(sale.isAfter(this.productCreated) && (stock || sale.isBefore(productModified))) {
+			int buys = 0;
+			DateTime lastWeek = sale.minusWeeks(1);
+			for(int i = 0; i < orders.size(); i++) {
+				if(lastWeek.isBefore(orders.get(i).getPlacedOrder())) {
+					buys++;
+				}
+			}
+			return new DenseVector(new double[]{(double)buys});
+		} else {
+			return new DenseVector(new double[]{0.0});
+		}
+	}
+	
 	public int getBuysInLastWeek(DateTime sale) {
 		if(sale.isAfter(this.productCreated) && (stock || sale.isBefore(productModified))) {
 			int buys = 0;
@@ -399,5 +422,13 @@ public class Item {
 	
 	public Item copy() {
 		return new Item(this);
+	}
+	
+	public long getIndex() {
+		return index;
+	}
+	
+	public void setIndex(int i) {
+		this.index = i;
 	}
 }

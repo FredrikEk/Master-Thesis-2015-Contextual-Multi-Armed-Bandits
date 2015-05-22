@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-import com.mapr.bandit.BanditHittepa2;
+import com.mapr.objects.ConstantHolder;
 import com.mapr.objects.Item;
 import com.mapr.objects.Order;
 import com.mapr.objects.User;
@@ -20,6 +20,7 @@ public class ContextualSetting {
 	HashMap<Long, Item> items = new HashMap<Long, Item>();
 	HashMap<Long, User> users = new HashMap<Long, User>();
 	HashMap<Long, Order> orders = new HashMap<Long, Order>();
+	HashMap<Long, Item> itemIndexMap = new HashMap<Long, Item>();
 	ArrayList<Order> ordersByDate = new ArrayList<Order>();
 	int debug;
 	
@@ -27,6 +28,12 @@ public class ContextualSetting {
 		debug = 0;
 		try {
 			readItems(brs[0]);
+			//List<Long> keyDomain = new ArrayList<Long>();
+			//for(long i = 0; i < itemIndexMap.size(); i++) {
+			//	keyDomain.add(i);
+			//}
+			//BanditHittepa2.KeyDomain = keyDomain;
+			ConstantHolder.numberOfItems = itemIndexMap.size();
 			readUsers(brs[1]);
 			readOrders(brs[2]);
 		} catch (FileNotFoundException e) {
@@ -44,7 +51,9 @@ public class ContextualSetting {
 		ArrayList<Order> orderedOrders = cs.getOrdersByDate();
 		
 		for(Long key : itemKeys) {
-			items.put(key, new Item(cs.getItem(key)));
+			Item i = new Item(cs.getItem(key));
+			items.put(key, i);
+			itemIndexMap.put(i.getIndex(), i);
 		}
 		for(Long key : userKeys) {
 			users.put(key, new User(cs.getUser(key)));
@@ -76,7 +85,7 @@ public class ContextualSetting {
 			debug++;
 			if(debug > debugOutPrint) {
 				System.out.println("Items: " + line);
-				BanditHittepa2.logWriter.println("Items: " + line);
+				ConstantHolder.logWriter.println("Items: " + line);
 				debug = 0;
 			}
 			String[] row = line.split(csvSplitBy);
@@ -84,8 +93,11 @@ public class ContextualSetting {
 			if(items.containsKey(i.getProductId())) {
 				items.get(i.getProductId()).update(i);
 			} else {
+				int index = items.size();
 				items.put(i.getProductId(), i);
-			}	
+				i.setIndex(index);
+				itemIndexMap.put((long) index, i);
+			}
 		}
 	}
 	
@@ -96,7 +108,7 @@ public class ContextualSetting {
 			debug++;
 			if(debug > debugOutPrint) {
 				System.out.println("Users: " + line);
-				BanditHittepa2.logWriter.println("Users: " + line);
+				ConstantHolder.logWriter.println("Users: " + line);
 				debug = 0;
 			}
 			User u = new User(line.split(csvSplitBy));
@@ -118,7 +130,7 @@ public class ContextualSetting {
 			debug++;
 			if(debug > debugOutPrint) {
 				System.out.println("Orders: " + line);
-				BanditHittepa2.logWriter.println("Orders: " + line);
+				ConstantHolder.logWriter.println("Orders: " + line);
 				debug = 0;
 			}
 			String[] row = line.split(csvSplitBy);
@@ -200,5 +212,13 @@ public class ContextualSetting {
 	
 	public ContextualSetting copy() {
 		return new ContextualSetting(this);
+	}
+	
+	public Set<Long> getItemIndexKeySet() {
+		return itemIndexMap.keySet();
+	}
+	
+	public Item getItemFromIndex(Long index) {
+		return itemIndexMap.get(index);
 	}
 }

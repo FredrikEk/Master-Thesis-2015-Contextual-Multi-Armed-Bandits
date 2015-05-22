@@ -1,0 +1,789 @@
+Items: 31014,2,2012-03-22 09:35:15.730000000,2013-01-31 22:08:19.360000000,0,0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+Items: 16065,3,2010-10-12 09:05:28.623000000,2011-10-19 12:41:59.293000000,0,0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+Items: 2897,1,2010-07-28 15:55:07.423000000,2013-07-15 05:02:15.650000000,0,0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+Users: 46671,2009-07-31 17:52:05.423000000,45238,,0
+Users: 117404,2012-02-11 18:20:17.737000000,30295,1989-02-13 00:00:00,1
+Users: 185087,2009-07-31 19:48:45.310000000,54234,1986-06-04 00:00:00,1
+Users: 242612,2011-12-03 21:34:16.640000000,90627,1990-07-23 00:00:00,2
+Users: 294436,2011-03-16 09:05:23.647000000,72233,1994-04-25 00:00:00,1
+Users: 345704,2011-11-11 20:55:14.437000000,68600,1994-06-05 00:00:00,2
+Users: 399809,2012-09-17 14:43:42.033000000,44491,1997-12-12 00:00:00,1
+Users: 455390,2012-12-20 16:02:28.573000000,3274,1978-06-02 00:00:00,2
+Users: 525182,2013-07-28 12:33:53.590000000,53372,1990-06-17 00:00:00,0
+Orders: 35022,1033356,1457,2009-10-18 21:46:53.347000000
+Orders: 214698,1082559,614,2010-01-24 20:16:55.153000000
+Orders: 226305,1122161,1501,2010-03-20 16:23:03.950000000
+Orders: 46541,1167569,11120,2010-05-26 12:55:02.417000000
+Orders: 75824,1208142,11119,2010-07-27 23:14:48.377000000
+Orders: 13287,1248778,12826,2010-09-21 21:56:27.157000000
+Orders: 272654,1296031,653,2010-12-01 18:41:36.730000000
+Orders: 285359,1344258,18628,2011-01-28 14:59:09.743000000
+Orders: 157456,1388262,18371,2011-03-17 11:46:02.120000000
+Orders: 307265,1432210,758,2011-04-29 21:28:48.340000000
+Orders: 271030,1473349,21803,2011-06-14 15:24:35.467000000
+Orders: 275827,1511037,21829,2011-07-28 21:58:50.970000000
+Orders: 62527,1550712,24845,2011-09-10 18:44:47.023000000
+Orders: 293365,1597283,27523,2011-11-12 08:21:31.203000000
+Orders: 158173,1649466,24361,2011-12-28 14:06:54.430000000
+Orders: 371623,1691322,28947,2012-01-31 15:54:20.570000000
+Orders: 151193,1739094,2144,2012-03-22 17:02:48.527000000
+Orders: 71320,1784958,7874,2012-05-16 17:00:59.817000000
+Orders: 287161,1827735,20480,2012-06-29 22:23:24.193000000
+Orders: 271514,1866722,31203,2012-08-11 21:38:56.863000000
+Orders: 428803,1915657,35460,2012-10-09 20:15:44.210000000
+Orders: 444954,1966435,29677,2012-12-01 22:51:49.073000000
+Orders: 460415,2018674,31695,2013-01-07 22:20:30.543000000
+Orders: 381441,2066329,35170,2013-02-19 22:08:16.833000000
+Orders: 485606,2112774,39306,2013-03-26 15:04:37.277000000
+Orders: 423890,2161061,11304,2013-05-03 09:35:38.190000000
+Orders: 314770,2207605,26096,2013-06-05 19:04:54.837000000
+Orders: 287308,2249841,40450,2013-07-13 20:23:09.463000000
+Orders: 255027,2289235,33612,2013-08-13 17:15:05.073000000
+Orders: 466261,2331294,43871,2013-09-15 21:02:00.180000000
+Orders: 446724,2379393,448,2013-11-01 19:20:53.627000000
+
+Startup information:
+First order in training stage: 700000
+First order in evaluation stage: 771338
+Last order in evaluation stage: 936163
+
+Number of orders in training stage: 71338
+Number of orders in evaluation stage: 164825
+
+The order information:
+Date: 2012-05-10T17:54:43.000+02:00
+It predicted these items for order 1779917 :
+   8862 with score of 7.75
+   1663 with score of 5.75
+   5003 with score of 5.5
+   29669 with score of 5.5
+   31777 with score of 3.5
+   28284 with score of 3.5
+   23469 with score of 3.25
+   23913 with score of 3.0
+   29685 with score of 2.75
+   23467 with score of 2.75
+These are the actual items bought: 
+   30342
+   23374
+   32289
+The order information:
+Date: 2012-05-13T15:53:25.000+02:00
+It predicted these items for order 1781930 :
+   31042 with score of 17.375
+   23318 with score of 14.0
+   23250 with score of 11.375
+   1023 with score of 5.875
+   4806 with score of 5.5
+   23364 with score of 5.0
+   1002 with score of 4.5
+   20990 with score of 4.375
+   27659 with score of 3.875
+   22855 with score of 3.625
+These are the actual items bought: 
+   2084
+   29003
+   31950
+   20990
+   31940
+   30573
+   20678
+   30195
+   25363
+   27900
+The order information:
+Date: 2012-05-20T19:46:05.000+02:00
+It predicted these items for order 1787986 :
+   11380 with score of 4.999999999999999
+   5003 with score of 4.0
+   28670 with score of 2.333333333333333
+   4936 with score of 2.333333333333333
+   19742 with score of 2.333333333333333
+   17310 with score of 1.9999999999999998
+   27576 with score of 1.6666666666666665
+   18317 with score of 1.6666666666666665
+   12096 with score of 1.6666666666666665
+   572 with score of 1.6666666666666665
+These are the actual items bought: 
+   9892
+   2750
+   30011
+The order information:
+Date: 2012-05-23T10:57:04.000+02:00
+It predicted these items for order 1790996 :
+   20747 with score of 16.0
+   24349 with score of 8.5
+   23873 with score of 6.5
+   27900 with score of 5.0
+   18516 with score of 5.0
+   23375 with score of 4.5
+   23755 with score of 4.0
+   22859 with score of 3.0
+   29004 with score of 3.0
+   23318 with score of 3.0
+These are the actual items bought: 
+   15449
+   21787
+   21787
+The order information:
+Date: 2012-05-25T09:03:22.000+02:00
+It predicted these items for order 1793007 :
+   27900 with score of 4.75
+   23332 with score of 4.125
+   23318 with score of 2.625
+   23250 with score of 2.25
+   21986 with score of 1.75
+   1023 with score of 1.75
+   31560 with score of 1.75
+   1002 with score of 1.625
+   20974 with score of 1.5
+   232 with score of 1.5
+These are the actual items bought: 
+   31184
+   9876
+   24045
+   32886
+The order information:
+Date: 2012-05-26T13:29:41.000+02:00
+It predicted these items for order 1794012 :
+   24428 with score of 13.666666666666679
+   27576 with score of 13.000000000000005
+   31553 with score of 12.49999999999999
+   32110 with score of 10.666666666666668
+   1667 with score of 10.333333333333332
+   21799 with score of 9.833333333333332
+   23467 with score of 9.83333333333333
+   1663 with score of 8.83333333333333
+   30221 with score of 8.666666666666664
+   21804 with score of 6.333333333333336
+These are the actual items bought: 
+   31457
+   24942
+   21839
+   1002
+The order information:
+Date: 2012-06-04T06:36:28.000+02:00
+It predicted these items for order 1803078 :
+   11833 with score of 9.600000000000001
+   23467 with score of 5.199999999999993
+   12153 with score of 4.399999999999992
+   27576 with score of 4.049999999999994
+   20451 with score of 3.8499999999999965
+   1663 with score of 3.3999999999999964
+   23469 with score of 3.2999999999999967
+   21986 with score of 3.149999999999998
+   29669 with score of 2.999999999999998
+   23114 with score of 2.549999999999999
+These are the actual items bought: 
+   31872
+The order information:
+Date: 2012-06-04T22:48:26.000+02:00
+It predicted these items for order 1804098 :
+   29353 with score of 2.8333333333333326
+   17403 with score of 2.1666666666666665
+   4917 with score of 2.0
+   30094 with score of 1.8333333333333335
+   30287 with score of 1.5
+   21787 with score of 1.5
+   24428 with score of 1.3333333333333333
+   17115 with score of 1.3333333333333333
+   30100 with score of 1.1666666666666665
+   30073 with score of 1.1666666666666665
+These are the actual items bought: 
+   20051
+   31484
+   13678
+   13672
+The order information:
+Date: 2012-06-07T08:29:43.000+02:00
+It predicted these items for order 1806121 :
+   11832 with score of 2.240506329113927
+   27900 with score of 2.139240506329118
+   20430 with score of 2.037974683544306
+   21803 with score of 1.4810126582278464
+   23913 with score of 1.4430379746835456
+   23467 with score of 1.4177215189873422
+   23469 with score of 1.405063291139241
+   29669 with score of 1.3544303797468353
+   31553 with score of 1.2278481012658227
+   21776 with score of 1.0126582278481007
+These are the actual items bought: 
+   33075
+The order information:
+Date: 2012-06-22T22:11:26.000+02:00
+It predicted these items for order 1818221 :
+   20430 with score of 5.0
+   25365 with score of 4.333333333333332
+   12366 with score of 4.166666666666665
+   30914 with score of 3.8333333333333317
+   19814 with score of 3.666666666666665
+   2751 with score of 3.666666666666665
+   194 with score of 3.4999999999999987
+   14250 with score of 3.4999999999999987
+   30026 with score of 3.1666666666666656
+   30443 with score of 2.666666666666666
+These are the actual items bought: 
+   13289
+   14951
+   14951
+The order information:
+Date: 2012-06-24T23:07:04.000+02:00
+It predicted these items for order 1820233 :
+   31042 with score of 17.833333333333325
+   23318 with score of 12.333333333333323
+   20974 with score of 10.666666666666663
+   23250 with score of 8.16666666666667
+   1002 with score of 7.1666666666666705
+   31560 with score of 7.1666666666666705
+   23332 with score of 7.0000000000000036
+   1023 with score of 6.66666666666667
+   4806 with score of 5.500000000000001
+   20990 with score of 5.333333333333334
+These are the actual items bought: 
+   27900
+   32213
+The order information:
+Date: 2012-06-26T21:15:21.000+02:00
+It predicted these items for order 1823247 :
+   23113 with score of 1.1428571428571426
+   25130 with score of 1.1428571428571426
+   27145 with score of 1.1428571428571426
+   13702 with score of 1.1428571428571426
+   21857 with score of 1.1428571428571426
+   174 with score of 1.1428571428571426
+   21835 with score of 1.1428571428571426
+   30582 with score of 1.1428571428571426
+   28982 with score of 0.9999999999999998
+   8319 with score of 0.9999999999999998
+These are the actual items bought: 
+   20003
+   30394
+   18343
+The order information:
+Date: 2012-06-28T07:32:03.000+02:00
+It predicted these items for order 1825252 :
+   11833 with score of 64.66666666666683
+   20430 with score of 25.999999999999975
+   29669 with score of 24.33333333333331
+   27576 with score of 22.666666666666647
+   23467 with score of 22.333333333333318
+   25201 with score of 20.999999999999993
+   24428 with score of 19.333333333333336
+   23469 with score of 19.000000000000004
+   1663 with score of 17.66666666666667
+   32110 with score of 16.333333333333343
+These are the actual items bought: 
+   11832
+   30058
+The order information:
+Date: 2012-06-30T11:21:48.000+02:00
+It predicted these items for order 1828259 :
+   21803 with score of 13.0
+   29669 with score of 7.0
+   24269 with score of 5.0
+   19062 with score of 5.0
+   30028 with score of 4.5
+   31547 with score of 4.0
+   23240 with score of 4.0
+   30957 with score of 4.0
+   22926 with score of 4.0
+   32342 with score of 3.0
+These are the actual items bought: 
+   758
+   29700
+   32185
+   9700
+   31808
+The order information:
+Date: 2012-06-30T20:09:27.000+02:00
+It predicted these items for order 1829261 :
+   752 with score of 20.33333333333333
+   747 with score of 18.000000000000004
+   1663 with score of 17.000000000000007
+   32110 with score of 14.333333333333341
+   25201 with score of 14.000000000000007
+   29669 with score of 12.000000000000004
+   11832 with score of 10.666666666666668
+   23467 with score of 9.666666666666666
+   745 with score of 9.666666666666666
+   30914 with score of 8.999999999999998
+These are the actual items bought: 
+   27589
+   32739
+The order information:
+Date: 2012-07-02T11:25:18.000+02:00
+It predicted these items for order 1832265 :
+   31560 with score of 3.1818181818181803
+   29380 with score of 2.6363636363636354
+   28963 with score of 2.5454545454545445
+   29366 with score of 2.5454545454545445
+   18137 with score of 2.545454545454544
+   21838 with score of 2.272727272727272
+   20990 with score of 2.181818181818181
+   22342 with score of 2.181818181818181
+   30914 with score of 2.0909090909090904
+   21986 with score of 1.9090909090909085
+These are the actual items bought: 
+   29939
+The order information:
+Date: 2012-07-04T20:49:30.000+02:00
+It predicted these items for order 1838289 :
+   23722 with score of 3.5
+   20149 with score of 3.0
+   21942 with score of 2.5
+   757 with score of 2.5
+   11833 with score of 2.0
+   13316 with score of 1.5
+   24103 with score of 1.5
+   4424 with score of 1.5
+   26567 with score of 1.5
+   26554 with score of 1.5
+These are the actual items bought: 
+   29500
+   16202
+   30909
+   20430
+The order information:
+Date: 2012-07-08T23:07:32.000+02:00
+It predicted these items for order 1842304 :
+   29380 with score of 6.000000000000003
+   29353 with score of 6.000000000000003
+   31560 with score of 5.8000000000000025
+   28963 with score of 5.400000000000002
+   22342 with score of 5.400000000000002
+   11832 with score of 5.400000000000002
+   29366 with score of 5.200000000000002
+   21838 with score of 5.000000000000002
+   30914 with score of 4.800000000000002
+   11833 with score of 4.800000000000002
+These are the actual items bought: 
+   33177
+   21833
+The order information:
+Date: 2012-07-14T14:32:38.000+02:00
+It predicted these items for order 1846349 :
+   11832 with score of 3.3333333333333335
+   24980 with score of 1.9999999999999998
+   23723 with score of 1.9999999999999998
+   29726 with score of 1.9999999999999998
+   24353 with score of 1.9999999999999998
+   11833 with score of 1.9999999999999998
+   24075 with score of 1.6666666666666665
+   24876 with score of 1.6666666666666665
+   20480 with score of 1.6666666666666665
+   18405 with score of 1.6666666666666665
+These are the actual items bought: 
+   32590
+   24077
+   33209
+   31013
+The order information:
+Date: 2012-07-16T12:26:25.000+02:00
+It predicted these items for order 1847354 :
+   23467 with score of 3.857142857142856
+   29809 with score of 2.8571428571428563
+   20430 with score of 2.7142857142857135
+   24428 with score of 2.7142857142857135
+   29669 with score of 2.7142857142857135
+   30836 with score of 2.428571428571428
+   21803 with score of 2.428571428571428
+   25201 with score of 2.428571428571428
+   11832 with score of 2.285714285714285
+   28965 with score of 2.1428571428571423
+These are the actual items bought: 
+   6991
+   5003
+   33130
+   29647
+The order information:
+Date: 2012-07-23T14:01:38.000+02:00
+It predicted these items for order 1852375 :
+   20430 with score of 6.600000000000003
+   19455 with score of 5.600000000000002
+   30162 with score of 5.400000000000002
+   14343 with score of 5.000000000000002
+   21714 with score of 4.800000000000002
+   783 with score of 4.800000000000002
+   30949 with score of 4.600000000000001
+   31673 with score of 4.400000000000001
+   31346 with score of 4.200000000000001
+   32317 with score of 4.200000000000001
+These are the actual items bought: 
+   2621
+The order information:
+Date: 2012-07-29T14:34:53.000+02:00
+It predicted these items for order 1857401 :
+   32113 with score of 9.5
+   30173 with score of 7.0
+   30162 with score of 7.0
+   27576 with score of 6.5
+   30246 with score of 6.0
+   27629 with score of 5.0
+   31159 with score of 3.5
+   30807 with score of 3.5
+   16882 with score of 3.0
+   11739 with score of 3.0
+These are the actual items bought: 
+   10123
+The order information:
+Date: 2012-08-07T11:26:00.000+02:00
+It predicted these items for order 1863440 :
+   29306 with score of 4.600000000000001
+   31560 with score of 4.000000000000001
+   8319 with score of 3.0000000000000004
+   757 with score of 2.6000000000000005
+   19260 with score of 2.6
+   23722 with score of 2.0
+   32293 with score of 1.9999999999999998
+   7488 with score of 1.9999999999999998
+   29654 with score of 1.9999999999999998
+   25052 with score of 1.7999999999999998
+These are the actual items bought: 
+   9986
+The order information:
+Date: 2012-08-13T23:06:21.000+02:00
+It predicted these items for order 1868465 :
+   29669 with score of 15.57142857142856
+   20430 with score of 8.428571428571432
+   23469 with score of 7.4285714285714315
+   32110 with score of 6.28571428571429
+   1663 with score of 6.142857142857147
+   23467 with score of 6.0000000000000036
+   27576 with score of 5.428571428571431
+   23374 with score of 5.000000000000001
+   11832 with score of 4.857142857142858
+   32596 with score of 4.571428571428571
+These are the actual items bought: 
+   6624
+The order information:
+Date: 2012-08-16T12:23:50.000+02:00
+It predicted these items for order 1870470 :
+   31683 with score of 2.333333333333333
+   27900 with score of 2.333333333333333
+   1002 with score of 2.333333333333333
+   30220 with score of 1.9999999999999998
+   29478 with score of 1.9999999999999998
+   29700 with score of 1.6666666666666665
+   27275 with score of 1.6666666666666665
+   29722 with score of 1.3333333333333333
+   20944 with score of 1.3333333333333333
+   32150 with score of 1.3333333333333333
+These are the actual items bought: 
+   29521
+The order information:
+Date: 2012-08-21T10:38:11.000+02:00
+It predicted these items for order 1874483 :
+   32596 with score of 4.375
+   32650 with score of 4.125
+   23469 with score of 2.5
+   21811 with score of 2.375
+   24365 with score of 2.125
+   29746 with score of 2.0
+   30959 with score of 1.875
+   14343 with score of 1.875
+   30222 with score of 1.875
+   30807 with score of 1.75
+These are the actual items bought: 
+   31919
+   33132
+The order information:
+Date: 2012-08-23T16:18:22.000+02:00
+It predicted these items for order 1876494 :
+   25794 with score of 3.9999999999999987
+   18405 with score of 3.714285714285713
+   3934 with score of 3.5714285714285703
+   12748 with score of 3.4285714285714275
+   7458 with score of 3.142857142857142
+   21799 with score of 2.999999999999999
+   21779 with score of 2.7142857142857135
+   30901 with score of 2.428571428571428
+   10123 with score of 2.428571428571428
+   5003 with score of 2.428571428571428
+These are the actual items bought: 
+   20217
+   406
+The order information:
+Date: 2012-08-27T17:07:17.000+02:00
+It predicted these items for order 1879504 :
+   11833 with score of 3.0625
+   27576 with score of 2.8125
+   5003 with score of 2.1875
+   23375 with score of 1.9375
+   11832 with score of 1.8125
+   27656 with score of 1.75
+   29669 with score of 1.6875
+   29663 with score of 1.625
+   20430 with score of 1.625
+   21843 with score of 1.5625
+These are the actual items bought: 
+   33410
+The order information:
+Date: 2012-08-28T17:53:14.000+02:00
+It predicted these items for order 1880512 :
+   12338 with score of 19.0
+   752 with score of 10.0
+   25124 with score of 6.0
+   20430 with score of 6.0
+   24490 with score of 6.0
+   1671 with score of 6.0
+   30286 with score of 5.0
+   27091 with score of 5.0
+   14951 with score of 5.0
+   24142 with score of 4.0
+These are the actual items bought: 
+   33578
+The order information:
+Date: 2012-09-01T17:30:54.000+02:00
+It predicted these items for order 1884537 :
+   5003 with score of 11.25
+   20430 with score of 10.0
+   23469 with score of 9.75
+   11833 with score of 8.25
+   11832 with score of 7.75
+   23390 with score of 7.5
+   29669 with score of 7.25
+   30969 with score of 7.0
+   24365 with score of 7.0
+   29809 with score of 6.0
+These are the actual items bought: 
+   27404
+   31691
+   18703
+The order information:
+Date: 2012-09-02T20:57:05.000+02:00
+It predicted these items for order 1885541 :
+   5003 with score of 2.5
+   23318 with score of 2.0
+   20974 with score of 2.0
+   27900 with score of 2.0
+   23250 with score of 2.0
+   20199 with score of 1.5
+   25297 with score of 1.5
+   23210 with score of 1.5
+   1002 with score of 1.5
+   31641 with score of 1.5
+These are the actual items bought: 
+   29707
+The order information:
+Date: 2012-09-12T19:00:04.000+02:00
+It predicted these items for order 1893573 :
+   20430 with score of 8.166666666666671
+   27576 with score of 6.66666666666667
+   23467 with score of 3.9999999999999982
+   11832 with score of 3.8333333333333317
+   21804 with score of 3.333333333333332
+   28965 with score of 3.333333333333332
+   21811 with score of 3.1666666666666656
+   11833 with score of 2.999999999999999
+   21867 with score of 2.8333333333333326
+   21837 with score of 2.8333333333333326
+These are the actual items bought: 
+   31060
+   33353
+   23212
+The order information:
+Date: 2012-09-20T14:50:51.000+02:00
+It predicted these items for order 1899608 :
+   20430 with score of 8.000000000000004
+   24365 with score of 5.000000000000002
+   11833 with score of 4.200000000000001
+   11832 with score of 4.200000000000001
+   11790 with score of 4.000000000000001
+   31560 with score of 4.000000000000001
+   27900 with score of 3.400000000000001
+   12096 with score of 3.2000000000000006
+   21816 with score of 3.0000000000000004
+   5003 with score of 3.0000000000000004
+These are the actual items bought: 
+   13258
+   30653
+   34663
+The order information:
+Date: 2012-09-21T18:59:01.000+02:00
+It predicted these items for order 1900616 :
+   5003 with score of 30.0
+   24365 with score of 18.0
+   30459 with score of 18.0
+   23913 with score of 16.0
+   32289 with score of 15.0
+   32906 with score of 15.0
+   29653 with score of 15.0
+   11833 with score of 15.0
+   29669 with score of 9.0
+   22222 with score of 8.0
+These are the actual items bought: 
+   34878
+   30439
+   11832
+   34823
+The order information:
+Date: 2012-10-04T12:35:03.000+02:00
+It predicted these items for order 1911675 :
+   27576 with score of 10.199999999999996
+   11832 with score of 9.399999999999999
+   24365 with score of 8.8
+   21799 with score of 7.800000000000004
+   23469 with score of 7.600000000000004
+   29669 with score of 7.200000000000004
+   11833 with score of 7.0000000000000036
+   23467 with score of 7.0000000000000036
+   748 with score of 6.800000000000003
+   13091 with score of 6.600000000000003
+These are the actual items bought: 
+   14142
+The order information:
+Date: 2012-10-07T18:08:06.000+02:00
+It predicted these items for order 1913687 :
+   27576 with score of 3.000000000000001
+   5003 with score of 2.8888888888888897
+   23379 with score of 2.8888888888888897
+   29355 with score of 2.8888888888888897
+   23467 with score of 2.7777777777777786
+   24428 with score of 2.6666666666666674
+   28670 with score of 2.5555555555555562
+   29660 with score of 2.444444444444445
+   24355 with score of 2.333333333333334
+   21808 with score of 2.2222222222222228
+These are the actual items bought: 
+   35445
+The order information:
+Date: 2012-10-09T20:34:52.000+02:00
+It predicted these items for order 1915693 :
+   11832 with score of 17.099999999999973
+   27576 with score of 12.499999999999972
+   1663 with score of 12.199999999999974
+   27900 with score of 10.899999999999979
+   24428 with score of 9.399999999999983
+   11833 with score of 7.9999999999999885
+   29669 with score of 7.69999999999999
+   783 with score of 7.499999999999989
+   20430 with score of 6.699999999999992
+   23467 with score of 6.399999999999993
+These are the actual items bought: 
+   33359
+   33359
+The order information:
+Date: 2012-10-14T23:24:45.000+02:00
+It predicted these items for order 1919731 :
+   27576 with score of 6.25
+   24428 with score of 5.125
+   21799 with score of 5.0
+   30162 with score of 4.625
+   21714 with score of 4.125
+   31560 with score of 4.125
+   23467 with score of 3.875
+   23379 with score of 3.875
+   30949 with score of 3.625
+   30409 with score of 3.625
+These are the actual items bought: 
+   35921
+The order information:
+Date: 2012-10-22T19:50:19.000+02:00
+It predicted these items for order 1926782 :
+   31042 with score of 122.0
+   23318 with score of 83.0
+   20974 with score of 63.0
+   1002 with score of 50.0
+   23250 with score of 44.0
+   4806 with score of 43.0
+   1023 with score of 41.0
+   20990 with score of 37.0
+   31560 with score of 31.0
+   20430 with score of 30.0
+These are the actual items bought: 
+   23374
+The order information:
+Date: 2012-10-23T19:23:31.000+02:00
+It predicted these items for order 1927785 :
+   33359 with score of 11.299999999999978
+   27576 with score of 8.899999999999984
+   11380 with score of 5.799999999999995
+   783 with score of 5.599999999999996
+   21803 with score of 5.4999999999999964
+   32110 with score of 5.399999999999997
+   11833 with score of 4.700000000000001
+   11832 with score of 4.500000000000001
+   23467 with score of 4.000000000000002
+   29669 with score of 3.900000000000002
+These are the actual items bought: 
+   35559
+   34028
+The order information:
+Date: 2012-10-25T17:09:43.000+02:00
+It predicted these items for order 1929793 :
+   24428 with score of 34.75
+   21804 with score of 25.875
+   21799 with score of 22.625
+   27576 with score of 12.875
+   33359 with score of 10.25
+   21811 with score of 9.0
+   11832 with score of 8.75
+   23467 with score of 7.375
+   32110 with score of 7.0
+   23469 with score of 5.5
+These are the actual items bought: 
+   26395
+   36466
+The order information:
+Date: 2012-10-26T12:26:53.000+02:00
+It predicted these items for order 1930795 :
+   748 with score of 12.0
+   783 with score of 10.0
+   22208 with score of 10.0
+   374 with score of 9.0
+   3729 with score of 9.0
+   30002 with score of 9.0
+   31314 with score of 8.0
+   299 with score of 8.0
+   30001 with score of 8.0
+   6669 with score of 8.0
+These are the actual items bought: 
+   3315
+The order information:
+Date: 2012-10-28T22:46:12.000+01:00
+It predicted these items for order 1932807 :
+   20430 with score of 8.666666666666652
+   11833 with score of 5.999999999999994
+   33359 with score of 4.333333333333333
+   11832 with score of 4.333333333333333
+   5003 with score of 4.222222222222222
+   23467 with score of 4.222222222222222
+   748 with score of 4.111111111111112
+   29669 with score of 3.88888888888889
+   19455 with score of 3.777777777777779
+   783 with score of 3.666666666666668
+These are the actual items bought: 
+   13112
+The order information:
+Date: 2012-10-30T21:41:23.000+01:00
+It predicted these items for order 1934825 :
+   33150 with score of 2.0
+   33359 with score of 1.75
+   32358 with score of 1.75
+   30178 with score of 1.75
+   21787 with score of 1.5
+   20451 with score of 1.375
+   30162 with score of 1.375
+   21803 with score of 1.375
+   20778 with score of 1.25
+   28773 with score of 1.25
+These are the actual items bought: 
+   36863
+   26617
+   27287
+The order information:
+Date: 2012-11-07T17:03:19.000+01:00
+It predicted these items for order 1941905 :
+   23467 with score of 31.25
+   33359 with score of 26.0
+   27576 with score of 16.75
+   21803 with score of 15.75
+   29669 with score of 15.0
+   32110 with score of 13.25
+   1663 with score of 12.25
+   25201 with score of 11.75
+   30799 with score of 9.5
+   21808 with score of 9.25
+These are the actual items bought: 
+   35340
+6912

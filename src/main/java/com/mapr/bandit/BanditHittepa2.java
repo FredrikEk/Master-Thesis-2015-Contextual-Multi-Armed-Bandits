@@ -1,17 +1,20 @@
 package com.mapr.bandit;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
@@ -32,9 +35,10 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.joda.time.DateTime;
 
-import com.mapr.objects.Category;
+import JaccardSimilarity.JaccardDistanceAlgorithm;
+
+import com.mapr.objects.ConstantHolder;
 import com.mapr.objects.Item;
 import com.mapr.objects.Order;
 import com.mapr.objects.User;
@@ -45,51 +49,24 @@ import com.mapr.stats.bandit.ContextualSetting;
 public class BanditHittepa2 {
 
     private static Random gen = RandomUtils.getRandom();
-    
-    public final static boolean useCategories = true;
-    public final static boolean useGender = true;
-    public final static boolean useAge = true;
-    public final static boolean useLocation = true;
-    public final static boolean usePopularity = true;
-    // 771338 - 859594 3 months, 2012-05-01
-    // 771338 - 777471, 1 week, 2012-05-01
- 	public final static int TYPE_RANDOM_MATRIX = 0;
- 	public final static int TYPE_NORMAL = 1;
- 	public final static int TYPE_MOST_BUYS = 2;
-    public final static int startPlace = 700000;
-    public final static int numberOfTraining = 71338;
-	public final static int trainingSet = startPlace + numberOfTraining;
-	public final static int numberOfTests = 6133;
-	public final static int orderToEndAt = trainingSet + numberOfTests;
-	public final static int numberOfArms = 50;
-	public final static int numberOfFeatures = 0 + (useGender 		? 2 : 0) + 
-												   (useAge	 		? 3 : 0) + 
-												   (useLocation 	? 1 : 0) + 
-												   (usePopularity 	? 2 : 0) + 
-												   (useCategories 	? Category.numberOfCategories : 0);
-	public final static int extraFeatures = 10;
-	public final static int debugOutPrint = 100000;
-	public final static int itemsRecommendedPerTurn = 10;
-	public final static boolean baseLine = false;
 	
 	public static ContextualBayesArm bestArm = null;
     
 	static String[] csvFiles = {"data/JunkyardItems.csv", "data/JunkyardUser.csv", "data/JunkyardOrders.csv" };
 	static String csvSplitBy = ",";
 	
-	public static PrintWriter logWriter = null;
-	
+	public static ArrayList<User> userBought = new ArrayList<User>();
+
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		int TYPE = TYPE_NORMAL;
-				
-	 	long start1 = System.currentTimeMillis();
-	 	String logFileName = "logs/logfile" + DateTime.now().toString().replaceAll("[^a-zA-Z0-9.-]", "_");
+		//int TYPE = TYPE_JACCARD_DISTANCE | TYPE_NORMAL | TYPE_MOST_BUYS;
+		ConstantHolder.initialize();
+		
+		long start1 = System.currentTimeMillis();
 	 	
 	 	ContextualSetting contextualSetting = null;
 	 	
 		try {
-			logWriter = new PrintWriter(new File(logFileName + ".log"));
-		    
+			
 			BufferedReader[] br = {new BufferedReader(new FileReader(csvFiles[0])), 
 								   new BufferedReader(new FileReader(csvFiles[1])), 
 								   new BufferedReader(new FileReader(csvFiles[2]))};
@@ -106,64 +83,66 @@ public class BanditHittepa2 {
 		} catch( Exception e ) {
 			e.printStackTrace();
 		}
-		double[][] randomizedMatrix = new double[extraFeatures][numberOfFeatures];
+		double[][] randomizedMatrix = new double[ConstantHolder.extraFeatures][ConstantHolder.numberOfFeatures];
 		
 		System.out.println("");
 		System.out.println("Startup information:");
-		System.out.println("First order in training stage: " + startPlace);
-		System.out.println("First order in evaluation stage: " + trainingSet);
-		System.out.println("Last order in evaluation stage: " + orderToEndAt);
+		System.out.println("First order in training stage: " + ConstantHolder.startPlace);
+		System.out.println("First order in evaluation stage: " + ConstantHolder.trainingSet);
+		System.out.println("Last order in evaluation stage: " + ConstantHolder.orderToEndAt);
 		System.out.println("");
-		System.out.println("Number of orders in training stage: " + numberOfTraining);
-		System.out.println("Number of orders in evaluation stage: " + numberOfTests);
+		System.out.println("Number of orders in training stage: " + ConstantHolder.numberOfTraining);
+		System.out.println("Number of orders in evaluation stage: " + ConstantHolder.numberOfTests);
 		System.out.println("");
 		
-		logWriter.println("");
-		logWriter.println("Startup information:");
-		logWriter.println("First order in training stage: " + startPlace);
-		logWriter.println("First order in evaluation stage: " + trainingSet);
-		logWriter.println("Last order in evaluation stage: " + orderToEndAt);
-		logWriter.println("");
-		logWriter.println("Number of orders in training stage: " + numberOfTraining);
-		logWriter.println("Number of orders in evaluation stage: " + numberOfTests);
-		logWriter.println("");
+		ConstantHolder.logWriter.println("");
+		ConstantHolder.logWriter.println("Startup information:");
+		ConstantHolder.logWriter.println("First order in training stage: " + ConstantHolder.startPlace);
+		ConstantHolder.logWriter.println("First order in evaluation stage: " + ConstantHolder.trainingSet);
+		ConstantHolder.logWriter.println("Last order in evaluation stage: " + ConstantHolder.orderToEndAt);
+		ConstantHolder.logWriter.println("");
+		ConstantHolder.logWriter.println("Number of orders in training stage: " + ConstantHolder.numberOfTraining);
+		ConstantHolder.logWriter.println("Number of orders in evaluation stage: " + ConstantHolder.numberOfTests);
+		ConstantHolder.logWriter.println("");
 		
 		
 		ArrayList<XYSeries> allSeries = new ArrayList<XYSeries>();
 		
-		if(TYPE == TYPE_RANDOM_MATRIX) {
-			for(int i = 0; i < extraFeatures; i++) {
-				for (int j = 0; j < numberOfFeatures; j++) {
+		if((ConstantHolder.TYPE & ConstantHolder.TYPE_RANDOM_MATRIX) > 0) {
+			for(int i = 0; i < ConstantHolder.extraFeatures; i++) {
+				for (int j = 0; j < ConstantHolder.numberOfFeatures; j++) {
 					randomizedMatrix[i][j] = gen.nextDouble();
 				}
 			}
 			
+			ContextualSetting contextualSettingMatrix = contextualSetting.copy();
+			
 			Matrix characterMatrix = new DenseMatrix(randomizedMatrix);
 			
-			ContextualBandit cb = new ContextualBandit(numberOfArms, extraFeatures);
+			ContextualBandit cb = new ContextualBandit(ConstantHolder.numberOfArms, ConstantHolder.extraFeatures);
 			
-			for(int i = startPlace; i < trainingSet; i++) {
-				Order o = contextualSetting.getOrderByDate(i);
+			for(int i = ConstantHolder.startPlace; i < ConstantHolder.trainingSet; i++) {
+				Order o = contextualSettingMatrix.getOrderByDate(i);
 				List<Item> itemList = o.getItems();
 				for(Item item : itemList) {
 					item.buy(o);
 				}
 			}
 			
-			XYSeries seriesAll = testMatrixArm("All arms", cb, contextualSetting, characterMatrix);
+			XYSeries seriesAll = testMatrixArm("All arms", cb, contextualSettingMatrix, characterMatrix);
 
 			Item.mostPopularMonthly = new ArrayList<Item>();
 			Item.mostPopularWeekly = new ArrayList<Item>();
 			
 			allSeries.add(seriesAll);
 			
-			ContextualSetting contextualSettingEvaluation = contextualSetting.copy();
+			ContextualSetting contextualSettingEvaluation = contextualSettingMatrix.copy();
 			
 			ArrayList<ContextualBayesArm> bestArms = new ArrayList<ContextualBayesArm>();
 			bestArms.add(bestArm.copy());
 			ContextualBandit cbEvaluation = new ContextualBandit(bestArms);
 			
-			for(int i = startPlace; i < trainingSet; i++) {
+			for(int i = ConstantHolder.startPlace; i < ConstantHolder.trainingSet; i++) {
 				Order o = contextualSettingEvaluation.getOrderByDate(i);
 				List<Item> itemList = o.getItems();
 				for(Item item : itemList) {
@@ -177,34 +156,61 @@ public class BanditHittepa2 {
 			Item.mostPopularWeekly = new ArrayList<Item>();
 			
 			allSeries.add(seriesReference);
-		} else {
+		}
+		
+		if((ConstantHolder.TYPE & ConstantHolder.TYPE_JACCARD_DISTANCE) > 0) {
+			
+			ContextualSetting contextualSettingJaccard = contextualSetting.copy();
+			
+			for(int i = ConstantHolder.startPlace; i < ConstantHolder.trainingSet; i++) {
+				Order o = contextualSettingJaccard.getOrderByDate(i);
+				List<Item> itemList = o.getItems();
+				User u = o.getUser();
+				for(Item item : itemList) {
+					item.buy(o);
+				}
+				if(!userBought.contains(u)) userBought.add(u);
+			}
+			
+			XYSeries seriesJaccard = testJaccardSimilarity("Jaccard Similarity", contextualSettingJaccard);
+			
+			allSeries.add(seriesJaccard);
+			
+			
+		}
+		if((ConstantHolder.TYPE & ConstantHolder.TYPE_NORMAL) > 0){
 			ContextualBandit cb;
 			
-			cb = new ContextualBandit(numberOfArms, numberOfFeatures);		
+			Item.mostPopularMonthly = new ArrayList<Item>();
+			Item.mostPopularWeekly = new ArrayList<Item>();
 			
-			for(int i = startPlace; i < trainingSet; i++) {
-				Order o = contextualSetting.getOrderByDate(i);
+			ContextualSetting contextualSettingVector = contextualSetting.copy();
+			
+			cb = new ContextualBandit(ConstantHolder.numberOfArms, ConstantHolder.numberOfFeatures);		
+			
+			for(int i = ConstantHolder.startPlace; i < ConstantHolder.trainingSet; i++) {
+				Order o = contextualSettingVector.getOrderByDate(i);
 				List<Item> itemList = o.getItems();
 				for(Item item : itemList) {
 					item.buy(o);
 				}
 			}
 			
-			XYSeries seriesAll = testVectorArm("All arms", cb, contextualSetting, TYPE);
+			XYSeries seriesAll = testVectorArm("All arms", cb, contextualSettingVector, ConstantHolder.TYPE);
 
 			allSeries.add(seriesAll);
 
 			Item.mostPopularMonthly = new ArrayList<Item>();
 			Item.mostPopularWeekly = new ArrayList<Item>();
 			
-			ContextualSetting contextualSettingEvaluation = contextualSetting.copy();
+			ContextualSetting contextualSettingEvaluation = contextualSettingVector.copy();
 			
 			ArrayList<ContextualBayesArm> bestArms = new ArrayList<ContextualBayesArm>();
 			bestArms.add(bestArm.copy());
 			ContextualBandit cbEvaluation = new ContextualBandit(bestArms);
 			
 			
-			for(int i = startPlace; i < trainingSet; i++) {
+			for(int i = ConstantHolder.startPlace; i < ConstantHolder.trainingSet; i++) {
 				Order o = contextualSettingEvaluation.getOrderByDate(i);
 				List<Item> itemList = o.getItems();
 				for(Item item : itemList) {
@@ -212,7 +218,7 @@ public class BanditHittepa2 {
 				}
 			}
 			
-			XYSeries seriesReference = testVectorArm("Best arm", cbEvaluation, contextualSettingEvaluation, TYPE);
+			XYSeries seriesReference = testVectorArm("Best arm", cbEvaluation, contextualSettingEvaluation, ConstantHolder.TYPE);
 
 			Item.mostPopularMonthly = new ArrayList<Item>();
 			Item.mostPopularWeekly = new ArrayList<Item>();
@@ -220,12 +226,12 @@ public class BanditHittepa2 {
 			allSeries.add(seriesReference);
 		}
 		
-		if(baseLine || TYPE == TYPE_MOST_BUYS) {
+		if(ConstantHolder.baseLine || (ConstantHolder.TYPE & ConstantHolder.TYPE_MOST_BUYS) > 0) {
 			ContextualBandit cbBaseline = new ContextualBandit(1, 1);
 			
 			ContextualSetting contextualSettingBaseline = contextualSetting.copy();
 			
-			for(int i = startPlace; i < trainingSet; i++) {
+			for(int i = ConstantHolder.startPlace; i < ConstantHolder.trainingSet; i++) {
 				Order o = contextualSettingBaseline.getOrderByDate(i);
 				List<Item> itemList = o.getItems();
 				for(Item item : itemList) {
@@ -233,7 +239,7 @@ public class BanditHittepa2 {
 				}
 			}
 			
-			XYSeries seriesReference = testVectorArm("Baseline (most bought last month)", cbBaseline, contextualSettingBaseline, TYPE_MOST_BUYS);
+			XYSeries seriesReference = testVectorArm("Baseline (most bought last week)", cbBaseline, contextualSettingBaseline, ConstantHolder.TYPE_MOST_BUYS);
 
 			Item.mostPopularMonthly = new ArrayList<Item>();
 			Item.mostPopularWeekly = new ArrayList<Item>();
@@ -241,11 +247,11 @@ public class BanditHittepa2 {
 			allSeries.add(seriesReference);
 		}
 		
-		savePlot(allSeries, logFileName);
+		savePlot(allSeries, ConstantHolder.logFileName);
 		
 		System.out.println((System.currentTimeMillis() - start1) / 1000);
-		logWriter.println((System.currentTimeMillis() - start1) / 1000 + "");
-		logWriter.close();
+		ConstantHolder.logWriter.println((System.currentTimeMillis() - start1) / 1000 + "");
+		ConstantHolder.logWriter.close();
 	  }
 		
 	
@@ -258,6 +264,11 @@ public class BanditHittepa2 {
         NumberAxis range = new NumberAxis("Correct predictions (%)");
         XYSplineRenderer r = new XYSplineRenderer(3);
         XYPlot xyplot = new XYPlot(dataset, domain, range, r);
+        Font font3 = new Font("Dialog", Font.PLAIN, 25);
+        xyplot.getDomainAxis().setLabelFont(font3); // Increase size of "Number of tries"
+        xyplot.getRangeAxis().setLabelFont(font3); // Increase size of "Correct predicitons(%)"
+        xyplot.getDomainAxis().setTickLabelFont(font3); // Increase size of "Number-of-tries-ticks"
+        xyplot.getRangeAxis().setLabelFont(font3); // Increase size of "Correct-predictions(%)-ticks"
         JFreeChart chart = new JFreeChart(xyplot);
         ChartPanel chartPanel = new ChartPanel(chart){
 
@@ -285,7 +296,15 @@ public class BanditHittepa2 {
         
         XYSplineRenderer r = new XYSplineRenderer(3);
         XYPlot xyplot = new XYPlot(dataset, domain, range, r);
+        
+        Font font3 = new Font("Dialog", Font.PLAIN, 25);
+        xyplot.getDomainAxis().setLabelFont(font3); // Increase size of "Number of tries"
+        xyplot.getRangeAxis().setLabelFont(font3); // Increase size of "Correct predicitons(%)"
+        xyplot.getDomainAxis().setTickLabelFont(font3); // Increase size of "Number-of-tries-ticks"
+        xyplot.getRangeAxis().setTickLabelFont(font3); // Increase size of "Correct-predictions(%)-ticks"
+        
         JFreeChart chart = new JFreeChart(xyplot);
+        chart.getLegend().setItemFont(font3); // Increase size of Legend
         writeAsPNG(chart, 1920, 1080, fileName);
 	}
 	
@@ -309,7 +328,7 @@ public class BanditHittepa2 {
 		XYSeries series = new XYSeries(plotName);
 		int numberOfSuccess = 0;
 		try {
-			for(int i = trainingSet; i < orderToEndAt; i++) {
+			for(int i = ConstantHolder.trainingSet; i < ConstantHolder.orderToEndAt; i++) {
 				boolean debug = i % 1000 == 0;
 				boolean evaluate = i % 100 == 0;
 				TreeMap<Double, ArrayList<Long>> sortedMap = new TreeMap<Double, ArrayList<Long>>();
@@ -347,14 +366,14 @@ public class BanditHittepa2 {
 					System.out.println("Date: " + currentOrder.getPlacedOrder().toString());
 					System.out.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
 					
-					logWriter.println("The current arm is " + cba.getArmNumber() + " with vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta());
-					logWriter.println("The order information:");
-					logWriter.println("Date: " + currentOrder.getPlacedOrder().toString());
-					logWriter.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
+					ConstantHolder.logWriter.println("The current arm is " + cba.getArmNumber() + " with vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta());
+					ConstantHolder.logWriter.println("The order information:");
+					ConstantHolder.logWriter.println("Date: " + currentOrder.getPlacedOrder().toString());
+					ConstantHolder.logWriter.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
 				}
 
 				boolean success = false;
-				for(int j = 0; j < itemsRecommendedPerTurn; ) {
+				for(int j = 0; j < ConstantHolder.itemsRecommendedPerTurn; ) {
 					double key = sortedMap.lastKey();
 					ArrayList<Long> itemKeys2 = sortedMap.remove(key);
 					for(Long itemKey : itemKeys2) {
@@ -362,10 +381,10 @@ public class BanditHittepa2 {
 						if(currentOrder.getItems().contains(item)) success = true;
 						if(debug) {
 							System.out.println("   " + item.getProductId() + " with score of " + key);
-							logWriter.println("   " + item.getProductId() + " with score of " + key);
+							ConstantHolder.logWriter.println("   " + item.getProductId() + " with score of " + key);
 						}
 						j++;
-						if(!(j < itemsRecommendedPerTurn)) break;
+						if(!(j < ConstantHolder.itemsRecommendedPerTurn)) break;
 					}
 				}
 				
@@ -373,23 +392,23 @@ public class BanditHittepa2 {
 				if(success) numberOfSuccess++;
 				if(debug) {
 					System.out.println("These are the actual items bought: ");	
-					logWriter.println("These are the actual items bought: ");	
+					ConstantHolder.logWriter.println("These are the actual items bought: ");	
 				}
 				for(Item item : currentOrder.getItems()) {
 					item.buy(currentOrder);
 					if(debug) {
 						System.out.println("   " + item.getProductId());
-						logWriter.println("   " + item.getProductId());
+						ConstantHolder.logWriter.println("   " + item.getProductId());
 					}
 				}
 				if(evaluate) {
-					series.add(i - trainingSet, (((double) numberOfSuccess)/((double) i - trainingSet))*100 );
+					series.add(i - ConstantHolder.trainingSet, (((double) numberOfSuccess)/((double) i - ConstantHolder.trainingSet))*100 );
 				}
 			}
 		}
 		catch (Exception e) {
 			System.out.println(debugString);
-			logWriter.println(debugString);
+			ConstantHolder.logWriter.println(debugString);
 			e.printStackTrace();
 		}
 		int numberOfRightGuesses = 0;
@@ -397,7 +416,7 @@ public class BanditHittepa2 {
 		for(ContextualBayesArm cba : cb.getAllArms()) {
 			numberOfRightGuesses += cba.getNumberOfBuys();
 			System.out.println("The arm " + cba.getArmNumber() + " has vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
-			logWriter.println("The arm " + cba.getArmNumber() + " has vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
+			ConstantHolder.logWriter.println("The arm " + cba.getArmNumber() + " has vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
 			if(thisRunBestArm == null) {
 				thisRunBestArm = cba;
 			}
@@ -407,20 +426,20 @@ public class BanditHittepa2 {
 		}
 		
 		System.out.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
-		logWriter.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
+		ConstantHolder.logWriter.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
 		
 		if(bestArm == null || ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries()) > ((double)bestArm.getNumberOfBuys()/(double)bestArm.getNumberOfTries())) {
 			bestArm = thisRunBestArm;
 		}
 		System.out.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
 		
-		System.out.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) numberOfTests)*100) + "% correct");
+		System.out.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) ConstantHolder.numberOfTests)*100) + "% correct");
 		System.out.println("Done");
 		
-		logWriter.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
+		ConstantHolder.logWriter.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
 		
-		logWriter.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) numberOfTests)*100) + "% correct");
-		logWriter.println("Done");
+		ConstantHolder.logWriter.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) ConstantHolder.numberOfTests)*100) + "% correct");
+		ConstantHolder.logWriter.println("Done");
 		
 		return series;
 	}
@@ -431,7 +450,7 @@ public class BanditHittepa2 {
 		XYSeries series = new XYSeries(plotName);
 		int numberOfSuccess = 0;
 		try {
-			for(int i = trainingSet; i < orderToEndAt; i++) {
+			for(int i = ConstantHolder.trainingSet; i < ConstantHolder.orderToEndAt; i++) {
 				boolean debug = i % 1000 == 0;
 				boolean evaluate = i % 100 == 0;
 				TreeMap<Double, ArrayList<Long>> sortedMap = new TreeMap<Double, ArrayList<Long>>();
@@ -442,7 +461,7 @@ public class BanditHittepa2 {
 				debugString = currentOrder.getOrderId() + "";
 				
 				Vector userContext;
-				if(TYPE == TYPE_NORMAL) {
+				if((TYPE & ConstantHolder.TYPE_NORMAL) > 0) {
 					userContext = cba.getContext().times(u.getContextVector(currentOrder.getPlacedOrder()));
 				} else {
 					// Timefocus only
@@ -453,11 +472,11 @@ public class BanditHittepa2 {
 				for(Long key : itemKeys) {
 					double result = 0;
 					Vector itemVec;
-					if(TYPE == TYPE_NORMAL) {
+					if((TYPE & ConstantHolder.TYPE_NORMAL) > 0) {
 						itemVec = contextualSetting.getItem(key).getContextVector(zipcode, currentOrder.getPlacedOrder());
 					} else {
-						// Timefocus only
-						itemVec = contextualSetting.getItem(key).getNumberOfBuysInLastMonth(currentOrder.getPlacedOrder());
+						// Timefocus only'
+						itemVec = contextualSetting.getItem(key).getNumberOfBuysInLastWeek(currentOrder.getPlacedOrder());
 					}
 					for(int j = 0; j < userContext.size(); j++) {
 						result += userContext.get(j) * itemVec.get(j);
@@ -477,14 +496,14 @@ public class BanditHittepa2 {
 					System.out.println("Date: " + currentOrder.getPlacedOrder().toString());
 					System.out.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
 					
-					logWriter.println("The current arm is " + cba.getArmNumber() + " with vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta());
-					logWriter.println("The order information:");
-					logWriter.println("Date: " + currentOrder.getPlacedOrder().toString());
-					logWriter.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
+					ConstantHolder.logWriter.println("The current arm is " + cba.getArmNumber() + " with vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta());
+					ConstantHolder.logWriter.println("The order information:");
+					ConstantHolder.logWriter.println("Date: " + currentOrder.getPlacedOrder().toString());
+					ConstantHolder.logWriter.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
 				}
 
 				boolean success = false;
-				for(int j = 0; j < itemsRecommendedPerTurn; ) {
+				for(int j = 0; j < ConstantHolder.itemsRecommendedPerTurn; ) {
 					double key = sortedMap.lastKey();
 					ArrayList<Long> itemKeys2 = sortedMap.remove(key);
 					for(Long itemKey : itemKeys2) {
@@ -492,10 +511,10 @@ public class BanditHittepa2 {
 						if(currentOrder.getItems().contains(item)) success = true;
 						if(debug) {
 							System.out.println("   " + item.getProductId() + " with score of " + key);
-							logWriter.println("   " + item.getProductId() + " with score of " + key);
+							ConstantHolder.logWriter.println("   " + item.getProductId() + " with score of " + key);
 						}
 						j++;
-						if(!(j < itemsRecommendedPerTurn)) break;
+						if(!(j < ConstantHolder.itemsRecommendedPerTurn)) break;
 					}
 				}
 				
@@ -503,23 +522,23 @@ public class BanditHittepa2 {
 				if(success) numberOfSuccess++;
 				if(debug) {
 					System.out.println("These are the actual items bought: ");	
-					logWriter.println("These are the actual items bought: ");	
+					ConstantHolder.logWriter.println("These are the actual items bought: ");	
 				}
 				for(Item item : currentOrder.getItems()) {
 					item.buy(currentOrder);
 					if(debug) {
 						System.out.println("   " + item.getProductId());
-						logWriter.println("   " + item.getProductId());
+						ConstantHolder.logWriter.println("   " + item.getProductId());
 					}
 				}
 				if(evaluate) {
-					series.add(i - trainingSet, (((double) numberOfSuccess)/((double) i - trainingSet))*100 );
+					series.add(i - ConstantHolder.trainingSet, (((double) numberOfSuccess)/((double) i - ConstantHolder.trainingSet))*100 );
 				}
 			}
 		}
 		catch (Exception e) {
 			System.out.println(debugString);
-			logWriter.println(debugString);
+			ConstantHolder.logWriter.println(debugString);
 			
 			e.printStackTrace();
 		}
@@ -528,7 +547,7 @@ public class BanditHittepa2 {
 		for(ContextualBayesArm cba : cb.getAllArms()) {
 			numberOfRightGuesses += cba.getNumberOfBuys();
 			System.out.println("The arm " + cba.getArmNumber() + " has vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
-			logWriter.println("The arm " + cba.getArmNumber() + " has vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
+			ConstantHolder.logWriter.println("The arm " + cba.getArmNumber() + " has vector " + cba.getContext().toString() + " with alpha " + cba.getAlpha() + " and beta " + cba.getBeta() + ", percentage " + ((double)cba.getNumberOfBuys()/(double)cba.getNumberOfTries())*100);
 			if(thisRunBestArm == null) {
 				thisRunBestArm = cba;
 			}
@@ -538,18 +557,122 @@ public class BanditHittepa2 {
 		}
 		
 		System.out.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
-		logWriter.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
+		ConstantHolder.logWriter.println("The best arm is " + thisRunBestArm.getArmNumber() + " with vector " + thisRunBestArm.getContext().toString() + " with alpha " + thisRunBestArm.getAlpha() + " and beta " + thisRunBestArm.getBeta() + ", percentage " + ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries())*100);
 		
 		if(bestArm == null || ((double)thisRunBestArm.getNumberOfBuys()/(double)thisRunBestArm.getNumberOfTries()) > ((double)bestArm.getNumberOfBuys()/(double)bestArm.getNumberOfTries())) {
 			bestArm = thisRunBestArm;
 		}
 		
-		System.out.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) numberOfTests)*100) + "% correct");
+		System.out.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) ConstantHolder.numberOfTests)*100) + "% correct");
 		System.out.println("Done");
-		logWriter.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) numberOfTests)*100) + "% correct");
-		logWriter.println("Done");
+		ConstantHolder.logWriter.println("The right guesses are: " + numberOfRightGuesses + " which means " + (((double) numberOfRightGuesses)/((double) ConstantHolder.numberOfTests)*100) + "% correct");
+		ConstantHolder.logWriter.println("Done");
 		
 		return series;
 	}
-	
+
+	public static XYSeries testJaccardSimilarity(String plotName, ContextualSetting contextualSetting) {
+		String debugString = "";
+
+		XYSeries series = new XYSeries(plotName);
+		int numberOfSuccess = 0;
+		int numberOfFails = 0;
+		try {
+			for(int i = ConstantHolder.trainingSet; i < ConstantHolder.orderToEndAt; i++) {
+				boolean debug = i % 1000 == 0;
+				boolean evaluate = i % 100 == 0;
+				Order currentOrder = contextualSetting.getOrderByDate(i);
+				User u = currentOrder.getUser();
+				JaccardDistanceAlgorithm jda = new JaccardDistanceAlgorithm(u);
+				
+				for(User u2 : userBought) {
+					jda.addNewUser(u2);
+				}
+				
+				Map<Long, Double> recommendationMap = jda.getRecommendationMap();
+				
+				// Convert Map to List
+				List<Map.Entry<Long, Double>> sortedList = 
+					new LinkedList<Map.Entry<Long, Double>>(recommendationMap.entrySet());
+		 
+				
+				if(sortedList.size() >= ConstantHolder.itemsRecommendedPerTurn) {
+					// Sort list with comparator, to compare the Map values
+					Collections.sort(sortedList, new Comparator<Map.Entry<Long, Double>>() {
+						public int compare(Map.Entry<Long, Double> o1,
+			                                           Map.Entry<Long, Double> o2) {
+							return (o2.getValue()).compareTo(o1.getValue());
+						}
+					});
+
+					if(debug) {
+						System.out.println("The order information:");
+						System.out.println("Date: " + currentOrder.getPlacedOrder().toString());
+						System.out.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
+						
+						ConstantHolder.logWriter.println("The order information:");
+						ConstantHolder.logWriter.println("Date: " + currentOrder.getPlacedOrder().toString());
+						ConstantHolder.logWriter.println("It predicted these items for order " + currentOrder.getOrderId() + " :");
+					}
+
+					boolean success = false;
+					
+					int offset = 0;
+					for(int j = 0; j < ConstantHolder.itemsRecommendedPerTurn; j++) {
+						if(sortedList.size() <= j + offset) {
+							numberOfFails++;
+							success = false;
+							break;
+						}
+						Map.Entry<Long, Double> entry = sortedList.get(j + offset);
+						Long itemKey = entry.getKey();
+						Item item = contextualSetting.getItemFromIndex(itemKey);
+						while(u.getItemList().contains(item)) {
+							offset++;
+							if(sortedList.size() <= j + offset) {
+								numberOfFails++;
+								success = false;
+								break;
+							}
+							entry = sortedList.get(j + offset);
+							itemKey = entry.getKey();
+							item = contextualSetting.getItemFromIndex(itemKey);
+						}
+						if(currentOrder.getItems().contains(item)) success = true;
+						if(debug) {
+							System.out.println("   " + item.getProductId() + " with score of " + entry.getValue());
+							ConstantHolder.logWriter.println("   " + item.getProductId() + " with score of " + entry.getValue());
+						}
+					}
+					
+					if(success) numberOfSuccess++;
+					if(debug) {
+						System.out.println("These are the actual items bought: ");	
+						ConstantHolder.logWriter.println("These are the actual items bought: ");	
+					}
+					for(Item item : currentOrder.getItems()) {
+						item.buy(currentOrder);
+						if(debug) {
+							System.out.println("   " + item.getProductId());
+							ConstantHolder.logWriter.println("   " + item.getProductId());
+						}
+					}
+					if(evaluate) {
+						series.add(i - ConstantHolder.trainingSet, (((double) numberOfSuccess)/((double) (i - ConstantHolder.trainingSet - numberOfFails + 1)))*100 );
+					}
+				} else {
+					numberOfFails++;
+				}
+				if(!userBought.contains(u)) userBought.add(u);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		series.add(ConstantHolder.orderToEndAt - ConstantHolder.trainingSet - numberOfFails, (((double) numberOfSuccess)/((double) (ConstantHolder.orderToEndAt - ConstantHolder.trainingSet - numberOfFails + 1)))*100 );
+		System.out.println(numberOfSuccess);
+		System.out.println(numberOfFails);
+		System.out.println("Jaccard is over");
+		
+		return series;
+	}	
 }

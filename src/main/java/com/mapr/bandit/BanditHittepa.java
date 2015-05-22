@@ -1,6 +1,7 @@
 package com.mapr.bandit;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,6 +23,7 @@ import org.apache.mahout.math.Vector;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.data.xy.XYSeries;
@@ -45,8 +47,8 @@ public class BanditHittepa {
  	public final static int TYPE_MOST_BUYS = 2;
  	
     public final static int startPlace = 100000;
-	public final static int trainingSet = startPlace + 20000;
-	public final static int numberOfTests = 5000;
+	public final static int trainingSet = startPlace + 1;
+	public final static int numberOfTests = 10000;
 	public final static int orderToEndAt = trainingSet + numberOfTests;
 	public final static int numberOfArms = 50;
 	public final static int numberOfFeatures = useCategories ? 8 + Category.numberOfCategories : 8;
@@ -219,6 +221,37 @@ public class BanditHittepa {
 		System.out.println((System.currentTimeMillis() - start1) / 1000);
 	  }
 	
+	public double computeJaccardDistance(String stringOne, String stringTwo) {
+		   return (double) intersect(stringOne, stringTwo).length() /
+		          (double) union(stringOne, stringTwo).length();
+		 }
+	
+	/** Returns the union of the two strings, case insensitive. 
+	Takes O( (|S1| + |S2|) ^2 ) time. */
+	public static String union(String s1, String s2){
+	    String s = (s1 + s2).toLowerCase(); //start with entire contents of both strings
+	    int i = 0;
+	    while(i < s.length()){
+	        char c = s.charAt(i);
+	        if(i != s.lastIndexOf(c)) //If c occurs multiple times in s, remove first one
+	            s = s.substring(0, i) + s.substring(i+1, s.length());
+	        else i++; //otherwise move pointer forward
+	    }
+	    return s;
+	}
+	
+	/** Returns the intersection of the two strings, case insensitive. 
+ 	Takes O( |S1| * |S2| ) time. */
+	public static String intersect(String s1, String s2){
+	    String s = "";
+	    s2 = s2.toLowerCase();
+	    for(char c : s1.toLowerCase().toCharArray()){
+	        if(s2.indexOf(c) != -1 && s.indexOf(c) == -1)
+	            s += c;
+	    }
+	    return s;
+	}
+	
 	private static void plot(XYSeries series, XYSeries series2) {
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
@@ -227,6 +260,11 @@ public class BanditHittepa {
         NumberAxis range = new NumberAxis("Correct predictions (%)");
         XYSplineRenderer r = new XYSplineRenderer(3);
         XYPlot xyplot = new XYPlot(dataset, domain, range, r);
+        Font font3 = new Font("Dialog", Font.PLAIN, 25);
+        xyplot.getDomainAxis().setLabelFont(font3); // Increase size of "Number of tries"
+        xyplot.getRangeAxis().setLabelFont(font3); // Increase size of "Correct predicitons(%)"
+        xyplot.getDomainAxis().setTickLabelFont(font3); // Increase size of "Number-of-tries-ticks"
+        xyplot.getRangeAxis().setLabelFont(font3); // Increase size of "Correct-predictions(%)-ticks"
         JFreeChart chart = new JFreeChart(xyplot);
         ChartPanel chartPanel = new ChartPanel(chart){
 
@@ -235,6 +273,7 @@ public class BanditHittepa {
                 return new Dimension(1024, 800);
             }
         };
+        
         JFrame frame = new JFrame("Bandit Evaluation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(chartPanel);

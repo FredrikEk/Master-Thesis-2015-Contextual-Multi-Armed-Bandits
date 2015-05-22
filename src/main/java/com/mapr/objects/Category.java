@@ -290,8 +290,8 @@ public class Category {
 
 		int index = byteArray.indexOf("1");
 		while (index >= 0) {
-			index = byteArray.indexOf("1", index + 1);
 			subCategories.add(Categories.GetValue(index));
+			index = byteArray.indexOf("1", index + 1);
 		}
    
 	   return subCategories;

@@ -49,7 +49,8 @@ public class ContextualBayesArm {
 		alpha *= decayFactor;
 		beta *= decayFactor;
 		alpha += success ? 1 : 0;
-		beta++;
+		//beta++;
+		beta += success ? 0 : 1;
 		numberOfBuys += success ? 1 : 0;
 		numberOfTries++;
 	}
