@@ -4,11 +4,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -65,7 +67,9 @@ public class BanditHittepa3 {
 		
 		long start1 = System.currentTimeMillis();
 	 	String logFileName = "logs/logfile" + DateTime.now().toString().replaceAll("[^a-zA-Z0-9.-]", "_");
-	 	
+		
+	 	ConstantHolder.plotWriter.println("test");
+		
 	 	ContextualSetting contextualSetting = null;
 	 	
 		try {
@@ -294,12 +298,12 @@ public class BanditHittepa3 {
 		}
 		*/
 		
-		savePlot(allSeriesPlot, logFileName);
-		
+		//savePlot(allSeriesPlot, logFileName);
 		System.out.println((System.currentTimeMillis() - start1) / 1000);
 		ConstantHolder.logWriter.println((System.currentTimeMillis() - start1) / 1000 + "");
 		ConstantHolder.logWriter.close();
-	  }
+		savePlotToText(allSeries);
+	}
 		
 	
 	private static void plot(ArrayList<XYSeries> allSeries) {
@@ -618,6 +622,37 @@ public class BanditHittepa3 {
 		return series;
 	}
 
+	public static void savePlotToText(ArrayList<HashMap<Integer, Double>> allPlots) {
+		try {
+			
+			int j = 0;
+			ConstantHolder.plotWriter.print("[");
+			for(HashMap<Integer, Double> plot : allPlots) {
+				ConstantHolder.plotWriter.print("[");
+				int k = 0;
+				for(Integer i : plot.keySet()) {
+					ConstantHolder.plotWriter.print("(" + i + "," + plot.get(i) + ")");
+					
+					k++;
+					if(k != plot.keySet().size()) {
+						ConstantHolder.plotWriter.print(",");
+					}
+				}
+				ConstantHolder.plotWriter.print("]");
+				j++;
+				if(j != allPlots.size()) {
+					ConstantHolder.plotWriter.println(",");			
+				}
+			}
+			ConstantHolder.plotWriter.println("]");
+			ConstantHolder.plotWriter.flush();
+			ConstantHolder.plotWriter.close();
+		} catch(Exception e) {
+			System.out.println("FAIL");
+			e.printStackTrace();
+		}
+	}
+	
 	public static HashMap<Integer, Double> testJaccardSimilarity(String plotName, ContextualSetting contextualSetting) {
 		String debugString = "";
 

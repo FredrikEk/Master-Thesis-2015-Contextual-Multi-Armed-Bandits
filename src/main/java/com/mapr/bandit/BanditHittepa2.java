@@ -4,14 +4,17 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +38,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.joda.time.DateTime;
 
 import JaccardSimilarity.JaccardDistanceAlgorithm;
 
@@ -319,6 +323,36 @@ public class BanditHittepa2 {
 		catch (Exception e) {
 			
 		} 
+	}
+	
+	public static void savePlotToText(ArrayList<HashMap<Integer, Double>> allPlots) {
+		try {
+			String plotFileName = "textPlot/logfile" + DateTime.now().toString().replaceAll("[^a-zA-Z0-9.-]", "_");
+		 	
+			PrintWriter plotWriter = new PrintWriter(new File(plotFileName + ".log"));
+			int j = 0;
+			plotWriter.println("[");
+			for(HashMap<Integer, Double> plot : allPlots) {
+				plotWriter.println("[");
+				int k = 0;
+				for(Integer i : plot.keySet()) {
+					plotWriter.println("(" + i + "," + plot.get(i) + ")");
+					
+					k++;
+					if(k != plot.keySet().size()) {
+						plotWriter.println(",");
+					}
+				}
+				plotWriter.println("]");
+				j++;
+				if(j != allPlots.size()) {
+					plotWriter.println(",");			
+				}
+			}
+			plotWriter.println("]");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static XYSeries testMatrixArm(String plotName, ContextualBandit cb, ContextualSetting contextualSetting, Matrix characterMatrix) {

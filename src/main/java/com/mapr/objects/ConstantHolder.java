@@ -23,9 +23,9 @@ public class ConstantHolder {
  	public static final int TYPE_JACCARD_DISTANCE = 8;
  	// Should be set to 700 000
  	public static final int startPlace = 700000;
- 	public static final int numberOfTraining = 71338;
+ 	public static final int numberOfTraining = 1000; // 71338
  	public static final int trainingSet = startPlace + numberOfTraining;
- 	public static final int numberOfTests = 17500;
+ 	public static final int numberOfTests = 2000;
  	public static final int orderToEndAt = trainingSet + numberOfTests;
  	public static final int numberOfArms = 50;
  	public static final int numberOfFeatures = 0 + (useAge	 		? 3 : 0) + 
@@ -38,18 +38,23 @@ public class ConstantHolder {
  	public static final int itemsRecommendedPerTurn = 10;
 	public static final boolean baseLine = true;
 	public static PrintWriter logWriter = null;
+	public static PrintWriter plotWriter = null;
+	
 	
 	public static int numberOfItems;
 	
 	public static String logFileName;
+	public static String plotFileName;
 	public static int TYPE = TYPE_NORMAL | TYPE_MOST_BUYS | TYPE_JACCARD_DISTANCE;		
  	
 	public static void initialize() {
 		
 		logFileName = "logs/logfile" + DateTime.now().toString().replaceAll("[^a-zA-Z0-9.-]", "_");
-	 	
+	 	plotFileName = "textPlot/logfile" + DateTime.now().toString().replaceAll("[^a-zA-Z0-9.-]", "_");
+		
 		try {
 			logWriter = new PrintWriter(new File(logFileName + ".log"));
+			plotWriter = new PrintWriter(new File(plotFileName + ".log"));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
